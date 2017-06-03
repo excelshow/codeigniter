@@ -1,18 +1,18 @@
-<div class="am-cf admin-main"> 
+<div class="am-cf admin-main">
 
 <div class="nav-navicon admin-main admin-sidebar">
-    
-    
-    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：清风抚雪</div>
+
+
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：<?=$_SESSION['username']?></div>
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
         <li><a href="<?php echo base_url('/admin/good_manage/good_list')?>">商品列表</a></li>
-          <li><a href="<?php echo base_url('/admin/good_manage/good_new')?>">添加新商品</a></li>
+        <li><a href="<?php echo base_url('/admin/good_manage/good_new')?>">添加新商品</a></li>
         <li><a href="<?php echo base_url('/admin/good_manage/good_class')?>">商品分类</a></li>
-        <li><a href="<?php echo base_url('/admin/good_manage/user_ag')?>">用户评论</a></li>
-        <li><a href="<?php echo base_url('/admin/good_manage/good_trash')?>">商品回收站</a></li>
+        <li><a href="<?php echo base_url('/admin/goods_picture')?>">商品图片</a></li>
         <li><a href="<?php echo base_url('/admin/good_manage/good_save')?>">库存管理 </a></li>
+        <li><a href="<?php echo base_url('/admin/good_manage/user_ag')?>">用户评论</a></li>
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
@@ -52,8 +52,8 @@
         <li><a href="">声音文件</a></li>
       </ul>
     </div>
-    <!-- sideMenu End --> 
-    
+    <!-- sideMenu End -->
+
     <script type="text/javascript">
 			jQuery(".sideMenu").slide({
 				titCell:"h3", //鼠标触发对象
@@ -64,7 +64,7 @@
 				defaultPlay:true,//默认是否执行效果（默认true）
 				returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
 				});
-		</script> 
+		</script>
     </div>
     <div class=" admin-content">
     <div class="daohang">

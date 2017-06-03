@@ -53,17 +53,26 @@ class Admin extends CI_Controller {
 				'class' => $this->Op_good_model->get_class(),
 				);
 		}
+		if($var === 'good_class')
+		{
+			$data = Array(
+				'class' => $this->Op_good_model->get_class(),
+				);
+		}
 		$this->load->view("good_manage/".$var,$data);
 		$this->load->view('footer');
 		}
 
 	}
+	public function goods_picture(){
+		$data = Array();
+		$this->load->view("good_manage/goods_picture",$data);
+		$this->load->view('footer');
+	}
 	//添加新商品的检验
 	public function check_new_good(){
 			$this->form_validation->set_error_delimiters('<font style="color:red"> ERROR:', '</font>');
-			$data = Array(
-				'tips' => '上传成功',
-				);
+			$data = Array();
 			$config = array(
 			    array(
 			        'field' => 'name',
@@ -92,12 +101,31 @@ class Admin extends CI_Controller {
         		$row = Array(
         			'name' => $this->input->post('name'),
         			'prices' => $this->input->post('prices'),
+							'picture' => $this->input->post('name').'.jpg',
         			'description' => $this->input->post('description'),
         			);
         		$this->Op_good_model->insert_good($row);
 						$good_id = $this->Op_good_model->get_max('id','goods');
 						$this->Op_good_model->update_class($good_id,$this->input->post('class'));
-        		$this->load->view('board',$data);
         	}
+					$config['upload_path']      = './uploads/';
+	        $config['allowed_types']    = 'gif|jpg|png';
+	        $config['max_size']    			= 1000;
+	        $config['max_width']        = 1900;
+	        $config['max_height']       = 1900;
+					$config['file_name']       = iconv("UTF-8","gbk",$this->input->post('name'));
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('file'))
+	        {
+							$data = array('tips' => $this->upload->display_errors());
+							$this->load->view('board',$data);
+	        }
+	        else
+	        {
+	           $data = array('tips' => '提交成功','upload_data' => $this->upload->data());
+	           $this->load->view('board',$data);
+	        }
 		}
 }

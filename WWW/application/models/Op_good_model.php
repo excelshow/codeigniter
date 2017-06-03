@@ -45,6 +45,7 @@ class Op_good_model extends CI_Model {
             $data = Array(
                 'good_id'=>$row->id,
                 'name' => $row->name,
+                'picture' => $row->picture,
                 'prices' => $row->prices,
                 'description' => $row->description,
                 'num' => $row->num,
@@ -72,12 +73,11 @@ class Op_good_model extends CI_Model {
     //update方法
     public function update_class($good_id,$class)
     {
-
       $data = array(
       'id' => $good_id,
       'class' => $class,
     );
-    $this->db->insert('class_id_map', $data);
+    $this->db->insert('map_class_id', $data);
     }
 }
 ?>

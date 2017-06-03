@@ -11,7 +11,7 @@
 
     <div class="fbneirong">
 
-    <?php echo form_open('Admin/check_new_good'); ?>
+    <?php echo form_open_multipart('Admin/check_new_good'); ?>
 
       <form class="am-form">
         <div class="am-form-group am-cf">

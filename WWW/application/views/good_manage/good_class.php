@@ -57,7 +57,7 @@
         </form>
       </div>
     </div>
-    
+
           <div class="am-popup am-popup-inner" id="my-popups">
         <div class="am-popup-hd">
           <h4 class="am-popup-title">修改栏目名称</h4>
@@ -116,24 +116,24 @@
           </form>
         </div>
       </div>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     <div class="am-popup am-popup-inner" id="my-popupss">
         <div class="am-popup-hd">
           <h4 class="am-popup-title">复制栏目</h4>
           <span data-am-modal-close class="am-close">&times;</span> </div>
         <div class="am-popup-bd">
           <form class="am-form tjlanmu">
-          
-          
+
+
           <div class="am-form-group">
               <div class="zuo">复制到：</div>
               <div class="you">
-              
+
   <select data-am-selected="{btnWidth: 200, btnSize: 'sm', btnStyle: 'danger'}">
   <option value="a">Apple</option>
   <option value="b">Banana</option>
@@ -144,8 +144,8 @@
 
               </div>
             </div>
-          
-          
+
+
             <div class="am-form-group">
               <div class="zuo">新栏目名称：</div>
               <div class="you">
@@ -198,16 +198,16 @@
           </form>
         </div>
       </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
     <div class="admin-biaogelist">
       <div class="listbiaoti am-cf">
         <ul class="am-icon-flag on">
@@ -219,8 +219,8 @@
         <dl>
           <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" data-am-modal="{target: '#my-popup'}">添加商品一级分类</button>
         </dl>
-        <!--data-am-modal="{target: '#my-popup'}" 弹出层 ID  弹出层 190行 开始  271行结束--> 
-        
+        <!--data-am-modal="{target: '#my-popup'}" 弹出层 ID  弹出层 190行 开始  271行结束-->
+
       </div>
       <form class="am-form am-g">
         <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
@@ -237,145 +237,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">14</td>
-              <td><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="添加子栏目"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"  title="复制" data-am-modal="{target: '#my-popupss'}" ><span class="am-icon-copy"></span></button>
-                    <!-- 做完发现 复制栏目没什么用处 早晚都要修改 -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-            
-            
-                        <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">2</td>
-              <td><i style="margin-left:30px">├─  </i><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="添加子栏目"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"  title="复制"><span class="am-icon-copy"></span></button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-            
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">3</td>
-              <td><i style="margin-left:30px">├─  </i><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="添加子栏目"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"  title="复制"><span class="am-icon-copy"></span></button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-            
-            
-            
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">4</td>
-              <td><i style="margin-left:30px">├─  </i><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="添加子栏目"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"  title="复制"><span class="am-icon-copy"></span></button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-            
-            
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">5</td>
-              <td><i style="margin-left:30px">├─  </i><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="添加子栏目"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"  title="复制"><span class="am-icon-copy"></span></button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-            
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">6</td>
-              <td><i style="margin-left:30px">├─  </i><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="添加子栏目"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    
-                    
-                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"  title="复制"><span class="am-icon-copy"></span></button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-            
-            
+            <?php foreach ($class as $item): ?>
             <tr>
               <td><input type="checkbox" /></td>
               <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
               <td class="am-text-center">15</td>
-              <td><a href="#">Business management</a></td>
+              <td><a href="#"><?=$item?></a></td>
               <td>default</td>
               <td class="am-hide-sm-only"><i class="am-icon-close am-text-primary"></i></td>
               <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
@@ -388,6 +255,7 @@
                   </div>
                 </div></td>
             </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
         <div class="am-btn-group am-btn-group-xs">
@@ -412,15 +280,15 @@
         <hr />
         <p>
         备注：操作图标含义
-         <a class="am-text-success am-icon-file" title="添加子栏目"> 添加子栏目</a> 
-         <a class="am-icon-pencil-square-o am-text-secondary" title="修改"> 修改栏目</a> 
-         <a class="am-icon-copy am-text-warning" title="复制"> 复制栏目</a> 
+         <a class="am-text-success am-icon-file" title="添加子栏目"> 添加子栏目</a>
+         <a class="am-icon-pencil-square-o am-text-secondary" title="修改"> 修改栏目</a>
+         <a class="am-icon-copy am-text-warning" title="复制"> 复制栏目</a>
          <a class="am-icon-trash-o am-text-danger" title="删除"> 删除栏目</a>
-         
 
-        
-        
-        
-        
+
+
+
+
+
         </p>
       </form>
