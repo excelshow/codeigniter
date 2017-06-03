@@ -39,16 +39,20 @@ class Admin extends CI_Controller {
 	{
 		if($this->flag){
 			$data = Array();
-
+			$this->load->model('Op_good_model');
 		/*显示商品列表的判断*/
 		if($var === 'good_list')
 		{
-			$this->load->model('Op_good_model');
 			$data = Array(
 				'goods' => $this->Op_good_model->get_last_ten_goods(),
 				);
 		}
-
+		if($var === 'good_new')
+		{
+			$data = Array(
+				'class' => $this->Op_good_model->get_class(),
+				);
+		}
 		$this->load->view("good_manage/".$var,$data);
 		$this->load->view('footer');
 		}
@@ -67,11 +71,6 @@ class Admin extends CI_Controller {
 			        'rules' => 'required'
 			    ),
 			    array(
-			        'field' => 'class',
-			        'label' => '类名',
-			        'rules' => 'required',
-			    ),
-			    array(
 			        'field' => 'prices',
 			        'label' => '价格',
 			        'rules' => 'required'
@@ -81,17 +80,11 @@ class Admin extends CI_Controller {
 			        'label' => '描述',
 			        'rules' => 'required|min_length[3]|max_length[100]'
 			    ),
-			    /*array(
-			        'field' => 'file',
-			        'label' => '文件',
-			        'rules' => 'required'
-			    )*/
 			);
 			$this->form_validation->set_rules($config);
 
 			if ($this->form_validation->run() == FALSE){
-            	$this->load->view("good_manage/good_new");
-				$this->load->view('footer');
+            	$this->good_manage('good_new');
         	}
         	//将数据插入至数据库
         	else{
@@ -99,10 +92,11 @@ class Admin extends CI_Controller {
         		$row = Array(
         			'name' => $this->input->post('name'),
         			'prices' => $this->input->post('prices'),
-        			'class' => $this->input->post('class'),
         			'description' => $this->input->post('description'),
         			);
         		$this->Op_good_model->insert_good($row);
+						$good_id = $this->Op_good_model->get_max('id','goods');
+						$this->Op_good_model->update_class($good_id,$this->input->post('class'));
         		$this->load->view('board',$data);
         	}
 		}

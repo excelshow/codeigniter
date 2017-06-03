@@ -1,14 +1,14 @@
 <div class="admin-biaogelist">
-	
+
     <div class="listbiaoti am-cf">
       <ul class="am-icon-flag on"> 栏目名称</ul>
-      
+
       <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品列表</a></dl>
 
-      
-      
+
+
     </div>
-	
+
     <div class="fbneirong">
 
     <?php echo form_open('Admin/check_new_good'); ?>
@@ -23,7 +23,7 @@
         <div class="am-form-group am-cf">
           <div class="zuo">类别<span style="color:red;" >*</span>：</div>
           <div class="you">
-            <input type="text" name='class' value="<?php echo set_value('class'); ?>" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词"><?php echo form_error('class'); ?>
+            <select style="width:150px" name="class"><?php foreach ($class as $item): ?><option value="<?=$item?>"><?=$item?></option><?php endforeach; ?></select>
           </div>
         </div>
         <div class="am-form-group am-cf">
@@ -40,9 +40,9 @@
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">缩略图<span style="color:red;" >*</span>：</div><?php echo form_error('file'); ?>
-          <div class="you"></div><input type="file" name="file" id="doc-ipt-file-1"> 
+          <div class="you"></div><input type="file" name="file" id="doc-ipt-file-1">
         </div>
-        
+
         <!-- <div class="am-form-group am-cf">
           <div class="zuo">产品图片：</div>
           <div class="you" style="height: 45px;">
@@ -50,23 +50,23 @@
             <p class="am-form-help">请选择要上传的文件...</p>
           </div>
         </div>
-        
-        
+
+
         <div class="am-form-group am-cf">
           <div class="zuo">内容：</div>
           <div class="you">
             <textarea class="" rows="2" id="doc-ta-1"></textarea>
           </div>
         </div>
-        
+
         <div class="am-form-group am-cf">
           <div class="zuo">其他信息：</div>
           <div class="you">
             <textarea class="" rows="2" id="doc-ta-1"></textarea>
           </div>
         </div>-->
-        
-        
+
+
         <div class="am-form-group am-cf">
         <div class="zuo">更多：</div>
         <div class="you" style="margin-top: 5px;">
@@ -91,7 +91,7 @@
       </form>
     </div>
 
-  
+
 
 </div>
 

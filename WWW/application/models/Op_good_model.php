@@ -7,7 +7,7 @@ class Op_good_model extends CI_Model {
         $this->load->database();
         // Your own constructor code
     }
-
+    //get方法
     public function get_last_ten_goods()
     {
         $data_good = Array();
@@ -15,6 +15,7 @@ class Op_good_model extends CI_Model {
         foreach ($query->result() as $row)
         {
             $data = Array(
+                'id' => $row->id,
                 'name' => $row->name,
                 'prices' => $row->prices,
                 'description' => $row->description,
@@ -24,20 +25,17 @@ class Op_good_model extends CI_Model {
         }
         return $data_good;
     }
-
-    public function insert_good($row)
+    public function get_class()
     {
-        $this->db->insert('goods', $row);
+      $data = Array();
+      $query = $this->db->get('class');
+      foreach ($query->result() as $row)
+      {
+        array_push($data,$row->class);
+      }
+      return $data;
     }
 
-    public function update_entry()
-    {
-        $this->title    = $_POST['title'];
-        $this->content  = $_POST['content'];
-        $this->date = time();
-
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
-    }
     public function get_good()
     {
         $data_good = Array();
@@ -45,7 +43,7 @@ class Op_good_model extends CI_Model {
         foreach ($query->result() as $row)
         {
             $data = Array(
-                'selected_num'=>0,
+                'good_id'=>$row->id,
                 'name' => $row->name,
                 'prices' => $row->prices,
                 'description' => $row->description,
@@ -55,6 +53,31 @@ class Op_good_model extends CI_Model {
         }
         return $data_good;
     }
+    //get the max value
+    public function get_max($column,$table)
+    {
+      $this->db->select_max($column);
+      $query = $this->db->get($table);
+      foreach ($query->result() as $row)
+      {
+        $data=$row->$column;
+      }
+      return $data;
+    }
+    //insert方法
+    public function insert_good($row)
+    {
+        $this->db->insert('goods', $row);
+    }
+    //update方法
+    public function update_class($good_id,$class)
+    {
 
+      $data = array(
+      'id' => $good_id,
+      'class' => $class,
+    );
+    $this->db->insert('class_id_map', $data);
+    }
 }
 ?>

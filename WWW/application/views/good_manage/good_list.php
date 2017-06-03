@@ -58,6 +58,7 @@
             <thead>
               <tr class="am-success">
                 <th class="table-check"><input type="checkbox" /></th>
+                <th class="table-id">商品ID</th>
                 <th class="table-id">名称</th>
                 <th class="table-id">价格(元）</th>
                 <th class="table-title">库存(件)</th>
@@ -72,7 +73,8 @@
               <tr>
                 <td><input type="checkbox" /></td>
                 <!-- <td><input type="text" class="am-form-field am-radius am-input-sm"/></td> -->
-                <td><a href="#"><?=$item['name'];?></a></td>
+                <td width="90px"><a href="#"><?=$item['id'];?></a></td>
+                <td width="100px"><a href="#"><?=$item['name'];?></a></td>
                 <td  width="100px"><center><?=$item['prices']?></center></td>
                 <td><center><?=$item['num']?></center></td>
                 <td><center>水果</center></td>
@@ -86,23 +88,23 @@
                       <script type="text/javascript">
                       var tip = function(){
                         swal({
-  title: "Are you sure?",
-  text: "You will not be able to recover this imaginary file!",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes, delete it!",
-  cancelButtonText: "No, cancel plx!",
-  closeOnConfirm: false,
-  closeOnCancel: false
-},
-function(isConfirm){
-  if (isConfirm) {
-    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-  } else {
-    swal("Cancelled", "Your imaginary file is safe :)", "error");
-  }
-});
+                          title: "Are you sure?",
+                          text: "You will not be able to recover this imaginary file!",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Yes, delete it!",
+                          cancelButtonText: "No, cancel plx!",
+                          closeOnConfirm: false,
+                          closeOnCancel: false
+                        },
+                        function(isConfirm){
+                          if (isConfirm) {
+                            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                          } else {
+                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                          }
+                        });
                       }
                       </script>
                       <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  onclick="tip();"><span class="am-icon-trash-o"></span></button>
