@@ -70,21 +70,16 @@
     <div class="daohang">
       <ul>
         <li>
-        <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">首页</button></li>
+        <a href="<?=base_url('/admin')?>"><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">首页</button></a>
+        <li>
+          <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
+          产品管理<a href="<?=base_url('/admin/good_manage/good_list')?>" class="am-close am-close-spin" style="font-size:12px;">+</a>
+          </button>
+        </li>
         <li>
         <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
         帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
         </button>
-        </li>
-        <li>
-          <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
-          奖金管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
-          产品管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
-          </button>
         </li>
       </ul>
     </div>

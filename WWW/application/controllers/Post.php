@@ -7,7 +7,7 @@ class Post extends CI_Controller {
       parent::__construct();
     }
 	public function index(){
-		echo '我已收到您的数据'.$this->input->post('x');
+		echo '我已收到您的数据'.$this->input->get('user_Info');
 	}
   }
 ?>

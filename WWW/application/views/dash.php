@@ -1,14 +1,14 @@
 <div class="admin">
-	
 
-	
-	
-   
+
+
+
+
    <div class="admin-index">
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 100}">
         <dt class="qs"><i class="am-icon-users"></i></dt>
-        <dd>455</dd>
-        <dd class="f12">团队数量</dd>
+        <dd><?=$goods_count_all?></dd>
+        <dd class="f12">商品数量</dd>
       </dl>
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 300}">
         <dt class="cs"><i class="am-icon-area-chart"></i></dt>
@@ -227,32 +227,32 @@
                   <td>工作进度名称</td>
                   <td  align="center"><a href="#">10%</a></td>
                 </tr>
-                
+
                 <tr>
                   <td  align="center">1 </td>
                   <td>工作进度名称</td>
                   <td  align="center"><a href="#">10%</a></td>
                 </tr>
-                
+
                 <tr>
                   <td  align="center">1 </td>
                   <td>工作进度名称</td>
                   <td  align="center"><a href="#">10%</a></td>
                 </tr>
-                
+
                 <tr>
                   <td  align="center">1 </td>
                   <td>工作进度名称</td>
                   <td  align="center"><a href="#">10%</a></td>
                 </tr>
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
               </tbody>
             </table>
           </ul>
@@ -299,13 +299,13 @@
           </ul>
         </div>
       </div>
-      <script type="text/javascript">jQuery(".slideTxtBox").slide();</script> 
-   
-   
-   
-   
-   
-   
-   
-   
+      <script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+
+
+
+
+
+
+
+
 </div>

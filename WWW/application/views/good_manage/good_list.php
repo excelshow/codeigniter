@@ -3,10 +3,10 @@
     <div class="listbiaoti am-cf">
       <ul class="am-icon-flag on"> 栏目名称</ul>
 
-      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品列表</a></dl>
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="">商品列表</a></dl>
 
       <dl>
-        <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 添加产品</button>
+        <a href="good_new"><button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 添加产品</button></a>
       </dl>
 
 
@@ -52,7 +52,6 @@
   </ul>
 </div>
 
-
     <form class="am-form am-g">
           <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
             <thead>
@@ -60,6 +59,7 @@
                 <th class="table-check"><input type="checkbox" /></th>
                 <th class="table-id">商品ID</th>
                 <th class="table-id">名称</th>
+                <th class="table-id">缩略图</th>
                 <th class="table-id">价格(元）</th>
                 <th class="table-title">库存(件)</th>
                 <th class="table-type">类别</th>
@@ -75,6 +75,7 @@
                 <!-- <td><input type="text" class="am-form-field am-radius am-input-sm"/></td> -->
                 <td width="90px"><a href="#"><?=$item['id'];?></a></td>
                 <td width="100px"><a href="#"><?=$item['name'];?></a></td>
+                <td  width="100px"><img width='90px' height='50px' src="<?php echo base_url('uploads/'.$item['picture'])?>"></td>
                 <td  width="100px"><center><?=$item['prices']?></center></td>
                 <td><center><?=$item['num']?></center></td>
                 <td><center>水果</center></td>
@@ -82,32 +83,9 @@
                 <td class="am-hide-sm-only"><?=$item['description']?></td>
                 <td><div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <button type="button" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </button>
-                      <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span></button>
-                      <button type="button" class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"><span class="am-icon-copy"></span></button>
-                      <script type="text/javascript">
-                      var tip = function(){
-                        swal({
-                          title: "Are you sure?",
-                          text: "You will not be able to recover this imaginary file!",
-                          type: "warning",
-                          showCancelButton: true,
-                          confirmButtonColor: "#DD6B55",
-                          confirmButtonText: "Yes, delete it!",
-                          cancelButtonText: "No, cancel plx!",
-                          closeOnConfirm: false,
-                          closeOnCancel: false
-                        },
-                        function(isConfirm){
-                          if (isConfirm) {
-                            swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                          } else {
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                          }
-                        });
-                      }
-                      </script>
-                      <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  onclick="tip();"><span class="am-icon-trash-o"></span></button>
+                      <a href="/manage_goods/get_goods_content/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span></button></a>
+                      <a href="/manage_goods/edit_goods/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span></button></a>
+                      <a href="/manage_goods/delete_goods/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o"></span></button></a>
                     </div>
                   </div></td>
               </tr>
