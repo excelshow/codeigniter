@@ -7,12 +7,11 @@
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
-        <li><a href="<?php echo base_url('/admin/good_manage/good_list')?>">商品列表</a></li>
-        <li><a href="<?php echo base_url('/admin/good_manage/good_new')?>">添加新商品</a></li>
-        <li><a href="<?php echo base_url('/admin/good_manage/good_class')?>">商品分类</a></li>
-        <li><a href="<?php echo base_url('/admin/goods_picture')?>">商品图片</a></li>
-        <li><a href="<?php echo base_url('/admin/good_manage/good_save')?>">库存管理 </a></li>
-        <li><a href="<?php echo base_url('/admin/good_manage/user_ag')?>">用户评论</a></li>
+        <li><a href="<?=base_url('/Manage_goods/goods_list')?>">商品列表</a></li>
+        <li><a href="<?=base_url('/Manage_goods/goods_new')?>">添加新商品</a></li>
+        <li><a href="<?=base_url('/Manage_goods/goods_class')?>">商品分类</a></li>
+        <li><a href="<?=base_url('/admin/good_manage/good_save')?>">库存管理 </a></li>
+        <li><a href="<?=base_url('/admin/good_manage/user_ag')?>">用户评论</a></li>
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
@@ -73,7 +72,7 @@
         <a href="<?=base_url('/admin')?>"><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">首页</button></a>
         <li>
           <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
-          产品管理<a href="<?=base_url('/admin/good_manage/good_list')?>" class="am-close am-close-spin" style="font-size:12px;">+</a>
+          产品管理<a href="<?=base_url('Manage_goods/goods_list')?>" class="am-close am-close-spin" style="font-size:12px;">+</a>
           </button>
         </li>
         <li>

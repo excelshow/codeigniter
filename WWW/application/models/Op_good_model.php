@@ -14,7 +14,11 @@ class Op_good_model extends CI_Model {
   public function get_last_ten_goods()
   {
     $data_good = Array();
-    $query = $this->db->get($this->goods_table_name, 10);
+    $table = array($this->goods_table_name,'map_class_id');
+//    $where = array('goods.id' => map_class_id.id);
+//    $query = $this->db->get_where($table,$where);
+    $query = $this->db->query('SELECT * FROM goods,map_class_id WHERE goods.id=map_class_id.id');
+
     foreach ($query->result() as $row)
     {
       $data = Array(
@@ -23,6 +27,7 @@ class Op_good_model extends CI_Model {
         'picture' => $row->picture,
         'prices' => $row->prices,
         'description' => $row->description,
+        'class' => $row->class,
         'num' => $row->num,
       );
       array_push($data_good, $data);

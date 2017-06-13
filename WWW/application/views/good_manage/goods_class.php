@@ -211,13 +211,13 @@
     <div class="admin-biaogelist">
       <div class="listbiaoti am-cf">
         <ul class="am-icon-flag on">
-          用户评论
+          商品栏目管理
         </ul>
         <dl class="am-icon-home" style="float: right;">
-          当前位置： 首页 > <a href="#">用户评论</a>
+          当前位置： 首页 > <a href="#">商品列表</a>
         </dl>
         <dl>
-          <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" data-am-modal="{target: '#my-popup'}"> 给商品添加评论</button>
+          <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" data-am-modal="{target: '#my-popup'}">添加商品一级分类</button>
         </dl>
         <!--data-am-modal="{target: '#my-popup'}" 弹出层 ID  弹出层 190行 开始  271行结束-->
 
@@ -229,128 +229,33 @@
               <th class="table-check"><input type="checkbox" /></th>
               <th class="table-id">排序</th>
               <th class="table-id am-text-center">ID</th>
-              <th class="table-title">商品名称</th>
-              <th class="table-type">商品评论</th>
-              <th class="table-author am-hide-sm-only">会员ID</th>
-
-              <th width="125px" class="table-set">操作</th>
+              <th class="table-title">栏目名称</th>
+              <th class="table-type">数据量</th>
+              <th class="table-author am-hide-sm-only">访问</th>
+              <th class="table-date am-hide-sm-only">添加子栏目</th>
+              <th width="163px" class="table-set">操作</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">14</td>
-              <td><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="置顶（前台显示热门评论）"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="添加（随机虚拟用户ID ）"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-
-
-
-
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">3</td>
-              <td><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="置顶（前台显示热门评论）"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="添加（随机虚拟用户ID ）"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-
-
-
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">4</td>
-              <td><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="置顶（前台显示热门评论）"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="添加（随机虚拟用户ID ）"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-
-
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">5</td>
-              <td><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="置顶（前台显示热门评论）"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="添加（随机虚拟用户ID ）"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-
-                      <tr>
-              <td><input type="checkbox" /></td>
-              <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
-              <td class="am-text-center">6</td>
-              <td><a href="#">Business management</a></td>
-              <td>default</td>
-              <td class="am-hide-sm-only">访问</td>
-
-              <td><div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="置顶（前台显示热门评论）"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="添加（随机虚拟用户ID ）"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
-                  </div>
-                </div></td>
-            </tr>
-
-
+            <?php foreach ($class as $item): ?>
             <tr>
               <td><input type="checkbox" /></td>
               <td><input type="text" class="am-form-field am-radius am-input-sm"/></td>
               <td class="am-text-center">15</td>
-              <td><a href="#">Business management</a></td>
+              <td><a href="#"><?=$item?></a></td>
               <td>default</td>
               <td class="am-hide-sm-only"><i class="am-icon-close am-text-primary"></i></td>
-
+              <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
               <td><div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                  <a class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-file" data-am-modal="{target: '#my-popups'}" title="置顶（前台显示热门评论）"></a>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="添加（随机虚拟用户ID ）"><span class="am-icon-pencil-square-o" ></span></button>
-                    <!-- 用按钮的时候 弹层 后缀需要加 问好 ？#的 时候才有效 真恶心 .html?# -->
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  title="删除"><span class="am-icon-trash-o"></span></button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}"><span class="am-icon-pencil-square-o"></span></button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"><span class="am-icon-copy"></span></button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o"></span></button>
                   </div>
                 </div></td>
             </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
         <div class="am-btn-group am-btn-group-xs">
