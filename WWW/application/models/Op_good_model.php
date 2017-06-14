@@ -59,7 +59,7 @@ class Op_good_model extends CI_Model {
     foreach ($query->result() as $row)
     {
       $data = Array(
-        'good_id'=>$row->id,
+        'goods_id'=>$row->id,
         'name' => $row->name,
         'picture' => $row->picture,
         'prices' => $row->prices,

@@ -1,6 +1,3 @@
-/**
- * Manage_goods.php文件，该文件包含商品管理类
- */
 <?php
 require('Admin.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -8,17 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 商品管理类，继承于Admin类，所有商品管理的操作在这里完成
  */
 class Manage_goods extends Admin{
-  public function __construct()
-  {
+  public function __construct(){
     parent::__construct();
-    // $data =Array('content' =>'你当前并未登录,或');
-    // $this->load->view('tip',$data);
   }
   /**
    * 商品列表
    */
-  public function goods_list()
-  {
+  public function goods_list(){
     $data = Array(
       'goods' => $this->Op_good_model->get_last_ten_goods(),
     );
@@ -28,8 +21,7 @@ class Manage_goods extends Admin{
   /**
    * 添加新商品
    */
-  public function goods_new()
-  {
+  public function goods_new(){
     $data = Array(
       'class' => $this->Op_good_model->get_class(),
     );
@@ -39,8 +31,7 @@ class Manage_goods extends Admin{
   /**
    * 商品分类
    */
-  public function goods_class()
-  {
+  public function goods_class(){
     $data = Array(
       'class' => $this->Op_good_model->get_class(),
     );
@@ -50,8 +41,7 @@ class Manage_goods extends Admin{
   /**
    * 检查表单提交是否合法，同时完成文件的上传，但并没有返回值。
    */
-  public function check_new_good()
-  {
+  public function check_new_good(){
     $this->form_validation->set_error_delimiters('<font style="color:red"> ERROR:', '</font>');
     $data = Array();
     $config = array(

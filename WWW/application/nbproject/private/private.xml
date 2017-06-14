@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/phpStudy/WWW/application/views/dash.php</file>
-            <file>file:/C:/phpStudy/WWW/application/controllers/Manage_goods.php</file>
-            <file>file:/C:/phpStudy/WWW/application/views/good_manage/goods_class.php</file>
-            <file>file:/C:/phpStudy/WWW/application/controllers/Admin.php</file>
+            <file>file:/C:/phpStudy/WWW/application/controllers/Post.php</file>
+            <file>file:/C:/phpStudy/WWW/application/models/Op_user_model.php</file>
+            <file>file:/C:/phpStudy/WWW/application/models/Op_good_model.php</file>
+            <file>file:/C:/phpStudy/WWW/application/models/Op_order_model.php</file>
         </group>
     </open-files>
 </project-private>

@@ -7,10 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 </head>
-<body onload="swal('<?=$content?>登录失败');">
+<body onload="swal('用户登录身份已失效');">
 
 </body>
-<script type="text/javascript">window.setTimeout("window.location='<?=base_url()?>'",2000); </script>
 </html>
-
-
