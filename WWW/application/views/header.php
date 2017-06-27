@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>后台管理系统</title>
-<meta name="description" content="这是一个 index 页面">
+<meta name="description">
 <meta name="keywords" content="index">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
@@ -15,6 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <link rel="stylesheet" href="<?php echo base_url('/assets/css/amazeui.min.css')?>"/>
 <link rel="stylesheet" href="<?php echo base_url('/assets/css/admin.css')?>">
+    <script src="<?=base_url('assets/dist/echarts.js')?>"></script>
 <script src=" <?php echo base_url('/assets/js/jquery.min.js')?>"></script>
 <script src="<?php echo base_url('/assets/js/app.js')?>"></script>
 <script src="<?php echo base_url('/assets/js/amazeui.min.js')?>"></script>
@@ -42,12 +43,7 @@
 
 
     <li><a href="#">未激活会员 <span class="am-badge am-badge-danger am-round"></span></a></li>
-    <li><a href="#">未激活代理 <span class="am-badge am-badge-danger am-round"></span></a></li>
-    <li><a href="#">未处理汇款</a></li>
-    <li><a href="#">未发放提现</a></li>
-    <li><a href="#">未发货订单</a></li>
-    <li><a href="#">低库存产品</a></li>
-    <li><a href="#">信息反馈</a></li>
+    <li><a href="#">未确认订单 <span class="am-badge am-badge-danger am-round"></span></a></li>
 
 
 
@@ -58,31 +54,11 @@
 
   <a href="#">会员管理</a>
   <a href="#">订单管理</a>
-  <a href="#">产品管理</a>
-  <a href="#">个人中心</a>
-   <a href="#">系统设置</a>
+  <a href="#">商品管理</a>
  </li>
 
  <li class="soso">
-
-<p>
-
-  <select data-am-selected="{btnWidth: 70, btnSize: 'sm', btnStyle: 'default'}">
-          <option value="b">全部</option>
-          <option value="o">产品</option>
-          <option value="o">会员</option>
-
-        </select>
-
-</p>
-
-<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="搜索" /></p>
-<p><button class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p>
  </li>
-
-
-
-
       <li class="am-hide-sm-only" style="float: right;"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
     </ul>
   </div>

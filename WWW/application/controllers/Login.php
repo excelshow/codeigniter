@@ -37,8 +37,8 @@ class Login extends CI_Controller {
      			echo validation_errors();
         	}
         	else{
-        		$this->load->model('Op_admin_model');
-        		$admin_data = $this->Op_admin_model->get_admin();
+        		$this->load->model('Op_admin');
+        		$admin_data = $this->Op_admin->get_admin();
         		$username = $this->input->post('username');
         		$password = $this->input->post('password');
         		foreach ($admin_data ->result()  as $row) {

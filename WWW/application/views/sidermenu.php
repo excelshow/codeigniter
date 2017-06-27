@@ -7,48 +7,22 @@
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
-        <li><a href="<?=base_url('/Manage_goods/goods_list')?>">商品列表</a></li>
-        <li><a href="<?=base_url('/Manage_goods/goods_new')?>">添加新商品</a></li>
-        <li><a href="<?=base_url('/Manage_goods/goods_class')?>">商品分类</a></li>
-        <li><a href="<?=base_url('/admin/good_manage/good_save')?>">库存管理 </a></li>
-        <li><a href="<?=base_url('/admin/good_manage/user_ag')?>">用户评论</a></li>
+        <li><a href="<?=base_url('/Goods/lists')?>">商品列表</a></li>
+        <li><a href="<?=base_url('/Goods/add')?>">添加新商品</a></li>
+        <li><a href="<?=base_url('/Goods/classify')?>">商品分类</a></li>
+        <li><a href="<?=base_url('/Manage_order/test')?>">库存管理 </a></li>
+        <li><a href="<?=base_url('/admin/goods/user_ag')?>">用户评论</a></li>
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
-        <li><a href="">订单列表</a></li>
+        <li><a href="<?=base_url('/order/lists')?>">订单列表</a></li>
         <li><a href="">合并订单</a></li>
-        <li><a href="">订单打印</a></li>
-        <li><a href="">添加订单</a></li>
-        <li><a href="">发货单列表</a></li>
-        <li><a href="">换货单列表</a></li>
+        <li><a href="<?=base_url('/Manage_order/test')?>">订单打印</a></li>
       </ul>
       <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
       <ul>
-        <li><a href="">会员列表 </a></li>
-        <li><a href="">未激活会员</a></li>
-        <li><a href="">团队系谱图</a></li>
-        <li><a href="">会员推荐图</a></li>
-        <li><a href="">推荐列表</a></li>
-      </ul>
-      <h3 class="am-icon-volume-up"><em></em> <a href="#">信息通知</a></h3>
-      <ul>
-        <li><a href="">站内消息 /留言 </a></li>
-        <li><a href="">短信</a></li>
-        <li><a href="">邮件</a></li>
-        <li><a href="">微信</a></li>
-        <li><a href="">客服</a></li>
-      </ul>
-      <h3 class="am-icon-gears"><em></em> <a href="#">系统设置</a></h3>
-      <ul>
-        <li><a href="">数据备份</a></li>
-        <li><a href="">邮件/短信管理</a></li>
-        <li><a href="">上传/下载</a></li>
-        <li><a href="">权限</a></li>
-        <li><a href="">网站设置</a></li>
-        <li><a href="">第三方支付</a></li>
-        <li><a href="">提现 /转账 出入账汇率</a></li>
-        <li><a href="">平台设置</a></li>
-        <li><a href="">声音文件</a></li>
+        <li><a href="<?=base_url('/member/lists')?>">会员列表 </a></li>
+        <li><a href="<?=base_url('/member/Unable')?>">未激活会员</a></li>
       </ul>
     </div>
     <!-- sideMenu End -->
@@ -66,19 +40,9 @@
 		</script>
     </div>
     <div class=" admin-content">
-    <div class="daohang">
-      <ul>
-        <li>
-        <a href="<?=base_url('/admin')?>"><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">首页</button></a>
-        <li>
-          <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
-          产品管理<a href="<?=base_url('Manage_goods/goods_list')?>" class="am-close am-close-spin" style="font-size:12px;">+</a>
-          </button>
-        </li>
-        <li>
-        <button type="button" class="am-btn am-btn-default am-radius am-btn-xs">
-        帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
-        </button>
-        </li>
-      </ul>
-    </div>
+
+        <div class="daohang">
+            <ul>
+                <a href="<?=base_url('/admin')?>"><li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </button></li></a>
+            </ul>
+        </div>
