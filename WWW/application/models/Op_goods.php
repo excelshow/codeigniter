@@ -15,7 +15,16 @@ class Op_goods extends CI_Model {
         $this->load->database();
         // Your own constructor code
     }
-
+    public function get_max($column,$table)
+    {
+        $this->db->select_max($column);
+        $query = $this->db->get($table);
+        foreach ($query->result() as $row)
+        {
+            $data=$row->$column;
+        }
+        return $data;
+    }
     /**
      * @return mixed 最新的十个商品
      */
@@ -42,7 +51,7 @@ class Op_goods extends CI_Model {
     public function get_goods_byclass($class)
     {
         $class = urldecode($class);
-        $query = $this->db->query("SELECT * FROM goods,map_class_id WHERE goods.id=map_class_id.id AND class = '$class'");
+        $query = $this->db->query("SELECT * FROM goodsview where class='$class'");
         return $query->result_array();
     }
 
@@ -52,7 +61,11 @@ class Op_goods extends CI_Model {
      */
     public function insert_good($goods_data)
     {
-        $this->db->insert($this->goods_table_name, $goods_data);
+        if($this->db->insert($this->goods_table_name, $goods_data)){
+            return true;
+        }else{
+            return false;
+        }
     }
     /**
      * delete_goods 根据商品id删除商品
@@ -65,6 +78,42 @@ class Op_goods extends CI_Model {
     public function goods_detail($goods_id)
     {
         $query = $this->db->query("SELECT * FROM goods,goods_content WHERE goods.id=goods_content.goods_id AND id = '$goods_id'");
+        return $query->result_array();
+    }
+
+    public function update_class($goods_id,$class)
+    {
+        if($this->db->query("INSERT INTO map_class_id(class, id) VALUES ('$class', '$goods_id')")){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function update_content($goods_id,$function,$eat,$save)
+    {
+        if($this->db->query("INSERT INTO goods_content(goods_id,function,eat,save) VALUES ('$goods_id','$function','$eat','$save')")){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function guess_like($user_id)
+    {
+        $query = $this->db->get($this->goods_table_name,1);
+        return $query->result_array();
+    }
+
+    public function recommend()
+    {
+        $query = $this->db->get($this->goods_table_name,3);
+        return $query->result_array();
+    }
+
+    public function search($data)
+    {
+        $class = urldecode($data);
+        $query = $this->db->query("SELECT * FROM goodsview where name LIKE '%$class%'");
         return $query->result_array();
     }
 }

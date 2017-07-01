@@ -17,8 +17,10 @@ class Member extends Admin{
         $data = array('user_lists' => $this->Op_user->get_lists());
         $this->load->view('user/lists',$data);
     }
-    public function Unable()
+
+    public function unlists()
     {
-        $this->load->view('user/Unable');
+        $data = array('user_lists' => $this->Op_user->get_unlists());
+        $this->load->view('user/lists',$data);
     }
 }

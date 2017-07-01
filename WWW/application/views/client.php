@@ -10,5 +10,6 @@
     <a href="<?=$path?>/goods_class">goods_class</a>
     <a href="<?=$path?>/goods_detail">goods_detail(需要参数)</a>
     <a href="<?=$path?>/order_detail">order_detail(需要参数)</a>
+    <a href="<?=$path?>/get_orders">get_orders(需要参数)</a>
 </body>
 </html>

@@ -43,18 +43,13 @@ class Op_order  extends CI_Model{
      * @return bool 返回值判断是否插入成功
      * 插入订单
      */
-    public function insert_order($order_id,$user_id,$user_info){
-         $data = array(
-            'order_id' => $order_id,
-            'user_id' => $user_id,
-            'user_info' => $user_info
-        );
+    public function insert_order($data){
         if($this->db->insert($this->order_table_name, $data)){
-            echo "下单成功，订单号".$order_id;
+            echo "下单成功!请耐心等待商品归来";
             return true;
         }
         else{
-            echo "下单失败";
+            echo "下单失败!";
             return false;
         }
     }
@@ -68,5 +63,11 @@ class Op_order  extends CI_Model{
             return true;
         }
         return false;
+    }
+
+    public function get_orders($user_id)
+    {
+        $query = $this->db->query("SELECT order_id,orderInfo FROM orders WHERE user_id='$user_id'");
+        return $query->result_array();
     }
 }

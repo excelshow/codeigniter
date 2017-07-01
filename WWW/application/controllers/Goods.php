@@ -5,6 +5,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 商品管理类，继承于Admin类，所有商品管理的操作在这里完成
  */
 class Goods extends Admin{
+    private $filenum=0;
+    private function upload_file($goods_id,$time){
+        //文件上传的代码块
+        $config['upload_path']      = './uploads/';
+        $config['allowed_types']    = 'jpg';
+        $config['max_size']    			= 1000;
+        $config['max_width']        = 1900;
+        $config['max_height']       = 1900;
+        $config['file_name']       = $goods_id.'-'.$time;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config,TRUE);
+        if ( ! $this->upload->do_upload('file'.$time))
+        {
+            $data = array('tips' => $this->upload->display_errors());
+            var_dump($data);
+        }
+        else
+        {
+            $data = array('tips' => '提交成功','upload_data' => $this->upload->data());
+            $this->load->view('goods/upload_success',$data);
+        }
+    }
     public function __construct(){
         parent::__construct();
     }
@@ -50,6 +72,11 @@ class Goods extends Admin{
      */
     public function check(){
         $this->form_validation->set_error_delimiters("<font style=\"color:red\"> ERROR:", '</font>');
+        for($i=0;$i<6;$i++){
+            if($_FILES['file'.$i]['name'] != ''){
+                $this->filenum++;
+            }
+        }
         $data = Array();
         $config = array(
             array(
@@ -78,33 +105,17 @@ class Goods extends Admin{
             $row = Array(
                 'name' => $this->input->post('name'),
                 'prices' => $this->input->post('prices'),
-                'picture' => $this->input->post('name').'.jpg',
-                'description' => $this->input->post('description'),
+                'origin' => $this->input->post('origin'),
+                'filenum' => $this->filenum,
             );
-            if($this->Op_goods->insert_good($row)) {
+            if($this->Op_goods->insert_good($row)){
                 $good_id = $this->Op_goods->get_max('id', 'goods');
                 $this->Op_goods->update_class($good_id, $this->input->post('class'));
+                $this->Op_goods->update_content($good_id,$this->input->post('function'),$this->input->post('eat'),$this->input->post('save'));
+                for($i=0;$i<$this->filenum;$i++){
+                    $this->upload_file($good_id,$i);
+                }
             }
-        }
-        //文件上传的代码块
-        $config['upload_path']      = './uploads/';
-        $config['allowed_types']    = 'jpg';
-        $config['max_size']    			= 1000;
-        $config['max_width']        = 1900;
-        $config['max_height']       = 1900;
-        $config['file_name']       = iconv("UTF-8","gbk",$this->input->post('name'));
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('file'))
-        {
-            $data = array('tips' => $this->upload->display_errors());
-            $this->load->view('board',$data);
-        }
-        else
-        {
-            $data = array('tips' => '提交成功','upload_data' => $this->upload->data());
-            $this->load->view('goods/upload_success',$data);
         }
     }
     /**

@@ -28,4 +28,26 @@ class Client extends CI_Controller {
         $result = $this->Op_order->order_detail($order_id);
         echo json_encode($result);
     }
+    public function get_orders($user_id)
+    {
+        $result = $this->Op_order->get_orders($user_id);
+        echo json_encode($result);
+    }
+
+    public function guess_like($user_id)
+    {
+        $result = $this->Op_goods->guess_like($user_id);
+        echo json_encode($result);
+    }
+
+    public function recommend()
+    {
+        $result = $this->Op_goods->recommend();
+        echo json_encode($result);
+    }
+    public function search($data)
+    {
+        $result = $this->Op_goods->search($data);
+        echo json_encode($result);
+    }
 }

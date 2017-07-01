@@ -32,18 +32,15 @@ class Op_user  extends CI_Model {
         $row=$query->row();
         return $row->user_num;
     }
-    public function settlement($user_id){
-        $num = $this->get_user_num($user_id)+1;
-        $data = array(
-    '       user_num' => $num
-        );
-        $this->db->where('user_id', $user_id);
-        $this->db->update($this->user_table_name, $data);
-    }
-
     public function get_lists()
     {
-        $query = $this->db->get($this->user_table_name);
+        $query = $this->db->get_where($this->user_table_name,array('status' => '1'));
+        return $query->result_array();
+    }
+
+    public function get_unlists()
+    {
+        $query = $this->db->get_where($this->user_table_name,array('status' => '0'));
         return $query->result_array();
     }
 
@@ -60,5 +57,15 @@ class Op_user  extends CI_Model {
         }else{
             return 0;
         }
+    }
+
+    public function sure($user_no)
+    {
+        if($this->db->query("update user set status=1 where user_no='$user_no'")){
+            return "激活成功";
+        }else{
+            return "激活失败";
+        }
+
     }
 }

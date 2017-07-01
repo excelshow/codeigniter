@@ -14,7 +14,7 @@
 		  <?=$tips?>
 		<ul>
 		<?php foreach ($upload_data as $item => $value):?>
-		<li><?php echo $item;?>: <?php echo iconv("gbk","UTF-8",$value);?></li>
+		<li><?php echo $item;?>:<?=$value?></li>
 		<?php endforeach; ?>
 		</ul>
 

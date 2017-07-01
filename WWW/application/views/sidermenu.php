@@ -22,7 +22,7 @@
       <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
       <ul>
         <li><a href="<?=base_url('/member/lists')?>">会员列表 </a></li>
-        <li><a href="<?=base_url('/member/Unable')?>">未激活会员</a></li>
+        <li><a href="<?=base_url('/member/unlists')?>">未激活会员</a></li>
       </ul>
     </div>
     <!-- sideMenu End -->

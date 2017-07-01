@@ -11,7 +11,7 @@
 
     <div class="fbneirong">
 
-    <?php echo form_open_multipart('_goods/check_new_good'); ?>
+    <?php echo form_open_multipart('goods/check'); ?>
 
       <form class="am-form">
         <div class="am-form-group am-cf">
@@ -38,42 +38,35 @@
               <input type="text"  name='origin' value="<?php echo set_value('origin'); ?>"  rows="5" id="doc-ta-1"  placeholder="请输入产地"><?php echo form_error('origin'); ?>
           </div>
         </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">缩略图<span style="color:red;" >*</span>：</div><?php echo form_error('file'); ?>
-          <div class="you"></div><input type="file" name="file" id="doc-ipt-file-1">
-              <div class="zuo">附加图(非必需)
-              <input type="file" name="file">
-              <input type="file" name="file">
-              <input type="file" name="file">
-              <input type="file" name="file">
-              <input type="file" name="file">
+          <div class="am-form-group am-cf">
+              <div class="zuo">功效：</div>
+              <div class="you">
+                  <textarea class="" rows="2" id="doc-ta-1" name="function"></textarea>
               </div>
           </div>
-
-        <!-- <div class="am-form-group am-cf">
-          <div class="zuo">产品图片：</div>
-          <div class="you" style="height: 45px;">
-            <input type="file" id="doc-ipt-file-1">
-            <p class="am-form-help">请选择要上传的文件...</p>
+          <div class="am-form-group am-cf">
+              <div class="zuo">食用方法：</div>
+              <div class="you">
+                  <textarea class="" rows="2" id="doc-ta-1" name="eat"></textarea>
+              </div>
           </div>
-        </div>
-
-
+          <div class="am-form-group am-cf">
+              <div class="zuo">储存方法：</div>
+              <div class="you">
+                  <textarea class="" rows="2" id="doc-ta-1" name="save"></textarea>
+              </div>
+          </div>
         <div class="am-form-group am-cf">
-          <div class="zuo">内容：</div>
-          <div class="you">
-            <textarea class="" rows="2" id="doc-ta-1"></textarea>
+          <div class="zuo">缩略图(只支持JPG格式）<span style="color:red;" >*</span>：</div><?php echo form_error('file'); ?>
+          <div class="you"></div><input type="file" name="file0" id="doc-ipt-file-1">
+              <div class="zuo">附加图(非必需)请按顺序添加
+              <input type="file" name="file1">
+              <input type="file" name="file2">
+              <input type="file" name="file3">
+              <input type="file" name="file4">
+              <input type="file" name="file5">
+              </div>
           </div>
-        </div>
-
-        <div class="am-form-group am-cf">
-          <div class="zuo">其他信息：</div>
-          <div class="you">
-            <textarea class="" rows="2" id="doc-ta-1"></textarea>
-          </div>
-        </div>-->
-
-
         <div class="am-form-group am-cf">
         <div class="zuo">更多：</div>
         <div class="you" style="margin-top: 5px;">
@@ -108,3 +101,4 @@
 
 
 </div>
+

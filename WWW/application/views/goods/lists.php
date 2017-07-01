@@ -75,7 +75,7 @@
                 <!-- <td><input type="text" class="am-form-field am-radius am-input-sm"/></td> -->
                 <td width="90px"><a href="#"><?=$item['id'];?></a></td>
                 <td width="100px"><a href="#"><?=$item['name'];?></a></td>
-                <td  width="100px"><img width='90px' height='50px' src="<?php echo base_url('uploads/'.$item['picture'])?>"></td>
+                <td  width="100px"><img width='90px' height='50px' src="<?php echo base_url('uploads/'.$item['id'].'-0.jpg')?>"></td>
                 <td  width="100px"><center><?=$item['prices']?></center></td>
                 <td><center><?=$item['num']?></center></td>
                 <td><center><?=$item['class']?></center></td>
@@ -83,7 +83,7 @@
                 <td class="am-hide-sm-only"><?=$item['origin']?></td>
                 <td><div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <a href="/Goods/detail/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span></button></a>
+                      <a href="/goods/detail/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span></button></a>
                       <a href="/manage_goods/edit_goods/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span></button></a>
                       <a href="/manage_goods/delete_goods/<?=$item['id']?>"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o"></span></button></a>
                     </div>

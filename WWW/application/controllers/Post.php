@@ -11,7 +11,7 @@ class Post extends CI_Controller {
     private function Generate_orderid($user_id){
         $time=strftime("%Y%m%d",time());
         $user_no=$this->Op_user->get_user_no($user_id);
-        $user_num=$this->Op_use->get_user_num($user_id);
+        $user_num=$this->Op_user->get_user_num($user_id);
         return $time.$user_no.$user_num;
     }
 
@@ -54,26 +54,36 @@ class Post extends CI_Controller {
      * order 下单函数
      */
     public function order(){
-        $user_info=json_decode($this->input->get('userInfo'),true);
-        $user_id=$user_info['userID'];
-        $order_id = $this->Generate_orderid($user_id);
-        if($this->Op_order->insert_order($order_id,$user_id,$this->input->get('userInfo'))){
-            $order_info = json_decode($this->input->get('orderInfo'),true);
+        $user_id=$this->input->get('userId');
+        $order_id=$this->Generate_orderid($user_id);
+        $order_info = json_decode($this->input->get('orderInfo'),true);
+        $data = array(
+            'order_id' => $order_id,
+            'user_id' => $user_id,
+            'orderInfo' => $this->input->get('orderInfo'),
+            'money' => $order_info['summation'],
+            'datetime' => $order_info['expected_arrive_time'],
+            'pay_way' => $order_info['pay_way'],
+        );
+        if($this->Op_order->insert_order($data))
+        {
             $goods_list = $order_info['goods_list'];
             $data_list =array();
-            foreach($goods_list as $goods){
+            foreach($goods_list as $goods)
+            {
                 $data=array(
                     'order_id' => $order_id,
-                    'goods_id' => (int)$goods['goods_id'],
+                    'goods_id' => (int)$goods['id'],
                     'select_num' => $goods['select_num']
                 );
                 array_push($data_list, $data);
             }
-            if($this->Op_order->insert_order_content($data_list)) {
+            if($this->Op_order->insert_order_content($data_list))
+            {
                 return true;
             }
+            return false;
         }
-        return false;
     }
     public function register(){
         $this->load->database();
@@ -88,5 +98,6 @@ class Post extends CI_Controller {
             echo "sorry,注册消息提交失败，勿重复提交";
         }
     }
+
 }
 
