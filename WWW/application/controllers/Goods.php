@@ -38,7 +38,7 @@ class Goods extends Admin{
             'goods' => $this->Op_goods->get_last_ten_goods(),
         );
         $this->load->view("goods/lists",$data);
-        $this->load->view('footer');
+        
     }
     /**
      * 添加新商品
@@ -48,7 +48,6 @@ class Goods extends Admin{
             'class' => $this->Op_goods->goods_class(),
         );
         $this->load->view("goods/add",$data);
-        $this->load->view('footer');
     }
     /**
      * 商品分类
@@ -58,7 +57,7 @@ class Goods extends Admin{
             'class' => $this->Op_goods->goods_class(),
         );
         $this->load->view("goods/classify",$data);
-        $this->load->view('footer');
+        
     }
     public function detail($good_id)
     {
@@ -97,7 +96,9 @@ class Goods extends Admin{
         );
         $this->form_validation->set_rules($config);
         if ($this->form_validation->run() == FALSE){
-            $this->goods_new();
+            $this->load->view('header');
+            $this->load->view('sidermenu');
+            $this->add();
         }
         //将数据插入至数据库
         else{

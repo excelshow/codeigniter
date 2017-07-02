@@ -1,66 +1,107 @@
-<!doctype html>
-<html class="no-js">
-<head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <?php $this->load->helper('url');?>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>后台管理系统</title>
-<meta name="description">
-<meta name="keywords" content="index">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="renderer" content="webkit">
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="<?php echo base_url('/assets/i/favicon.png')?>">
-<link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/assets/i/app-icon72x72@2x.png')?>">
-<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="<?php echo base_url('/assets/css/amazeui.min.css')?>"/>
-<link rel="stylesheet" href="<?php echo base_url('/assets/css/admin.css')?>">
-    <script src="<?=base_url('assets/dist/echarts.js')?>"></script>
-<script src=" <?php echo base_url('/assets/js/jquery.min.js')?>"></script>
-<script src="<?php echo base_url('/assets/js/app.js')?>"></script>
-<script src="<?php echo base_url('/assets/js/amazeui.min.js')?>"></script>
-<!--消息框js-->
-<script src="<?=base_url('assets/dist/sweetalert.min.js')?>"></script>
-<link rel="stylesheet" type="text/css" href="<?=base_url('assets/dist/sweetalert.css')?>">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>控制台页面</title>
+    <link rel="stylesheet" href="<?=base_url('assets/css/style.default.css')?>" type="text/css" />
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery-1.7.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery-ui-1.8.16.custom.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.cookie.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.uniform.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.flot.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.flot.resize.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.slimscroll.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/custom/general.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/custom/dashboard.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.dataTables.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/js/custom/tables.js')?>"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="<?=base_url('/assets/js/plugins/excanvas.min.js')?>"></script><![endif]-->
+    <!--[if IE 9]>
+    <link rel="stylesheet" media="screen" href="<?=base_url('css/style.ie9.css')?>"/>
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" media="screen" href="<?=base_url('css/style.ie8.css')?>"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="<?=base_url('/assets/js/plugins/css3-mediaqueries.js')?>"></script>
+    <![endif]-->
 </head>
-<!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
 
-<body>
-<header class="am-topbar admin-header">
-  <div class="am-topbar-brand"><img src="<?php echo base_url('/assets/i/logo.png')?>"></div>
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+            <h1 class="logo">Ama.<span>Admin</span></h1>
+            <span class="slogan">后台管理系统</span>
 
-  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-    <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
+            <div class="search">
+                <form action="" method="post">
+                    <input type="text" name="keyword" id="keyword" value="请输入" />
+                    <button class="submitbutton"></button>
+                </form>
+            </div><!--search-->
 
-   <li class="am-dropdown tognzhi" data-am-dropdown>
-  <button class="am-btn am-btn-primary am-dropdown-toggle am-btn-xs am-radius am-icon-bell-o" data-am-dropdown-toggle> 消息管理<span class="am-badge am-badge-danger am-round"></span></button>
-  <ul class="am-dropdown-content">
+            <br clear="all" />
+
+        </div><!--left-->
+
+        <div class="right">
+            <!--<div class="notification">
+                <a class="count" href="<?=base_url('ajax/notifications.html')?>"><span>9</span></a>
+            </div>-->
+            <div class="userinfo">
+                <img src="<?=base_url('/assets/images/thumbs/avatar.png')?>" alt="" />
+                <span>管理员</span>
+            </div><!--userinfo-->
+
+            <div class="userinfodrop">
+                <div class="avatar">
+                    <a href=""><img src="<?=base_url('/assets/images/thumbs/avatarbig.png')?>" alt="" /></a>
+                    <div class="changetheme">
+                        切换主题: <br />
+                        <a class="default"></a>
+                        <a class="blueline"></a>
+                        <a class="greenline"></a>
+                        <a class="contrast"></a>
+                        <a class="custombg"></a>
+                    </div>
+                </div><!--avatar-->
+                <div class="userdata">
+                    <h4>Juan</h4>
+                    <span class="email">youremail@yourdomain.com</span>
+                    <ul>
+                        <li><a href="<?=base_url('editprofile.html')?>">编辑资料</a></li>
+                        <li><a href="<?=base_url('accountsettings.html')?>">账号设置</a></li>
+                        <li><a href="<?=base_url('help.html')?>">帮助</a></li>
+                        <li><a href="<?=base_url('index.html')?>">退出</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
 
 
+    <div class="header">
+        <ul class="headermenu">
+            <li class="current"><a href="<?=base_url('admin')?>"><span class="icon icon-flatscreen"></span>首页</a></li>
+            <li><a href="<?=base_url('manageblog.html')?>"><span class="icon icon-pencil"></span>商品管理</a></li>
+            <li><a href="<?=base_url('messages.html')?>"><span class="icon icon-message"></span>查看消息</a></li>
+            <li><a href="<?=base_url('reports.html')?>"><span class="icon icon-chart"></span>统计报表</a></li>
+        </ul>
 
-    <li class="am-dropdown-header">所有消息都在这里</li>
+        <div class="headerwidget">
+            <div class="earnings">
+                <div class="one_half">
+                    <h4>Today's Earnings</h4>
+                    <h2>$640.01</h2>
+                </div><!--one_half-->
+                <div class="one_half last alignright">
+                    <h4>Current Rate</h4>
+                    <h2>53%</h2>
+                </div><!--one_half last-->
+            </div><!--earnings-->
+        </div><!--headerwidget-->
 
-
-
-    <li><a href="#">未激活会员 <span class="am-badge am-badge-danger am-round"></span></a></li>
-    <li><a href="#">未确认订单 <span class="am-badge am-badge-danger am-round"></span></a></li>
-
-
-
-  </ul>
-</li>
-
- <li class="kuanjie">
-
-  <a href="#">会员管理</a>
-  <a href="#">订单管理</a>
-  <a href="#">商品管理</a>
- </li>
-
- <li class="soso">
- </li>
-      <li class="am-hide-sm-only" style="float: right;"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
-    </ul>
-  </div>
-</header>
-?>
+    </div>

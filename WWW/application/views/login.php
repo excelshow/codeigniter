@@ -1,81 +1,65 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<?php $this->load->helper('url');?>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>登录页面</title>
+        <link rel="stylesheet" href="<?=base_url('/assets/css/style.default.css')?>" type="text/css" />
+        <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery-1.7.min.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery-ui-1.8.16.custom.min.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.cookie.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.uniform.min.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('/assets/js/custom/general.js')?>"></script>
+        <script type="text/javascript" src="<?=base_url('/assets/js/custom/index.js')?>"></script>
+    </head>
 
-<title>管理员登录</title>
-<link href="./assets/login//style_log.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="./assets/login//style.css">
-<link rel="stylesheet" type="text/css" href="./assets/login//userpanel.css">
-<link rel="stylesheet" type="text/css" href="./assets/login//jquery.ui.all.css">
+    <body class="loginpage">
+    <div class="loginbox">
+        <div class="loginboxinner">
 
-</head>
+            <div class="logo">
+                <h1 class="logo">小程序商城<span>后台管理</span></h1>
+                <span class="slogan">thinkmoon</span>
+            </div><!--logo-->
 
-<body class="login" mycollectionplug="bind">
-<div class="login_m">
-<div class="login_logo"><img src="./assets/login//logo.png" width="196" height="46"></div>
-<div class="login_boder">
+            <br clear="all" /><br />
 
-<div class="login_padding" id="login_model">
-<?php echo form_open('Login/check_admin'); ?>
-  <h2>USERNAME</h2>
-  <label>
-    <input type="text" name='username' id="username" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" placeholder="Your name">
-  </label>
-  <h2>PASSWORD</h2>
-  <label>
-    <input type="password" name="password" id="userpwd" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;***********&#39;}" placeholder="********">
-  </label>
- 
- 
+            <div class="nousername">
+                <div class="loginmsg">密码不正确.</div>
+            </div><!--nousername-->
 
- 
-  <p class="forgot"><a id="iforget" href="javascript:void(0);">Forgot your password?</a></p>
-  <div class="rem_sub">
-  <div class="rem_sub_l">
-  <input type="checkbox" name="checkbox" id="save_me">
-   <label for="checkbox">Remember me</label>
-   </div>
-    <label>
-      <input type="submit" class="sub_button" name="button" id="button" value="SIGN-IN" style="opacity: 0.7;">
-    </label>
-  </div>
-</div>
+            <div class="nopassword">
+                <div class="loginmsg">密码不正确.</div>
+                <div class="loginf">
+                    <div class="thumb"><img alt="" src="<?=base_url('/assets/images/thumbs/avatar1.png')?>" /></div>
+                    <div class="userlogged">
+                        <h4></h4>
+                        <a href="index.html">Not <span></span>?</a>
+                    </div>
+                </div><!--loginf-->
+            </div><!--nopassword-->
+            <?php echo form_open('Login/check_admin'); ?>
+                <div class="username">
+                    <div class="usernameinner">
+                        <input type="text" name="username" id="username" />
+                    </div>
+                </div>
 
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
+                <div class="password">
+                    <div class="passwordinner">
+                        <input type="password" name="password" id="password" />
+                    </div>
+                </div>
 
-<div id="forget_model" class="login_padding" style="display:none">
-<br>
+                <button>登录</button>
 
-   <h1>Forgot password</h1>
-   <br>
-   <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
-    <label>
-    <input type="text" id="usrmail" class="txt_input txt_input2">
-   </label>
+                <div class="keep"><input type="checkbox" /> 记住密码</div>
 
- 
-  <div class="rem_sub">
-  <div class="rem_sub_l">
-   </div>
-    <label>
-     <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
-     　　　
-     <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
-    
-    </label>
-  </div>
-</div>
+            </form>
+
+        </div><!--loginboxinner-->
+    </div><!--loginbox-->
 
 
-
-
-
-
-<!--login_padding  Sign up end-->
-</div><!--login_boder end-->
-</div><!--login_m end-->
- <br> <br>
-<p align="center">Copyright@2017 by <a href="http://blog.thinkmoon.cn/" target="_blank" title="模板之家">thinkmoon.cn</a> - modify by <a href="http://blog.thinkmoon.cn/" target="_blank">醉月思</a></p>
-
-
-
-</body></html>
+    </body>
+    </html>

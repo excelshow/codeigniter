@@ -5,9 +5,9 @@
 <!-- * Date: 2017/6/16-->
 <!-- * Time: 18:48-->
 <!-- */-->
+<div id="contentwrapper" class="contentwrapper">
 <div class="admin-biaogelist">
     <div class="listbiaoti am-cf">
-        <ul class="am-icon-flag on"> 栏目名称</ul>
         <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品列表</a></dl>
     </div>
     <div class="fbneirong">
@@ -17,7 +17,7 @@
             table { width: 200px; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}
         </style>
 
-        <h3>订单号：<?=$order_id?></h3>
+        <h5>订单号：<?=$order_id?></h5>
         <table>
             <thead>
                 <th>商品</th>
@@ -36,7 +36,7 @@
                     <?php endforeach; ?>
             </tbody>
         </table>
-        <h2>总金额：</h2>
+        <h5>总金额：</h5>
         <div class="you" style="margin-left: 11%;">
             <button type="submit" class="am-btn am-btn-success am-radius" style="background: #2eff8d">确认订单</button>&nbsp;  &raquo; &nbsp; <button type="submit" class="am-btn am-btn-secondary am-radius" style="background: #FF0000">拒绝订单</button>
 

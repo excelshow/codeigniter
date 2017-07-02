@@ -1,3 +1,4 @@
+<div id="contentwrapper" class="contentwrapper">
 <div class="admin-biaogelist">
 
     <div class="listbiaoti am-cf">
@@ -41,19 +42,19 @@
           <div class="am-form-group am-cf">
               <div class="zuo">功效：</div>
               <div class="you">
-                  <textarea class="" rows="2" id="doc-ta-1" name="function"></textarea>
+                  <textarea class="" rows="5" id="doc-ta-1" name="function"></textarea>
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">食用方法：</div>
               <div class="you">
-                  <textarea class="" rows="2" id="doc-ta-1" name="eat"></textarea>
+                  <textarea class="" rows="5" id="doc-ta-1" name="eat"></textarea>
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">储存方法：</div>
               <div class="you">
-                  <textarea class="" rows="2" id="doc-ta-1" name="save"></textarea>
+                  <textarea class="" rows="5" id="doc-ta-1" name="save"></textarea>
               </div>
           </div>
         <div class="am-form-group am-cf">

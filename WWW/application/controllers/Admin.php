@@ -17,8 +17,6 @@ class Admin extends CI_Controller {
             redirect('');
 		}else {
             $this->load->model('Op_goods');
-            $this->load->view('header');
-            $this->load->view('sidermenu');
             $this->load->helper(array('form', 'url'));
         }
 	}
@@ -28,6 +26,9 @@ class Admin extends CI_Controller {
 	*/
 	public function index()
 	{
+        $this->load->view('header');
+        $this->load->view('sidermenu');
         $this->load->view('dashboard');
+        $this->load->view('footer');
 	}
 }
