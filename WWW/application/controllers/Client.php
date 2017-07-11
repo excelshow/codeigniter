@@ -28,9 +28,9 @@ class Client extends CI_Controller {
         $result = $this->Op_order->order_detail($order_id);
         echo json_encode($result);
     }
-    public function get_orders($user_id)
+    public function get_orders($user_id,$dist)
     {
-        $result = $this->Op_order->get_orders($user_id);
+        $result = $this->Op_order->get_orders($user_id,$dist);
         echo json_encode($result);
     }
 

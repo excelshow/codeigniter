@@ -1,51 +1,5 @@
-<?php $this->load->helper('url');?>
-<script type="text/javascript">
-    function toast(url) {
-        alert("正在处理。。请稍候");
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                alert(xmlhttp.responseText);
-            }
-        }
-        xmlhttp.open("GET",'<?=base_url("/")?>'+url,true);
-        xmlhttp.send();
-        return false;
-    }
-    function change_content(url)
-    {
-        document.getElementById("content").innerHTML="<br/>&nbsp;<h3>&nbsp;正在加载数据........请稍候！</h3>";
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                document.getElementById("content").innerHTML=xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("GET",'<?=base_url("/")?>'+url,true);
-        xmlhttp.send();
-        return false;
-    }
-</script>
+﻿<?php $this->load->helper('url');?>
+<script type="text/javascript" src="<?=base_url('/assets/ajax/ajax.js')?>"></script>
 <div class="vernav2 iconmenu">
     <ul>
         <li><a href="#goods_manage" class="addons">商品管理</a>
@@ -53,6 +7,7 @@
             <ul id="goods_manage">
                 <li><a href="javascript:void(0);" onclick="change_content('goods/lists')">商品列表</a></li>
                 <li><a href="javascript:void(0);" onclick="change_content('goods/classify')">商品分类</a></li>
+                <li><a href="javascript:void(0);" onclick="change_content('goods/stock')">库存管理</a></li>
                 <li><a href="javascript:void(0);" onclick="change_content('goods/add')">添加新商品</a></li>
             </ul>
         </li>

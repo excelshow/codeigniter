@@ -39,11 +39,11 @@
         <td align="center"><input type="checkbox" /></td>
         <td><?=$item['id'];?></td>
         <td><?=$item['name'];?></td>
-        <td><img width='90px' height='50px' src="<?php echo base_url('uploads/'.$item['id'].'-0.jpg')?>"></td>
+        <td><img width='90px' height='50px' src="<?=base_url('uploads/'.$item['id'].'-0.jpg')?>"></td>
         <td class="center"><?=$item['prices']?></td>
         <td class="center"><?=$item['num']?></td>
         <td class="center"><?=$item['class']?></td>
-        <td class="center"><a href="" class="edit">查看详情</a><a href="" class="edit">编辑</a> &nbsp; <a href="" class="delete">删除</a></td>
+        <td class="center"><a href="javascript:void(0);" onclick="change_content('goods/detail/'+<?=$item['id'];?>)" class="edit">查看详情</a> &nbsp; <a href="javascript:void(0);" onclick="change_content('goods/detail/'+<?=$item['id'];?>)" class="edit">编辑</a> &nbsp; <a href="" class="delete">删除</a></td>
     </tr>
     <?php endforeach; ?>
     </tbody>

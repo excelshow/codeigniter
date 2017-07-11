@@ -9,7 +9,6 @@ class Order extends Admin{
     //put your code here
     public function __construct(){
         parent::__construct();
-        $this->load->model('Op_order');
     }
     /*
      * 加载未确认订单列表
@@ -29,5 +28,10 @@ class Order extends Admin{
     }
     public function test(){
         $this->load->view('test');
+    }
+
+    public function sure($order_id)
+    {
+        $this->Op_order->sure($order_id);
     }
 }

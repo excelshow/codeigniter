@@ -119,12 +119,29 @@ class Goods extends Admin{
             }
         }
     }
+
+    public function stock()
+    {
+        $data = Array(
+            'stock' => $this->Op_goods->get_stock(),
+        );
+        $this->load->view("goods/stock",$data);
+    }
     /**
      * 执行删除商品操作
      * @param int $id 商品ID
      */
-    public function delete($id) {
+    public function delete($id){
         $this->Op_goods->delete_goods($id);
         redirect('Goods/lists');
+    }
+
+    public function add_have($id,$num)
+    {
+        $this->Op_goods->add_have($id,$num);
+    }
+    public function add_num($id,$num)
+    {
+        $this->Op_goods->add_num($id,$num);
     }
 }

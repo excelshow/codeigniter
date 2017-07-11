@@ -9,7 +9,6 @@ require('Admin.php');
 class Member extends Admin{
     public function __construct(){
         parent::__construct();
-        $this->load->model('Op_user');
     }
 
     public function lists()

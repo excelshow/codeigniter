@@ -35,27 +35,42 @@
             <th class="table-id">下单电话</th>
             <th class="table-id">详细地址</th>
             <th class="table-title">期望送达日期</th>
-            <th width="163px" class="table-set">订单总金额</th>
+            <th width="50px" class="table-set">订单总金额</th>
+            <th class="table-title">订单状态</th>
             <th width="163px" class="table-set">操作</th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($order_list as $item):?>
             <tr>
-                <td><input type="checkbox" /></td>
+                <td><input type="checkbox" id="<?='checkbox'.$item['order_id'];?>" onchange="born('<?='checkbox'.$item['order_id'];?>');"/></td>
                 <td width="90px"><a href="#"><?=$item['order_id'];?></a></td>
                 <td width="100px"><a href="#"><?php $orderInfo = json_decode($item['orderInfo'],true); echo $orderInfo['Address']['userName']?></a></td>
                 <td  width="100px"><?=$orderInfo['Address']['telNumber']?></td>
-                <td  width="100px"><center><?=$orderInfo['Address']['detailInfo']?></center></td>
-                <td><?=$item['datetime'];?></td>
+                <td  width="100px"><?=$orderInfo['Address']['detailInfo']?></td>
+                <td><?=date('Y-m-d H:i:s',$item['datetime']/1000)?></td>
                 <td><?=$item['money']?></td>
+                <td id="status<?=$item['order_id'];?>"><?php
+                    switch($item['status']){
+                        case 0:
+                            echo "<div style='color:#ff2821'>未支付</div>";break;
+                        case 1:
+                            echo "<div style='color:#0aff25'>已支付</div>";break;
+                        case -1:
+                            echo "<div style='color:#1920ff'>已完成</div>";break;
+                    }
+                    ?></td>
+
                 <td><div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
-                            <a href="javascript:void(0);" onclick="change_content('order/detail/'+<?=$item['order_id'];?>)">查看</a>
-                            <a href="javascript:void(0);" onclick="change_content('order/detail/'+<?=$item['order_id'];?>)">删除</a>
+                            <a href="javascript:void(0);" onclick="change_content('order/detail/<?=$item['order_id'];?>')">查看</a>
+                            <a href="javascript:void(0);" onclick="change_content('order/detail/'+<?=$item['order_id'];?>')">删除</a>
+                            <button onclick="update_data('order/sure/<?=$item['order_id'];?>','status<?=$item['order_id'];?>',' ')">确认到货</button>
                         </div>
                     </div></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+    <div id="born">
+    </div>

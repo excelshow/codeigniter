@@ -15,6 +15,12 @@ class Op_goods extends CI_Model {
         $this->load->database();
         // Your own constructor code
     }
+
+    public function get_stock()
+    {
+        $query = $this->db->query("SELECT id,name,have,num FROM goods");
+        return $query->result_array();
+    }
     public function get_max($column,$table)
     {
         $this->db->select_max($column);
@@ -30,9 +36,7 @@ class Op_goods extends CI_Model {
      */
     public function get_last_ten_goods()
     {
-        $data_good = Array();
-        $table = array($this->goods_table_name,'map_class_id');
-        $query = $this->db->query('SELECT * FROM goods,map_class_id WHERE goods.id=map_class_id.id');
+        $query = $this->db->query("SELECT * FROM goodsview");
         return $query->result_array();
     }
 
@@ -115,6 +119,24 @@ class Op_goods extends CI_Model {
         $class = urldecode($data);
         $query = $this->db->query("SELECT * FROM goodsview where name LIKE '%$class%'");
         return $query->result_array();
+    }
+
+    public function add_have($id,$num)
+    {
+        if($this->db->query("update goods set have=have+$num where id='$id'")){
+            $query = $this->db->get_where('goods',array('id'=>$id));
+            echo $query->row()->have;
+            return TRUE;
+        }else return FALSE;
+    }
+
+    public function add_num($id,$num)
+    {
+        if($this->db->query("update goods set num=num+$num where id='$id'")){
+            $query = $this->db->get_where('goods',array('id'=>$id));
+            echo $query->row()->num;
+            return TRUE;
+        }else return FALSE;
     }
 }
 ?>

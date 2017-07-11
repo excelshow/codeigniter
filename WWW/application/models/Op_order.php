@@ -30,11 +30,11 @@ class Op_order  extends CI_Model{
     }
 
     /**
-     * @return mixed 未确认订单
+     * @return mixed
      */
     public function get_order_unkown(){
-        $query = $this->db->get_where($this->order_table_name,array('status'=>0));
-        return $query->result_array();
+        $query = $this->db->get_where($this->order_table_name);
+        return array_reverse($query->result_array());
     }
     /**
      * @param $order_id 订单号
@@ -45,11 +45,9 @@ class Op_order  extends CI_Model{
      */
     public function insert_order($data){
         if($this->db->insert($this->order_table_name, $data)){
-            echo "下单成功!请耐心等待商品归来";
             return true;
         }
         else{
-            echo "下单失败!";
             return false;
         }
     }
@@ -65,9 +63,24 @@ class Op_order  extends CI_Model{
         return false;
     }
 
-    public function get_orders($user_id)
+    public function get_orders($user_id,$dist='%')
     {
-        $query = $this->db->query("SELECT order_id,orderInfo FROM orders WHERE user_id='$user_id'");
-        return $query->result_array();
+        $query = $this->db->query("SELECT order_id,orderInfo FROM orders WHERE user_id='$user_id' AND status='$dist'");
+        return array_reverse($query->result_array());
+    }
+
+    public function settlement($order_id)
+    {
+        if($this->db->query("update orders set status=1 where order_id='$order_id'")){
+            return TRUE;
+        }else return FALSE;
+    }
+
+    public function sure($order_id)
+    {
+        if($this->db->query("update orders set status=-1 where order_id='$order_id'")){
+            echo "<div style='color:#1920ff'>已完成</div>";
+            return TRUE;
+        }else return FALSE;
     }
 }

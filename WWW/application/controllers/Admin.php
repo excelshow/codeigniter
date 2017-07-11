@@ -17,6 +17,8 @@ class Admin extends CI_Controller {
             redirect('');
 		}else {
             $this->load->model('Op_goods');
+            $this->load->model('Op_user');
+            $this->load->model('Op_order');
             $this->load->helper(array('form', 'url'));
         }
 	}

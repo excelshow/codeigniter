@@ -33,8 +33,8 @@
 <div class="bodywrapper">
     <div class="topheader">
         <div class="left">
-            <h1 class="logo">Ama.<span>Admin</span></h1>
-            <span class="slogan">后台管理系统</span>
+            <h1 class="logo">及时<span>农场</span></h1>
+            <span class="slogan">商城后台管理系统</span>
 
             <div class="search">
                 <form action="" method="post">
@@ -70,7 +70,7 @@
                 </div><!--avatar-->
                 <div class="userdata">
                     <h4>Juan</h4>
-                    <span class="email">youremail@yourdomain.com</span>
+                    <span class="email"><?=$_SESSION['username']?></span>
                     <ul>
                         <li><a href="<?=base_url('editprofile.html')?>">编辑资料</a></li>
                         <li><a href="<?=base_url('accountsettings.html')?>">账号设置</a></li>
@@ -86,7 +86,7 @@
     <div class="header">
         <ul class="headermenu">
             <li class="current"><a href="<?=base_url('admin')?>"><span class="icon icon-flatscreen"></span>首页</a></li>
-            <li><a href="<?=base_url('manageblog.html')?>"><span class="icon icon-pencil"></span>商品管理</a></li>
+            <li><a href="javascript:void(0);" onclick="change_content('goods/lists')"><span class="icon icon-pencil"></span>商品管理</a></li>
             <li><a href="<?=base_url('messages.html')?>"><span class="icon icon-message"></span>查看消息</a></li>
             <li><a href="<?=base_url('reports.html')?>"><span class="icon icon-chart"></span>统计报表</a></li>
         </ul>

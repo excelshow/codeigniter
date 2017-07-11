@@ -27,6 +27,7 @@
             </thead>
             <tbody>
                     <?php foreach ($data as $item):?>
+
                     <tr>
                         <td><?=$item['name']?></td>
                         <td><?=$item['prices']?></td>

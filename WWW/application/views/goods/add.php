@@ -30,7 +30,7 @@
         <div class="am-form-group am-cf">
           <div class="zuo">价格<span style="color:red;" >*</span>：</div>
           <div class="you">
-            <input type="number" name='prices' value="<?php echo set_value('prices'); ?>"  class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入价格"><?php echo form_error('prices'); ?>
+            <input type="number" step='0.01' name='prices' value="<?php echo set_value('prices'); ?>"  class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入价格"><?php echo form_error('prices'); ?>
           </div>
         </div>
         <div class="am-form-group am-cf">
