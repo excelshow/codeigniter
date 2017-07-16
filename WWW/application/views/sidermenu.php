@@ -1,5 +1,12 @@
 ﻿<?php $this->load->helper('url');?>
 <script type="text/javascript" src="<?=base_url('/assets/ajax/ajax.js')?>"></script>
+<script type="text/javascript">
+    function check_all(obj,cName)
+    {
+        var checkboxs = document.getElementsByName(cName);
+        for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
+    }
+</script>
 <div class="vernav2 iconmenu">
     <ul>
         <li><a href="#goods_manage" class="addons">商品管理</a>

@@ -1,4 +1,4 @@
-var base_url='http://localhost/index.php/';
+var base_url='https://www.thinkmoon.cn/index.php/';
 function new_xmlhttp(){
     var xmlhttp;
         if (window.XMLHttpRequest)

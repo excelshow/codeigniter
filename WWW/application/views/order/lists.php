@@ -17,6 +17,7 @@
         </select> &nbsp;
         <button class="radius3">应用</button>
     </div><!--tableoptions-->
+    <?php echo form_open('Order/together'); ?>
     <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
         <colgroup>
             <col class="con0" style="width: 4%" />
@@ -29,7 +30,7 @@
         </colgroup>
         <thead>
         <tr class="am-success">
-            <th class="table-check"><input type="checkbox" /></th>
+            <th class="table-check"><input type="checkbox" name="all" onclick="check_all(this,'checkbox[]')" /></th>
             <th class="table-id">订单号</th>
             <th class="table-id">下单人</th>
             <th class="table-id">下单电话</th>
@@ -43,7 +44,7 @@
         <tbody>
         <?php foreach ($order_list as $item):?>
             <tr>
-                <td><input type="checkbox" id="<?='checkbox'.$item['order_id'];?>" onchange="born('<?='checkbox'.$item['order_id'];?>');"/></td>
+                <td><input type="checkbox" name="checkbox[]" value="<?=$item['order_id'];?>"/></td>
                 <td width="90px"><a href="#"><?=$item['order_id'];?></a></td>
                 <td width="100px"><a href="#"><?php $orderInfo = json_decode($item['orderInfo'],true); echo $orderInfo['Address']['userName']?></a></td>
                 <td  width="100px"><?=$orderInfo['Address']['telNumber']?></td>
@@ -72,5 +73,4 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <div id="born">
-    </div>
+    <button type="submit">备货</button>

@@ -33,6 +33,13 @@ class Client extends CI_Controller {
         $result = $this->Op_order->get_orders($user_id,$dist);
         echo json_encode($result);
     }
+	public function delete_order($order_id)
+	{
+		$result = $this->Op_order->delete_order($order_id);
+        if($result)
+			echo "成功" ;
+		else echo "失败" ;
+	}
 
     public function guess_like($user_id)
     {

@@ -78,7 +78,10 @@ class Post extends CI_Controller {
         );
         echo json_encode($data);
     }
-
+	public function sure_order($order_id)
+    {
+        $this->Op_order->sure($order_id);
+    }
     /**
      * order 下单接口，对接微信小程序的下单请求
      */
@@ -120,7 +123,19 @@ class Post extends CI_Controller {
         }
 
     }
+	/**
+     * order 下单接口，对接微信小程序的取消订单请求
 
+	public function cancleOrder(){
+		$order_id = $this->input->get('order_id') ;
+		$return = WeixinPay::closeOrder($this->app_id, $this->mch_id, $order_id) ;
+		echo json_encode($return) ;
+		return true ;
+	}
+	*/
+	 
+	 
+	 
     /**
      * register 接受注册请求
      */
@@ -180,7 +195,7 @@ class Post extends CI_Controller {
         $out_trade_no = $attr[out_trade_no];
 //        $time = $attr[time_end];
         $this->Op_order->settlement($out_trade_no);
-
+		echo "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
     }
 }
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require('Admin.php');
 /**
@@ -34,4 +34,31 @@ class Order extends Admin{
     {
         $this->Op_order->sure($order_id);
     }
+/* 
+合并订单
+*/
+public function together()
+    {
+        echo "<h1>合并订单内容正在生成，请点击下载detail文件</h1>";
+        $file_name='detail'.time().'.txt';
+        $file_content="----------------------------\r\n\r\n总计:\r\n\r\n";
+        $orders = $this->input->post('checkbox');
+       $result = $this->Op_order->together($orders);
+       echo "备货总计:<br />";
+       foreach ($result as $item){
+           $str = $item['name']."数量:》".$item['select_num']."斤";
+           $file_content = $file_content.$str."\r\n\r\n";
+           echo $str.'<br />';
+       }
+        $this->load->helper('file');
+        if ( ! write_file('./download/'.$file_name, $file_content."----------------------------\r\n\r\n")) {
+            echo '文件写入权限不足，请联系管理员<br />';
+        }
+        $this->Op_order->write_detail($file_name,$orders);
+    }
+	/*
+		统计当天的送出各种货物的数量
+	*/
+
+	
 }

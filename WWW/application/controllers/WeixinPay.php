@@ -18,7 +18,7 @@ class WeixinPay {
         $this->out_trade_no = $out_trade_no;  
         $this->body = $body;  
         $this->total_fee = $total_fee;  
-    }  
+    }
     public function pay() {  
         //统一下单接口  
         $return = $this->weixinapp();  
@@ -26,7 +26,7 @@ class WeixinPay {
     }  
     //统一下单接口  
     private function unifiedorder() {  
-        $url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';  
+        $url = 'https://api.mch.weixin.qq.com/pay/unifiedorder'; 
         $parameters = array(  
             'appid' => $this->appid, //小程序ID  
             'mch_id' => $this->mch_id, //商户号  
@@ -36,9 +36,9 @@ class WeixinPay {
 //            'out_trade_no' => '2015450806125323', //商户订单号  
             'out_trade_no'=> $this->out_trade_no,  
 //            'total_fee' => floatval(0.01 * 100), //总金额 单位 分  
-            'total_fee' => $this->total_fee,  
-//            'spbill_create_ip' => $_SERVER['REMOTE_ADDR'], //终端IP  
-            'spbill_create_ip' => '192.168.0.161', //终端IP  
+            'total_fee' => $this->total_fee ,  
+            'spbill_create_ip' => $_SERVER['REMOTE_ADDR'], //终端IP  
+            //'spbill_create_ip' => '192.168.0.161', //终端IP  
             'notify_url' => 'https://www.thinkmoon.cn/index.php/post/notice', //通知地址  确保外网能正常访问  
             'openid' => $this->openid, //用户id  
             'trade_type' => 'JSAPI'//交易类型  
@@ -50,6 +50,23 @@ class WeixinPay {
         $return = $this->xmlToArray($this->postXmlCurl($xmlData, $url, 60)); 
         return $return;  
     }  
+	/*
+	取消订单
+	public static function closeOrder($app_id,$mch_id,$order_id){
+		$url = 'https://api.mch.weixin.qq.com/pay/closeorder' ;
+        $parameters = array(  
+            'appid' => $appid, //小程序ID  
+            'mch_id' => $mch_id, //商户号  
+			'out_trade_no' => $order_id , 	//订单号
+            'nonce_str' => $this->createNoncestr(), //随机字符串  
+        );  
+        //签名  
+        $parameters['sign'] = utf8_encode($this->getSign($parameters));  
+        $xmlData = $this->arrayToXml($parameters); 
+        $return = $this->xmlToArray($this->postXmlCurl($xmlData, $url, 60)); 
+        return $return;  
+	}
+	*/
     private static function postXmlCurl($xml, $url, $second = 30)   
     {  
         $ch = curl_init();  
@@ -117,7 +134,7 @@ class WeixinPay {
         //签名  
         $parameters['paySign'] = $this->getSign($parameters);  
         return $parameters;  
-    }  
+    }
     //作用：产生随机字符串，不长于32位  
     private function createNoncestr($length = 32) {  
         $chars = "abcdefghijklmnopqrstuvwxyz0123456789";  

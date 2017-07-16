@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class Op_goods extends CI_Model {
     /**
      * @var string 商品表名
@@ -123,7 +123,7 @@ class Op_goods extends CI_Model {
 
     public function add_have($id,$num)
     {
-        if($this->db->query("update goods set have=have+$num where id='$id'")){
+        if($this->db->query("update goods set have=have+$num,num=num+$num where id='$id'")){
             $query = $this->db->get_where('goods',array('id'=>$id));
             echo $query->row()->have;
             return TRUE;
