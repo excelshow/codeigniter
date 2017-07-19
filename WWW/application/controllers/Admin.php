@@ -27,10 +27,15 @@ class Admin extends CI_Controller {
 	* @return null
 	*/
 	public function index()
-	{
+    {
         $this->load->view('header');
         $this->load->view('sidermenu');
-        $this->load->view('dashboard');
+        $this->lists();//用作神奇的继承函数
         $this->load->view('footer');
+    }
+    //与子类进行兼容，简化代码
+    public function lists()
+    {
+        $this->load->view('dashboard');
 	}
 }

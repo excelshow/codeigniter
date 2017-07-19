@@ -85,8 +85,10 @@
 
     <div class="header">
         <ul class="headermenu">
-            <li class="current"><a href="<?=base_url('admin')?>"><span class="icon icon-flatscreen"></span>首页</a></li>
-            <li><a href="javascript:void(0);" onclick="change_content('goods/lists')"><span class="icon icon-pencil"></span>商品管理</a></li>
+            <li class="current"><a href="<?=base_url('index.php/admin')?>"><span class="icon icon-flatscreen"></span>首页</a></li>
+            <li><a href="<?=base_url('index.php/goods')?>"><span class="icon icon-pencil"></span>商品管理</a></li>
+            <li><a href="<?=base_url('index.php/order')?>"><span class="icon icon-pencil"></span>订单管理</a></li>
+            <li><a href="<?=base_url('index.php/member')?>"><span class="icon icon-pencil"></span>会员管理</a></li>
             <li><a href="<?=base_url('messages.html')?>"><span class="icon icon-message"></span>查看消息</a></li>
             <li><a href="<?=base_url('reports.html')?>"><span class="icon icon-chart"></span>统计报表</a></li>
         </ul>

@@ -66,11 +66,17 @@
                         <div class="am-btn-group am-btn-group-xs">
                             <a href="javascript:void(0);" onclick="change_content('order/detail/<?=$item['order_id'];?>')">查看</a>
                             <a href="javascript:void(0);" onclick="change_content('order/detail/'+<?=$item['order_id'];?>')">删除</a>
-                            <button onclick="update_data('order/sure/<?=$item['order_id'];?>','status<?=$item['order_id'];?>',' ')">确认到货</button>
+                            <?php if($item['status'] != 1){?>
+                            <button type="button" style="background: #838383;border-color: #444444">确认到货</button>
+                            <?php }else{?>
+                            <button type="button" onclick="update_data('order/sure/<?=$item['order_id'];?>','status<?=$item['order_id'];?>',' ')">确认到货</button>
+                            <?php }?>
                         </div>
                     </div></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php if($dist == 1) {?>
     <button type="submit">备货</button>
+    <?php } ?>

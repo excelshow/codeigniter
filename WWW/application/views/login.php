@@ -18,7 +18,7 @@
         <div class="loginboxinner">
 
             <div class="logo">
-                <h1 class="logo">小程序商城<span>后台管理</span></h1>
+                <h1 class="logo">小程序<span>后台管理</span></h1>
                 <span class="slogan">thinkmoon</span>
             </div><!--logo-->
 

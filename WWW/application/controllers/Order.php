@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require('Admin.php');
 /**
@@ -10,12 +10,14 @@ class Order extends Admin{
     public function __construct(){
         parent::__construct();
     }
+
     /*
      * 加载未确认订单列表
      */
-    public function lists(){
+    public function lists($dist='a'){
         $data=array(
-            'order_list' => $this->Op_order->get_order_unkown(),
+            'order_list' => $this->Op_order->get_order($dist),
+            'dist' => $dist,
         );
         $this->load->view('order/lists',$data);
     }
@@ -23,6 +25,8 @@ class Order extends Admin{
         $data = array(
             'order_id' => $order_id,
             'data' => $this->Op_order->order_detail($order_id),
+            'status' => $this->Op_order->get_status($order_id),
+            'order_info' => $this->Op_order->get_info($order_id),
         );
         $this->load->view('order/detail',$data);
     }
@@ -34,10 +38,8 @@ class Order extends Admin{
     {
         $this->Op_order->sure($order_id);
     }
-/* 
-合并订单
-*/
-public function together()
+
+    public function together()
     {
         echo "<h1>合并订单内容正在生成，请点击下载detail文件</h1>";
         $file_name='detail'.time().'.txt';
@@ -56,9 +58,4 @@ public function together()
         }
         $this->Op_order->write_detail($file_name,$orders);
     }
-	/*
-		统计当天的送出各种货物的数量
-	*/
-
-	
 }
