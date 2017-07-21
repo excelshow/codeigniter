@@ -6,7 +6,7 @@
 <!-- */-->
 <div id="contentwrapper" class="contentwrapper">
     <div class="admin-biaogelist">
-
+    <?=form_open('goods/edit/'.$goods_id)?>
 
         <div class="fbneirong">
 
@@ -29,6 +29,12 @@
                     <div class="zuo">产地<span style="color:red;" >*</span>：</div>
                     <div class="you">
                         <input type="text"  name='origin' value="<?=$item['origin'];?>"  rows="5" id="doc-ta-1"  placeholder="请输入产地">
+                    </div>
+                </div>
+                <div class="am-form-group am-cf">
+                    <div class="zuo">类别<span style="color:red;" >*</span>：</div>
+                    <div class="you">
+                        <select style="width:150px" name="class"><?php foreach ($class as $row): ?><option value="<?=$row['class']?>"><?=$row['class']?></option><?php endforeach; ?></select>
                     </div>
                 </div>
                 <div class="am-form-group am-cf">

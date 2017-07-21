@@ -3,7 +3,7 @@
     <div class="contenttitle2">
         <h3>分类详情</h3>
     </div><!--contenttitle-->
-    <button>新增</button>
+    <button onclick="classname=prompt('请输入你要增加的类名');if(classname != null){toast('goods/add_class/'+classname);}else{alert('你已取消');}">新增</button>
     <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
         <colgroup>
             <col class="con0" />
@@ -19,9 +19,9 @@
         </tr>
         </thead>
         <?php foreach ($class as $item): ?>
-        <tr>
+        <tr>S
             <td><?=$item['class']?></td>
-            <td><button>编辑</button><button>删除</button></td>
+            <td><button onclick="new_class_name=prompt('请输入你要增加的类名','<?=$item['class']?>');if(new_class_name != null){toast('goods/edit_class/<?=$item['class'].'/'?>'+new_class_name);}else{alert('你已取消');}">编辑</button><button onclick="toast('goods/delete_class/<?=$item['class']?>')">删除</button></td>
         </tr>
         <?php endforeach; ?>
         </tbody>

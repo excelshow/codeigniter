@@ -101,6 +101,14 @@ class Op_goods extends CI_Model {
             return FALSE;
         }
     }
+    public function replace_content($data)
+    {
+        if($this->db->replace('goods_content', $data))
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
 
     public function guess_like($user_id)
     {
@@ -137,6 +145,65 @@ class Op_goods extends CI_Model {
             echo $query->row()->num;
             return TRUE;
         }else return FALSE;
+    }
+
+    /**
+     * update_goods
+     * @param $row
+     * @return bool
+     * 更新商品列信息
+     */
+    public function update_goods($row)
+    {
+        if($this->db->replace($this->goods_table_name, $row))
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    /**
+     * add_class
+     * @param $class_name 商品类名
+     * 添加商品类别的模块
+     */
+    public function add_class($class_name)
+    {
+        if($this->db->insert('class',array('class'=>$class_name))){
+            echo "添加成功";
+        }
+        else{
+            echo "添加失败,已存在该类";
+        }
+    }
+
+    /**
+     * delete_class
+     * @param $class_name
+     * 删除商品类的模块
+     */
+    public function delete_class($class_name)
+    {
+        $this->db->delete('class',array('class'=>$class_name));
+        //暂不判断成功与否
+        echo "删除成功";
+    }
+    /**
+     * edit_class
+     * @param $class_name 商品类名
+     * 编辑商品类别的模块
+     */
+    public function edit_class($old_class_name,$new_class_name)
+    {
+        $str = "UPDATE class set class='$new_class_name' WHERE class='$old_class_name'";
+        //执行sql语句
+        $this->db->query($str) ;
+        //获取影响行数
+        $num = $this->db->affected_rows() ;
+        if( $num ){
+            echo "编辑成功";
+        }else{
+            echo "编辑失败,未知错误";
+        }
     }
 }
 ?>

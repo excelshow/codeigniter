@@ -1,4 +1,4 @@
-<?php
+﻿<?php
  date_default_timezone_set('PRC');
 /**
  * Description of Op_user_model
@@ -18,30 +18,43 @@ class Op_order  extends CI_Model{
      * 订单操作模块的构造函数，负责加载数据库的配置
      */
     public function __construct()
-  {
-    parent::__construct();
-    $this->load->database();
-    // Your own constructor code
-  }
-public function get_info($order_id)
+    {
+        parent::__construct();
+        $this->load->database();
+        $this->load->helper('file');
+        // Your own constructor code
+    }
+
+    public function get_status($order_id)
+    {
+        $query = $this->db->query("SELECT status FROM orders WHERE order_id='$order_id'");
+        return $query->row()->status;
+    }
+    public function get_info($order_id)
     {
         $query = $this->db->query("SELECT money,pay_way,orderInfo FROM orders WHERE order_id='$order_id'");
         return $query->row_array();
     }
+
     /**
      * @param $order_id  订单号
      * @return mixed 订单详情
      */
     public function order_detail($order_id){
         $query = $this->db->query("SELECT name,prices,select_num FROM order_content,goods WHERE order_content.goods_id = goods.id AND order_content.order_id='$order_id'");
-       return $query->result_array();
+        return $query->result_array();
     }
 
     /**
      * @return mixed
      */
-    public function get_order_unkown(){
-        $query = $this->db->get_where($this->order_table_name);
+    public function get_order($dist){
+
+        if($dist == 'a'){
+            $query = $this->db->get($this->order_table_name);
+        }else{
+            $query = $this->db->get_where($this->order_table_name,array('status' => $dist));
+        }
         return array_reverse($query->result_array());
     }
     /**
@@ -91,17 +104,16 @@ public function get_info($order_id)
     public function settlement($order_id)
     {
 		$this->db->query("update orders set status=1 where order_id='$order_id' AND status=0") ;
-		$num = $this->db->affected_rows() ;
+		$num = $this->db->affacted_rows() ;
         if( $num ){
 			$query = $this->db->query("select goods_id , select_num from order_content where order_id = '$order_id'");
-			foreach ( $query->result() as $row ){
+			foreach ( $query->$result as $row ){
 				$id = $row->goods_id ;
-				$n = $row->select_num ;
-				$this->db->query("update goods set num = num - $n where id = '$id'") ;
+				$num = $row->select_num ;
+				$this->db->query("update goods set num = num - $num where id = '$id'");
 			}
-			if( $this->db->affected_rows() )
-				return TRUE ;
-        }else return FALSE ;
+            return TRUE;
+        }else return FALSE;
 	
     }
 
@@ -158,5 +170,4 @@ public function together($orders)
         $this->load->helper('download');
         force_download('./download/'.$file_name, NULL);
     }
-	
 }

@@ -13,9 +13,9 @@
 		<h3>Your file was successfully uploaded!</h3>
 		  <?=$tips?>
 		<ul>
-		<?php foreach ($upload_data as $item => $value):?>
-		<li><?php echo $item;?>:<?=$value?></li>
-		<?php endforeach; ?>
+<!--		--><?php //foreach ($upload_data as $item => $value):?>
+<!--		<li>--><?php //echo $item;?><!--:--><?//=$value?><!--</li>-->
+<!--		--><?php //endforeach; ?>
 		</ul>
 
 		<p><?php echo anchor('admin/goods/good_new', 'Upload Another File!'); ?></p>
