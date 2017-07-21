@@ -50,6 +50,7 @@ class Login extends CI_Controller {
     						'logged_in' => TRUE,
 						);
         				$this->session->set_userdata($newdata);
+        				file_get_contents('https://sc.ftqq.com/SCU10223T309896e3f8dc384edc342918050a783059703e8545e05.send?text='.urlencode('后台系统有人登录').'&desp='.urlencode('登录IP：'.$_SERVER["REMOTE_ADDR"]));
         				redirect('admin/');
         			}
         		}
