@@ -1,4 +1,4 @@
-
+﻿
 <!--/**-->
 <!-- * Created by PhpStorm.-->
 <!-- * User: 醉月思-->
@@ -37,7 +37,7 @@
                 <td  width="100px"><?=$item['user_phone'];?></td>
                 <td  width="100px"><center><?=$item['status'];?></center></td>
                 <td><?=$item['user_num'];?></td>
-                <td><button>分析该用户</button><button type="button" class="sure" onclick="toast('/request/sure_user/'+<?=$item['user_no'];?>)">激活</button><button>删除</button></td>
+                <td><button>分析该用户</button><button type="button" class="sure" onclick="toast('/request/sure_user/<?=$item['user_no'];?>')">激活</button><button>删除</button></td>
             </tr>
                 <?php endforeach; ?>
             </tbody>

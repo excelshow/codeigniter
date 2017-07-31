@@ -4,7 +4,9 @@
 <!-- * Date: 2017/6/16-->
 <!-- * Time: 11:26-->
 <!-- */-->
+<?php echo form_open('Order/together'); ?>
 <div id="contentwrapper" class="contentwrapper">
+    <?php if($dist == 1){ echo "<h1>待备货单数".count($order_list)."</h1>"; }?>
     <div class="contenttitle2">
         <h3>订单列表</h3>
     </div><!--contenttitle-->
@@ -17,7 +19,6 @@
         </select> &nbsp;
         <button class="radius3">应用</button>
     </div><!--tableoptions-->
-    <?php echo form_open('Order/together'); ?>
     <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
         <colgroup>
             <col class="con0" style="width: 4%" />
@@ -36,7 +37,7 @@
             <th class="table-id">下单电话</th>
             <th class="table-id">详细地址</th>
             <th class="table-title">期望送达日期</th>
-            <th width="50px" class="table-set">订单总金额</th>
+            <th width="150px" class="table-set">订单总金额</th>
             <th class="table-title">订单状态</th>
             <th width="163px" class="table-set">操作</th>
         </tr>
@@ -49,34 +50,73 @@
                 <td width="100px"><a href="#"><?php $orderInfo = json_decode($item['orderInfo'],true); echo $orderInfo['Address']['userName']?></a></td>
                 <td  width="100px"><?=$orderInfo['Address']['telNumber']?></td>
                 <td  width="100px"><?=$orderInfo['Address']['detailInfo']?></td>
-                <td><?=date('Y-m-d H:i:s',$item['datetime']/1000)?></td>
-                <td><?=$item['money']?></td>
-                <td id="status<?=$item['order_id'];?>"><?php
-                    switch($item['status']){
-                        case 0:
-                            echo "<div style='color:#ff2821'>未支付</div>";break;
-                        case 1:
-                            echo "<div style='color:#0aff25'>已支付</div>";break;
-                        case -1:
-                            echo "<div style='color:#1920ff'>已完成</div>";break;
+                <td><?php
+                    echo date('Y-m-d H:i:s',$item['datetime']/1000);
+                    $overtime=FALSE;
+                    if($item['datetime']/1000 <= time()){
+                        $overtime=TRUE;
                     }
-                    ?></td>
+                    ?>
+                </td>
+                <td><?=$item['money']?></td>
+                <td id="status<?=$item['order_id'];?>">
+                    <?php
+                    if($overtime && $item['status'] == 1){
+                        echo "已过期,请退款";
+                    }
+                    else{
+                        switch($item['status']){
+                            case 0:
+                                echo "<div style='color:#ff2821'>未支付</div>";break;
+                            case 1:
+                                echo "<div style='color:#0aff25'>已支付</div>";break;
+                            case -1:
+                                echo "<div style='color:#1920ff'>已完成</div>";break;
+                            case 2:
+                                echo "<div style='color:#1920ff'>已完成</div>";break;
+                        }
+                    }
+                    ?>
+                </td>
 
                 <td><div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
                             <a href="javascript:void(0);" onclick="change_content('order/detail/<?=$item['order_id'];?>')">查看</a>
                             <a href="javascript:void(0);" onclick="change_content('order/detail/'+<?=$item['order_id'];?>')">删除</a>
-                            <?php if($item['status'] != 1){?>
-                            <button type="button" style="background: #838383;border-color: #444444">确认到货</button>
-                            <?php }else{?>
-                            <button type="button" onclick="update_data('order/sure/<?=$item['order_id'];?>','status<?=$item['order_id'];?>',' ')">确认到货</button>
-                            <?php }?>
+                            <a href="javascript:void(0);">退款</a>
+                            <?php
+                            if($item['status'] == 2 ){ ?>
+                                <button id="btn<?=$item['order_id']?>" class='btn btn-primary' type='button' onclick='btn_click("<?=$item['order_id']?>")'>备货完成</button>
+                        <?php
+                            }else if($item['status'] == 1){
+                                if(!$overtime){ ?>
+                                    <button id="btn<?=$item['order_id']?>" class='btn btn-primary' type='button' onclick='btn_click("<?=$item['order_id']?>")'>开始备货</button>
+                                <?php }else{    ?>
+                                    <button class='btn btn-danger' type='button')'>已过期</button>
+                                <?php }
+                            }else{
+                                echo "<button type='button' style='background: #838383;border-color: #444444'>订单结束</button>";
+                            }
+                            ?>
                         </div>
                     </div></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
-    <?php if($dist == 1) {?>
-    <button type="submit">备货</button>
+    <?php if($dist ==  2) {?>
+    <button class="btn btn-primary" type="submmit">下载备货详情</button>
     <?php } ?>
+    <div class="modal" id="mymodal" data-backdrop="static">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content" id="mymodal_content">
+
+
+            </div><!-- /.modal-content -->
+
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+

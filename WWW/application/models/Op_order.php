@@ -41,7 +41,7 @@ class Op_order  extends CI_Model{
      * @return mixed 订单详情
      */
     public function order_detail($order_id){
-        $query = $this->db->query("SELECT name,prices,select_num FROM order_content,goods WHERE order_content.goods_id = goods.id AND order_content.order_id='$order_id'");
+        $query = $this->db->query("SELECT id,name,prices,select_num,stocked,act_num FROM order_content,goods WHERE order_content.goods_id = goods.id AND order_content.order_id='$order_id'");
         return $query->result_array();
     }
 
@@ -53,9 +53,10 @@ class Op_order  extends CI_Model{
         if($dist == 'a'){
             $query = $this->db->get($this->order_table_name);
         }else{
-            $query = $this->db->get_where($this->order_table_name,array('status' => $dist));
+            $query = $this->db->order_by('datetime','ASC')
+                ->get_where($this->order_table_name,array('status' => $dist));
         }
-        return array_reverse($query->result_array());
+        return $query->result_array();
     }
     /**
      * @param $order_id 订单号
@@ -107,7 +108,7 @@ class Op_order  extends CI_Model{
 		$num = $this->db->affacted_rows() ;
         if( $num ){
 			$query = $this->db->query("select goods_id , select_num from order_content where order_id = '$order_id'");
-			foreach ( $query->$result as $row ){
+			foreach ( $query->result as $row ){
 				$id = $row->goods_id ;
 				$num = $row->select_num ;
 				$this->db->query("update goods set num = num - $num where id = '$id'");
@@ -153,9 +154,11 @@ public function together($orders)
             $i = 0;
             $result = $this->order_detail($order);
             $this->write_orderfile($file_name,"***********************\r\n订单号:".$order."\r\n//\r\n");
+            $title = '序号|商品名 ---- 单价*下订量>> 下订金额  --- 实际量 --- 金额偏差 ';
+            $this->write_orderfile($file_name,$title);
             foreach ($result as $item){
                 $i++;
-                $str = $i.'.'.$item['name']." ---- ".$item['prices'].'*'.$item['select_num'].' >> '.$item['prices']*$item['select_num']."\r\n";
+                $str = $i.'.   '.$item['name']." ----- ".$item['prices'].' *  '.$item['select_num'].' --->> '.$item['prices']*$item['select_num']."    ----  ".$item['act_num']." ---- ".($item['act_num']-$item['select_num'])*$item['prices']."\r\n";
                 $this->write_orderfile($file_name,$str);
             }
             $order_info = $this->get_info($order);
@@ -169,5 +172,36 @@ public function together($orders)
         }
         $this->load->helper('download');
         force_download('./download/'.$file_name, NULL);
+    }
+
+    public function stocking_goods($order_id,$goods_id,$act_num)
+    {
+        $this->db->set(array('stocked' => 1,'act_num'=> $act_num))->where(array('goods_id' => $goods_id,'order_id' => $order_id))->update('order_content');
+        if($this->db->affected_rows() >= 1){
+            echo "已完成";
+        }
+    }
+
+    public function stocked($order_id)
+    {
+        $this->db->query("update orders set status='2' WHERE status='1' AND order_id='$order_id'");
+    }
+    public function get_orderid_list($dist)
+    {
+        $query = $this->db->query("SELECT order_id FROM orders WHERE status = '$dist' OR status = '2' ORDER BY datetime ASC");
+        return $query->result_array();
+    }
+    public function next_order($order_id,$dist)
+    {
+        $this->stocked($order_id);
+        $data = array('order_id'=>$order_id);
+        $list = $this->get_orderid_list($dist);
+        $site = array_search($data,$list);
+        $site++;
+        if($site < count($list)){
+            return $list[$site]['order_id'];
+        }else{
+            return "end";
+        }
     }
 }

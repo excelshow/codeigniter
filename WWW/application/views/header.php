@@ -5,28 +5,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>控制台页面</title>
+
     <link rel="stylesheet" href="<?=base_url('assets/css/style.default.css')?>" type="text/css" />
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery-1.7.min.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery-ui-1.8.16.custom.min.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.cookie.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.uniform.min.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.flot.min.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.flot.resize.min.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.slimscroll.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/custom/general.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/custom/dashboard.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/plugins/jquery.dataTables.min.js')?>"></script>
-    <script type="text/javascript" src="<?=base_url('/assets/js/custom/tables.js')?>"></script>
+
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="<?=base_url('/assets/js/plugins/excanvas.min.js')?>"></script><![endif]-->
     <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="<?=base_url('css/style.ie9.css')?>"/>
     <![endif]-->
     <!--[if IE 8]>
     <link rel="stylesheet" media="screen" href="<?=base_url('css/style.ie8.css')?>"/>
+    <link rel="stylesheet" href="<?=base_url('/assets/dist/css/bootstrap.min.css')?>"/>
     <![endif]-->
     <!--[if lt IE 9]>
     <script src="<?=base_url('/assets/js/plugins/css3-mediaqueries.js')?>"></script>
     <![endif]-->
+    <!--    一个和谐的分割线，分割bootstrap。以下bootstrap-->
+    <script type="text/javascript" src="<?=base_url('/assets/jquery-3.2.1/jquery-3.2.1.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('/assets/bootstrap/js/bootstrap.min.js')?>"></script>
+    <link rel="stylesheet" href="<?=base_url('/assets/bootstrap/css/bootstrap.min.css')?>"/>
 </head>
 
 <body class="withvernav">

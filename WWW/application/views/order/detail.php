@@ -1,4 +1,4 @@
-
+﻿
 <!--/**-->
 <!-- * Created by PhpStorm.-->
 <!-- * User: 醉月思-->
@@ -47,7 +47,7 @@
             echo $money.$pay_way.$user.$phone.$detail_address;
             ?>
             <div class="you" style="margin-left: 11%;">
-                <?php if($status != 1){?>
+                <?php if($status != 1 && $status != 2){?>
                     <button type="submit" class="am-btn am-btn-success am-radius" style="background: #2eff8d">确认订单</button>&nbsp;  &raquo; &nbsp; <button type="submit" class="am-btn am-btn-secondary am-radius" style="background: #FF0000">拒绝订单</button>
                 <?php }else{?>
                     <button>打印订单</button>

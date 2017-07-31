@@ -95,6 +95,7 @@ class Post extends CI_Controller {
             'user_id' => $openid,
             'orderInfo' => $this->input->get('orderInfo'),
             'money' => $money,
+			'orderTime' => $this->input->get('orderTime'),
             'datetime' => $order_info['expected_arrive_time'],
             'pay_way' => $order_info['pay_way'],
         );

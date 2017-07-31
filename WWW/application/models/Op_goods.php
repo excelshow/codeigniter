@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class Op_goods extends CI_Model {
     /**
      * @var string 商品表名

@@ -8,55 +8,31 @@
     }
 </script>
 <div class="vernav2 iconmenu">
-    <ul>
-        <li><a  href="#goods_manage" class="addons">商品管理</a>
-            <span class="arrow"></span>
-            <ul id="goods_manage">
-                <li><a href="javascript:void(0);" onclick="change_content('goods/lists')">商品列表</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('goods/classify')">商品分类</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('goods/stock')">库存管理</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('goods/add')">添加新商品</a></li>
-            </ul>
-        </li>
-        <li><a href="#order_manage" class="icon icon-pencil"">订单管理</a>
-            <span class="arrow"></span>
-            <ul id="order_manage">
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists/1')">已支付</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists/0')">未支付</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists/-1')">已完成</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists/a')">全部</a></li>
-            </ul>
-        </li>
-        <li><a href="#member_manage" class="support">会员管理</a>
-            <span class="arrow"></span>
-            <ul id="member_manage">
-                <li><a href="javascript:void(0);" onclick="change_content('member/lists')">会员列表</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('member/unlists')">未激活会员</a></li>
-            </ul>
-        </li> <li><a href="#member_manage" class="support">消息管理</a>
-            <span class="arrow"></span>
-            <ul id="member_manage">
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists')">待激活会员</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('goods/classify')">未激活会员</a></li>
-                <li><a href="editor.html">商品分类</a></li>
-            </ul>
-        </li> <li><a href="#member_manage" class="support">统计报表</a>
-            <span class="arrow"></span>
-            <ul id="member_manage">
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists')">商品分析</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('goods/classify')">订单分析</a></li>
-                <li><a href="editor.html">商品分类</a></li>
-            </ul>
-        </li></li> <li><a href="#member_manage" class="support">系统设置</a>
-            <span class="arrow"></span>
-            <ul id="member_manage">
-                <li><a href="javascript:void(0);" onclick="change_content('order/lists')">商品分析</a></li>
-                <li><a href="javascript:void(0);" onclick="change_content('goods/classify')">订单分析</a></li>
-                <li><a href="editor.html">商品分类</a></li>
-            </ul>
-        </li>
+    <ul><li><a href="#goods_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;商品管理<span class="caret"></span></a></li></ul>
+    <ul id="goods_manage" class="nav nav-list collapse ">
+        <li><a href="javascript:void(0);" onclick="change_content('goods/lists')"><small>商品列表</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('goods/classify')"><small>商品分类</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('goods/stock')"><small>库存管理</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('goods/add')"><small>添加新商品</small></a></li>
     </ul>
-    <a class="togglemenu"></a>
-    <br /><br />
+    <ul><li><a href="#order_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;订单管理<span class="caret"></span></a></li></ul>
+    <ul id="order_manage" class="nav nav-list collapse ">
+        <li><a href="javascript:void(0);" onclick="change_content('order/lists/1')"><small>已支付</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('order/lists/0')"><small>未支付</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('order/lists/2')"><small>已备货</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('order/lists/a')"><small>全部</small></a></li>
+    </ul>
+    <ul><li><a href="#member_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-user"></i>&nbsp;用户管理<span class="caret"></span></a></li></ul>
+    <ul id="member_manage" class="nav nav-list collapse ">
+        <li><a href="javascript:void(0);" onclick="change_content('member/lists')"><small>会员列表</small></a></li>
+        <li><a href="javascript:void(0);" onclick="change_content('member/unlists')"><small>未激活会员</small></a></li>
+    </ul>
+    <ul class="disabled">
+        <li><a href="#member_manage" class="support">消息管理</a></li>
+        <li><a href="#member_manage" class="support">统计报表</a></li>
+        <li><a href="#member_manage" class="support">系统设置</a></li>
+    </ul>
+    </ul>
+    <br />
 </div><!--leftmenu-->
 <div class="centercontent" id="content">
