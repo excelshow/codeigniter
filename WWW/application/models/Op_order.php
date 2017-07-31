@@ -204,4 +204,10 @@ public function together($orders)
             return "end";
         }
     }
+
+    public function get_deliver()
+    {
+        $query = $this->db->select('name')->from('deliver')->get();
+        return $query->result_array();
+    }
 }

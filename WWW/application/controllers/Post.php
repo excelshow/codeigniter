@@ -95,8 +95,8 @@ class Post extends CI_Controller {
             'user_id' => $openid,
             'orderInfo' => $this->input->get('orderInfo'),
             'money' => $money,
-			'orderTime' => $this->input->get('orderTime'),
             'datetime' => $order_info['expected_arrive_time'],
+            'orderTime' => $this->input->get('orderTime'),
             'pay_way' => $order_info['pay_way'],
         );
         //如果订单插入成功，则进行商品解析并插入

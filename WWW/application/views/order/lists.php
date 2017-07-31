@@ -73,7 +73,10 @@
                             case -1:
                                 echo "<div style='color:#1920ff'>已完成</div>";break;
                             case 2:
-                                echo "<div style='color:#1920ff'>已完成</div>";break;
+                                echo "<div style='color:#1920ff'>已备货</div>";break;
+                            case 3:
+                                echo "<div style='color:#1920ff'>已分配</div>";break;
+
                         }
                     }
                     ?>
@@ -94,8 +97,10 @@
                                 <?php }else{    ?>
                                     <button class='btn btn-danger' type='button')'>已过期</button>
                                 <?php }
-                            }else{
-                                echo "<button type='button' style='background: #838383;border-color: #444444'>订单结束</button>";
+                            }else if($item['status'] == 3){
+                                echo "<button type='button' style='background: #838383;border-color: #444444'>订单已分配</button>";
+                            }else if($item['status'] == -1){
+                                echo "<button type='button' style='background: #838383;border-color: #444444'>订单已完成</button>";
                             }
                             ?>
                         </div>
@@ -104,8 +109,15 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <?php if($dist ==  2) {?>
-    <button class="btn btn-primary" type="submmit">下载备货详情</button>
+    <?php if($dist == 2) { ?>
+        <label>快递员：</label>
+        <select name="deliver" style="min-width:180px">
+            <?php foreach ($deliver as $item): ?>
+            <option><?=$item['name']?></option>
+            <?php endforeach; ?>
+        </select>
+        <button class="btn btn-primary" type="submmit">分配并下载备货详情</button>
+
     <?php } ?>
     <div class="modal" id="mymodal" data-backdrop="static">
 

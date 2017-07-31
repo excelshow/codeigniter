@@ -19,6 +19,10 @@ class Order extends Admin{
             'order_list' => $this->Op_order->get_order($dist),
             'dist' => $dist,
         );
+        if($dist == '2'){
+            $data['deliver']= $this->Op_order->get_deliver();
+        }
+
         $this->load->view('order/lists',$data);
     }
     public function detail($order_id){
@@ -45,6 +49,10 @@ class Order extends Admin{
         $file_name='detail'.time().'.txt';
         $file_content="----------------------------\r\n\r\n总计:\r\n\r\n";
         $orders = $this->input->post('checkbox');
+        $deliver_id = $this->Op_deliver->get_id_byname($this->input->post('deliver'));
+        foreach ($orders as $order_id){
+            $this->Op_deliver->join($order_id,$deliver_id);
+        }
         if($orders != NULL){
             $result = $this->Op_order->together($orders);
         }
@@ -53,12 +61,12 @@ class Order extends Admin{
            $str = $item['name']."数量:》".$item['select_num']."斤";
            $file_content = $file_content.$str."\r\n\r\n";
            echo $str.'<br />';
-       }
-        $this->load->helper('file');
-        if ( ! write_file('./download/'.$file_name, $file_content."----------------------------\r\n\r\n")) {
-            echo '文件写入权限不足，请联系管理员<br />';
-        }
-        $this->Op_order->write_detail($file_name,$orders);
+           }
+            $this->load->helper('file');
+            if ( ! write_file('./download/'.$file_name, $file_content."----------------------------\r\n\r\n")) {
+                echo '文件写入权限不足，请联系管理员<br />';
+            }
+            $this->Op_order->write_detail($file_name,$orders);
     }
 
     /**

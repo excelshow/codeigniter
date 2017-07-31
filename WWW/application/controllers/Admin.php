@@ -19,6 +19,7 @@ class Admin extends CI_Controller {
             $this->load->model('Op_goods');
             $this->load->model('Op_user');
             $this->load->model('Op_order');
+            $this->load->model('Op_deliver');
             $this->load->helper(array('form', 'url'));
         }
 	}

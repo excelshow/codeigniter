@@ -13,7 +13,7 @@
         <div id="updates" class="subcontent">
             <div class="notibar announcement">
                 <a class="close"></a>
-                <h3>Announcement</h3>
+                <h3>未处理的过期订单</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div><!-- notification announcement -->
 
