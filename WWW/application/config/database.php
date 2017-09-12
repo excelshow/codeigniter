@@ -75,9 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+    //'port'  => '5504',
+	//'hostname' => '598c59a74a723.gz.cdb.myqcloud.com',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '',
+	//'password' => 'BBBBBBJbdh1Q1z',
+	'password' => 'root',
 	'database' => 'xcx',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

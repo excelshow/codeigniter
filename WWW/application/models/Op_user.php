@@ -32,40 +32,34 @@ class Op_user  extends CI_Model {
         $row=$query->row();
         return $row->user_num;
     }
-    public function get_lists()
+    public function get_lists($status)
     {
-        $query = $this->db->get_where($this->user_table_name,array('status' => '1'));
+        $query = $this->db->get_where($this->user_table_name,array('status' => $status));
         return $query->result_array();
     }
 
-    public function get_unlists()
+    public function get_info($user_id)
     {
-        $query = $this->db->get_where($this->user_table_name,array('status' => '0'));
+        $query = $this->db->select('*')->get_where('user', array('user_id' => $user_id));
         return $query->result_array();
-    }
-
-    public function get_status($user_id)
-    {
-        $this->db->select('status');
-        $query = $this->db->get_where('user', array('user_id' => $user_id));
-        $result =  $query->result_array();
-        if(!isset($result[0]['status'])){
-            return 0;
-        }
-        if($result[0]['status'] == '1'){
-            return 1;
-        }else{
-            return 0;
-        }
     }
 
     public function sure($user_no)
     {
         if($this->db->query("update user set status=1 where user_no='$user_no'")){
-            return "激活成功";
+            return TRUE;
         }else{
-            return "激活失败";
+            return FALSE;
         }
 
     }
+	public function delete($user_no)
+	{
+		$this->db->delete('user', array('user_no' => $user_no));
+		if($this->db->affected_rows() == 1){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
 }

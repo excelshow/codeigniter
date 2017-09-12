@@ -9,7 +9,7 @@ class Op_admin extends CI_Model {
     }
     public function get_admin()
     {
-    	$query = $this->db->get('Administrator');
+    	$query = $this->db->get('administrator');
     	return $query;
     }
 }

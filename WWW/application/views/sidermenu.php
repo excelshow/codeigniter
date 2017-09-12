@@ -1,58 +1,309 @@
-﻿<?php $this->load->helper('url');?>
-<script type="text/javascript" src="<?=base_url('/assets/ajax/ajax.js')?>"></script>
 <script type="text/javascript">
-    function check_all(obj,cName)
-    {
-        var checkboxs = document.getElementsByName(cName);
-        for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
-    }
-
+    try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 </script>
-<style>
-    .iconmenu ul li a{ text-decoration:none;}
-    .iconmenu ul li a small{ color:#2d95ff;}
-    .glyphicon-chevron-down{position: relative;
-        left:120px;}
-</style>
-<button id="refresh_menu" class="btn"><i class="glyphicon glyphicon-refresh"></i></button>
-<div class="vernav2 iconmenu">
-    <ul><li><a href="#goods_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-shopping-cart"></i>商品管理<i class="glyphicon glyphicon-chevron-down"></i></a></li></ul>
-    <ul id="goods_manage" class="nav nav-list collapse ">
-        <li><a href="javascript:void(0);" onclick="change_content('goods/lists')"><small>&nbsp;&nbsp;&nbsp;商品列表</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('goods/classify')"><small>&nbsp;&nbsp;&nbsp;商品分类</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('goods/stock')"><small>&nbsp;&nbsp;&nbsp;库存管理</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('goods/add')"><small>&nbsp;&nbsp;&nbsp;添加新商品</small></a></li>
-    </ul>
-    <ul><li><a href="#order_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;订单管理<i class="glyphicon glyphicon-chevron-down"></i><span class="label mybadge">New</span></a></li></ul>
-    <ul id="order_manage" class="nav nav-list collapse ">
-        <li><a href="javascript:void(0);" onclick="change_content('order/lists/0')"><small>未支付->待支付</small><span class="badge mybadge" >42</span></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('order/lists/1')"><small>已支付->待备货</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('order/lists/2')"><small>已备货->待分配</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('order/lists/3')"><small>已分配->待完成</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('order/lists/1')"><small>已完成</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('order/lists/a')"><small>全部</small></a></li>
-    </ul>
-    <ul><li><a href="#member_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-user"></i>&nbsp;用户管理<i class="glyphicon glyphicon-chevron-down"></i><span class="label mybadge">New</span></a></li></ul>
-    <ul id="member_manage" class="nav nav-list collapse ">
-        <li><a href="javascript:void(0);" onclick="change_content('member/lists')"><small>会员列表</small></a></li>
-        <li><a href="javascript:void(0);" onclick="change_content('member/unlists')"><small>未激活会员</small></a></li>
-    </ul>
-    <ul><li><a href="#message_manage" class="nav-header" data-toggle="collapse"><i class="glyphicon glyphicon-bell"></i>&nbsp;消息管理<i class="glyphicon glyphicon-chevron-down"></i><span class="label mybadge">New</span></a></li></ul>
-    <ul id="message_manage" class="nav nav-list collapse ">
-    <li><a href="javascript:void(0);" onclick="change_content('order/lists/0')"><small>未激活会员</small><span class="badge mybadge" >42</span></a></li>
-    <li><a href="javascript:void(0);" onclick="change_content('order/lists/0')"><small>待备货的订单</small><span class="badge mybadge" >42</span></a></li>
-    <li><a href="javascript:void(0);" onclick="change_content('order/lists/0')"><small>未处理的过期订单</small><span class="badge mybadge" >42</span></a></li>
-    </ul>
-    <ul>
-        <li><a href="#member_manage" class="support">统计报表</a></li>
-        <li><a href="#member_manage" class="support">系统设置</a></li>
-    </ul>
-    </ul>
-    <br />
-</div><!--leftmenu-->
-</div>
-<script>
-    $("#refresh_menu").click(function(){alert('fasdf')});
-</script>
-<div class="centercontent" id="content">
 
+<!-- #section:basics/sidebar -->
+<div id="sidebar" class="sidebar                  responsive">
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <button class="btn btn-success disabled">
+                    <i class="ace-icon fa fa-signal"></i>
+                </button>
+
+                <button class="btn btn-info">
+                    <i class="ace-icon fa fa-pencil"></i>
+                </button>
+
+                <!-- #section:basics/sidebar.layout.shortcuts -->
+                <button class="btn btn-warning">
+                    <i class="ace-icon fa fa-users"></i>
+                </button>
+
+                <button class="btn btn-danger">
+                    <i class="ace-icon fa fa-cogs"></i>
+                </button>
+
+                <!-- /section:basics/sidebar.layout.shortcuts -->
+            </div>
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+
+                <span class="btn btn-info"></span>
+
+                <span class="btn btn-warning"></span>
+
+                <span class="btn btn-danger"></span>
+            </div>
+        </div><!-- /.sidebar-shortcuts -->
+
+        <ul class="nav nav-list">
+            <li id="admin" class="">
+                <a href="<?php url('admin') ?>">
+                    <i class="menu-icon fa fa-tachometer"></i>
+                    <span class="menu-text">控制台</span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text"> 消息管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="<?php url('order/expired_order')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            未处理的过期订单
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('order/get_new_comment')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            有新评论的订单
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="<?php url('goods/get_new_comment')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            有新评论的商品
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            <!--            nav.goods-->
+            <li id="goods" class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon glyphicon glyphicon-shopping-cart"></i>
+                    <span class="menu-text"> 商品管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="<?php url('goods/lists')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            商品列表
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('goods/classify')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            商品分类
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('goods/stock')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            库存管理
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('goods/add')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            添加新商品
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li><!--            /nav.goods-->
+            <!--            nav.order-->
+            <li id="order" class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon glyphicon glyphicon-list-alt"></i>
+                    <span class="menu-text"> 订单管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="<?php url('order/comment_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            订单评价汇总
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('order/unpay_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            未支付
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('order/payed_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            已支付
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('order/stocked_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            已备货
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="<?php url('order/pending_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            待完成
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="<?php url('order/completed_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            已完成
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li><!--            /nav.order-->
+            <!--            nav.user-->
+            <li id="user" class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon glyphicon glyphicon-user"></i>
+                    <span class="menu-text"> 会员管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="<?php url('member/lists')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            会员列表
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php url('member/unactived')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            待激活的会员
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            <!--            /nav.user-->
+            <!--            nav.report-->
+            <li id="user" class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon glyphicon glyphicon-signal"></i>
+                    <span class="menu-text"> 统计报表 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="disabled">
+                        <a href="<?php url('order/comment_list')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            此分类目录暂无内容
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            <!--            /nav.report-->
+            <!--            nav.setting-->
+            <li id="setting" class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon glyphicon glyphicon-cog"></i>
+                    <span class="menu-text"> 系统设置 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="<?php url('setting/must_address')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            自取地址设置
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+            <!--            /nav.setting-->
+        </ul>
+
+
+        <!-- #section:basics/sidebar.layout.minimize -->
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+    <script type="text/javascript">
+        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        var url = window.location.pathname;
+        if(url.match("admin")){
+            $("#admin").addClass("active");
+        }else if(url.match("order")){
+            $("#order").addClass("active");
+        }else if(url.match("goods")){
+            $("#goods").addClass("active");
+        }else if(url.match("member")){
+            $("#user").addClass("active");
+        }else if(url.match("setting")){
+            $("#setting").addClass("active");
+        }
+    </script>
+    </div>

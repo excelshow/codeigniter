@@ -18,4 +18,9 @@ class Request extends CI_Controller
     {
         echo $this->Op_user->sure($user_no);
     }
+
+    public function data_download()
+    {
+        $this->load->view("request/data_download");
+    }
 }

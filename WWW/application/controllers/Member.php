@@ -7,19 +7,46 @@ require('Admin.php');
  * Time: 16:31
  */
 class Member extends Admin{
-    public function __construct(){
+	/**
+	 * @var array 记录类名
+	 */
+	private $data = array('Class' => __CLASS__);
+
+	public function __construct(){
         parent::__construct();
     }
 
     public function lists()
     {
-        $data = array('user_lists' => $this->Op_user->get_lists());
-        $this->load->view('user/lists',$data);
+	    $this->data['function'] = __FUNCTION__;
+	    $this->data['user_lists'] = $this->Op_user->get_lists(1);
+        $this->load->view('user/lists/lists',$this->data);
     }
 
-    public function unlists()
+    public function unactived()
     {
-        $data = array('user_lists' => $this->Op_user->get_unlists());
-        $this->load->view('user/lists',$data);
+	    $this->data['function'] = __FUNCTION__;
+	    $this->data['user_lists'] = $this->Op_user->get_lists(0);
+	    $this->load->view('user/lists/unactived',$this->data);
+    }
+
+	public function sure_member($user_id)
+	{
+		if($this->Op_user->sure($user_id)){
+			alert('激活成功');
+			go_history();
+		}else{
+			$this->output->set_output('激活失败');
+		}
+    }
+
+	public function delete_member($user_id)
+	{
+		if($this->Op_user->delete($user_id)){
+			alert('删除成功');
+			go_history();
+		}else{
+			$this->output->set_output('激活失败');
+		}
     }
 }

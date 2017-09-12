@@ -16,11 +16,6 @@ class Op_goods extends CI_Model {
         // Your own constructor code
     }
 
-    public function get_stock()
-    {
-        $query = $this->db->query("SELECT id,name,have,num FROM goods");
-        return $query->result_array();
-    }
     public function get_max($column,$table)
     {
         $this->db->select_max($column);
@@ -36,7 +31,7 @@ class Op_goods extends CI_Model {
      */
     public function get_last_ten_goods()
     {
-        $query = $this->db->query("SELECT * FROM goodsview");
+        $query = $this->db->query("SELECT * FROM goods_view");
         return $query->result_array();
     }
 
@@ -45,7 +40,7 @@ class Op_goods extends CI_Model {
      */
     public function goods_class()
     {
-        $query = $this->db->get('class');
+        $query = $this->db->get('goods_class');
         return $query->result_array();
     }
     /**
@@ -55,10 +50,9 @@ class Op_goods extends CI_Model {
     public function get_goods_byclass($class)
     {
         $class = urldecode($class);
-        $query = $this->db->query("SELECT * FROM goodsview where class='$class'");
+        $query = $this->db->query("SELECT * FROM goods_view where class='$class'");
         return $query->result_array();
     }
-
     /**
      * insert_good 将商品信息插入至商品表
      * @param $row
@@ -81,7 +75,7 @@ class Op_goods extends CI_Model {
 
     public function goods_detail($goods_id)
     {
-        $query = $this->db->query("SELECT * FROM goods,goods_content WHERE goods.id=goods_content.goods_id AND id = '$goods_id'");
+        $query = $this->db->query("SELECT * FROM goods,goods_content WHERE goods.id=goods_content.goods_id AND id = '$goods_id' LOCK IN SHARE MODE");
         return $query->result_array();
     }
 
@@ -125,28 +119,9 @@ class Op_goods extends CI_Model {
     public function search($data)
     {
         $class = urldecode($data);
-        $query = $this->db->query("SELECT * FROM goodsview where name LIKE '%$class%'");
+        $query = $this->db->query("SELECT * FROM goods_view where name LIKE '%$class%'");
         return $query->result_array();
     }
-
-    public function add_have($id,$num)
-    {
-        if($this->db->query("update goods set have=have+$num,num=num+$num where id='$id'")){
-            $query = $this->db->get_where('goods',array('id'=>$id));
-            echo $query->row()->have;
-            return TRUE;
-        }else return FALSE;
-    }
-
-    public function add_num($id,$num)
-    {
-        if($this->db->query("update goods set num=num+$num where id='$id'")){
-            $query = $this->db->get_where('goods',array('id'=>$id));
-            echo $query->row()->num;
-            return TRUE;
-        }else return FALSE;
-    }
-
     /**
      * update_goods
      * @param $row
@@ -168,11 +143,10 @@ class Op_goods extends CI_Model {
      */
     public function add_class($class_name)
     {
-        if($this->db->insert('class',array('class'=>$class_name))){
-            echo "添加成功";
-        }
-        else{
-            echo "添加失败,已存在该类";
+        if($this->db->insert('goods_class',array('class'=>$class_name))){
+            return TRUE;
+        }else{
+            return FALSE;
         }
     }
 
@@ -183,9 +157,8 @@ class Op_goods extends CI_Model {
      */
     public function delete_class($class_name)
     {
-        $this->db->delete('class',array('class'=>$class_name));
-        //暂不判断成功与否
-        echo "删除成功";
+        $this->db->delete('goods_class',array('class'=>$class_name));
+        return TRUE;
     }
     /**
      * edit_class
@@ -194,16 +167,135 @@ class Op_goods extends CI_Model {
      */
     public function edit_class($old_class_name,$new_class_name)
     {
-        $str = "UPDATE class set class='$new_class_name' WHERE class='$old_class_name'";
+        $str = "UPDATE goods_class set class='$new_class_name' WHERE class='$old_class_name'";
         //执行sql语句
         $this->db->query($str) ;
         //获取影响行数
         $num = $this->db->affected_rows() ;
         if( $num ){
-            echo "编辑成功";
+            return TRUE;
         }else{
-            echo "编辑失败,未知错误";
+            return FALSE;
         }
+    }
+
+    public function judge_goods_comment($user_id,$goods_id)
+    {
+        $order_list = $this->db->select('order_id')->from('orders')->where('user_id', $user_id)->get();
+        $orders = array();
+        foreach ($order_list->result_array() as $order_id){
+            array_push($orders,$order_id['order_id']);
+        }
+        $goods_list = $this->db->select('goods_id')->from('order_content')->where('goods_id',$goods_id)->where_in('order_id',$orders)->get();
+        if(count($goods_list->result_array()) ==  0){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
+    public function save_goods_comment($user_id,$goods_id,$comment)
+    {
+        $data = array(
+            'user_id' => $user_id,
+            'goods_id' => $goods_id,
+            'comment' => $comment,
+            'reply' => '谢谢您的评论，您的关注是我们最大的支持',
+            'time' => time()
+        );
+        if($this->db->insert('goods_comment', $data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    /**
+     * get_comment 获取评论，含用户信息
+     * @param $goods_id
+     * @return mixed
+     */
+    public function get_comment($goods_id)
+    {
+            $query = $this->db->where('goods_id',$goods_id)->get('goods_comment_view');
+        return $query->result_array();
+    }
+
+    public function get_stock()
+    {
+        $query = $this->db->select('id,name,pre_input,have,num')->from('goods')->get();
+        return $query->result_array();
+    }
+
+    public function get_filenum($goods_id)
+    {
+        $query = $this->db->select('filenum')->from('goods')->where('id',$goods_id)->get();
+        return $query->row()->filenum;
+    }
+    /**
+     * get_new_comment
+     * 获取待回复的订单评论
+     */
+    public function get_new_comment($show=FALSE){
+        $comment_list = $this->db->select('*')->from('goods_comment_view')->where(array('reply' =>'谢谢您的评论，您的关注是我们最大的支持'))->get();
+        $num = count($comment_list->result_array());
+        if($show){if($num != 0) echo $num;}
+        return $comment_list->result_array();
+    }
+    /**
+     * get_comment
+     * @param $order_id
+     * @return mixed
+     * 获取单个商品评论
+     */
+    public function get_goods_comment($comment_id)
+    {
+        $query=$this->db->query("SELECT comment from goods_comment_view WHERE comment_id='$comment_id'");
+        return $query->row()->comment;
+    }
+    public function reply_comment($comment_id,$reply)
+    {
+        $this->db->query("update goods_comment set reply='$reply' WHERE comment_id='$comment_id'");
+        return $this->db->affected_rows();
+    }
+    /**
+     * 获取预入库数量
+     * @return [type] [description]
+     */
+    public function get_pre_input($goods_id)
+    {
+      $query=$this->db->query("SELECT pre_input from goods WHERE id='$goods_id'");
+      return $query->row()->pre_input;
+    }
+    public function input($goods_id,$input){
+      if($input == ''){
+        return false;
+      }
+      $pre_input =  $this->get_pre_input($goods_id);
+      $sub = $input - $pre_input;
+      //如果入库数大于预入库数
+      if( $sub > 0){
+          $this->db->query("update goods set pre_input=0,have=have + '$input' WHERE id='$goods_id'");
+      }else if ($sub < 0) {//如果入库数小于预入库数
+          $this->db->query("update goods set pre_input=pre_input - '$input',have=have + '$input' WHERE id='$goods_id'");
+      }
+      return TRUE;
+    }
+    public function pre_input($goods_id,$pre_input){
+      if($pre_input == ''){
+        return false;
+      }
+      $this->db->query("update goods set pre_input=pre_input + '$pre_input' WHERE id='$goods_id'");
+      return TRUE;
+    }
+
+    public function col_add_one($goods_id)
+    {
+        $this->db->query("update goods set filenum=filenum + 1 WHERE id='$goods_id'");
+    }
+    public function col_sub_one($goods_id)
+    {
+        $this->db->query("update goods set filenum=filenum - 1 WHERE id='$goods_id'");
     }
 }
 ?>

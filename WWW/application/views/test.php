@@ -1,20 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<?php $this->load->helper('url');?>
-<script type="text/javascript" src="<?=base_url('/assets/ajax/ajax.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('/assets/jquery-3.2.1/jquery-3.2.1.min.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('/assets/bootstrap/js/bootstrap.min.js')?>"></script>
-<link rel="stylesheet" href="<?=base_url('/assets/bootstrap/css/bootstrap.min.css')?>"/>
-<button class="btn btn-primary" type="button" id="oncli">开始备货</button>
-</body>
-</html>
-
-
+<?php
+$this->load->helper('excel');
+$objPHPExcel = new PHPExcel();
+$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+$objPHPExcel->getActiveSheet()->setTitle('Simple');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', '序号');
+$objPHPExcel->getActiveSheet()->setCellValue('B1', '名称');
+$objPHPExcel->getActiveSheet()->setCellValue('A3', true);
+$objPHPExcel->getActiveSheet()->setCellValue('C5', '=SUM(C2:C4)');
+$objPHPExcel->getActiveSheet()->setCellValue('B8', '=MIN(B2:C5)');
+$objWriter->save("xxx.xlsx");

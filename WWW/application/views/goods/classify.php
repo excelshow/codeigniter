@@ -1,28 +1,60 @@
-<div id="contentwrapper" class="contentwrapper">
+ <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="<?php url('admin')?>">Home</a>
+                    </li>
 
-    <div class="contenttitle2">
-        <h3>分类详情</h3>
-    </div><!--contenttitle-->
-    <button onclick="classname=prompt('请输入你要增加的类名');if(classname != null){toast('goods/add_class/'+classname);}else{alert('你已取消');}">新增</button>
-    <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
-        <colgroup>
-            <col class="con0" />
-            <col class="con1" />
-            <col class="con0" />
-            <col class="con1" />
-            <col class="con0" />
-        </colgroup>
-        <thead>
-        <tr>
-            <th class="head0">类名</th>
-            <th class="head1">操作</th>
-        </tr>
-        </thead>
-        <?php foreach ($class as $item): ?>
-        <tr>S
-            <td><?=$item['class']?></td>
-            <td><button onclick="new_class_name=prompt('请输入你要增加的类名','<?=$item['class']?>');if(new_class_name != null){toast('goods/edit_class/<?=$item['class'].'/'?>'+new_class_name);}else{alert('你已取消');}">编辑</button><button onclick="toast('goods/delete_class/<?=$item['class']?>')">删除</button></td>
-        </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+                    <li>
+                        <a href="<?php url($Class)?>"><?php echo $Class?></a>
+                    </li>
+                    <li class="active">
+						<?php echo $function?>
+                    </li>
+                </ul><!-- /.breadcrumb -->
+
+                <!-- /section:basics/content.breadcrumbs -->
+                <div class="page-content">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <div class="page-header">
+                                <h1>
+                                    分类
+                                    <small>
+                                        <i class="ace-icon fa fa-angle-double-right"></i>
+										<?php echo count($class) ?>&nbsp;<button onclick="classname=prompt('请输入你要增加的类名');if(classname != null){
+										    $.post(base_url + 'goods/add_class',{class:classname},function(data){alert(data);location.reload(true);});
+										}else{alert('你已取消');}">新增</button>
+                                    </small>
+                                </h1>
+                            </div><!-- /.page-header -->
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>类名</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+								<?php foreach ($class as $item): ?>
+                                    <tr>
+                                        <td><?php echo $item['class']?></td>
+                                        <td><button onclick="new_class_name=prompt('请输入你要修改的类名','<?php echo $item['class']?>');if(new_class_name != null){
+                                            $.post(base_url + 'goods/edit_class',{old:'<?php echo $item['class']?>',new:new_class_name},function(data){alert(data);location.reload(true);});
+                                        }else{alert('你已取消');}">编辑</button><button onclick="
+                                                    $.post(base_url + 'goods/delete_class',{class:'<?php echo $item['class']?>'},function(data){alert(data);location.reload(true);});
+                                                    ">删除</button></td>
+                                    </tr>
+								<?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <!-- PAGE CONTENT ENDS -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+            </div>
+        </div><!-- /.main-content -->

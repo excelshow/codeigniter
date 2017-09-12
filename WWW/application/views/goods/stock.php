@@ -1,38 +1,89 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: 醉月思
- * Date: 2017/7/10
- * Time: 11:08
+ * type:view
+ * content:商品库存管理
  */
 ?>
-<div class="pageheader">
-    <h1 class="pagetitle">库存管理</h1>
-</div>
-<div id="contentwrapper" class="contentwrapper">
-    <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
-        <colgroup>
-            <col class="con0" />
-            <col class="con1" />
-            <col class="con0" />
-            <col class="con1" />
-            <col class="con0" />
-        </colgroup>
-        <thead>
-        <tr>
-            <th class="head0">商品Id</th>
-            <th class="head1">商品名</th>
-            <th class="head1">实际库存</th>
-            <th class="head1">库存余量</th>
-        </tr>
-        </thead>
-        <?php foreach ($stock as $item): ?>
-    <tr>
-        <td><?=$item['id']?></td>
-        <td><?=$item['name']?></td>
-        <td><span id="<?='have'.$item['id']?>"><?=$item['have']?></span><input id="<?='input_h'.$item['id']?>"  style="border-left-width: 3px; margin-left: 2em;"><button onclick="var a=document.getElementById('<?='input_h'.$item['id']?>').value;update_data('goods/add_have/<?=$item['id']?>/','<?='have'.$item['id']?>',a);">入库</button></td>
-        <td><span id="<?='num'.$item['id']?>"><?=$item['num']?></span><input id="<?='input_n'.$item['id']?>"  style="border-left-width: 3px; margin-left: 2em;"><button onclick="var a=document.getElementById('<?='input_n'.$item['id']?>').value;update_data('goods/add_num/<?=$item['id']?>/','<?='num'.$item['id']?>',a);">预入库</button></td>
-    </tr>
-<?php endforeach; ?>
-</tbody>
-</table>
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="<?php url('admin')?>">Home</a>
+                <li>
+                    <a href="<?php url($Class)?>"><?php echo $Class?></a>
+                </li>
+                <li class="active">
+					<?php echo $function?>
+                </li>
+            </ul><!-- /.breadcrumb -->
+
+            <!-- /section:basics/content.breadcrumbs -->
+            <div class="page-content">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="page-header">
+                            <h1>
+                                待回复的订单
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+
+                                </small>
+                            </h1>
+                        </div><!-- /.page-header -->
+
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="100px">商品序号</th>
+                                <th>商品名</th>
+                                <th>实际库存</th>
+                                <th>预入库库存</th>
+                                <th>前台显示库存</th>
+                                <th>入库</th>
+                                <th>预入库</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+							<?php foreach ($stock as $item):?>
+                                <tr>
+                                    <td><?php echo $item['id']?></td>
+                                    <td><?php echo $item['name']?></td>
+                                    <td <?php if($item['have']<=10) echo "style='color:red'"?>><?php echo $item['have']?></td>
+                                    <td><?php echo $item['pre_input']?></td>
+                                    <td><?php echo $item['num']?></td>
+                                    <td><input id="<?php echo $item['id']?>" class="input" name="input"></td>
+                                    <td><input id="<?php echo $item['id']?>" class="input" name="pre_input"></td>
+                                </tr>
+							<?php endforeach;?>
+                            </tbody>
+                        </table>
+                        <script>
+                            $('.input').keypress(function (event){
+                                if(event.keyCode == 13){
+                                    if(isNaN( $(this).val() ) ){
+                                        alert('请输入数字');
+                                        return false;
+                                    }
+                                    if(confirm('你正在修改入库，是否继续操作')){
+                                        if($(this).attr('name') == 'input'){
+                                            url = base_url + "goods/input";
+                                            $.post(url,{goods_id:$(this).attr('id'),input:$(this).val()},function(data){alert(data);location.reload(true);});
+                                        }else if($(this).attr('name') == 'pre_input'){
+                                            url = base_url + "goods/pre_input";
+                                            $.post(url,{goods_id:$(this).attr('id'),pre_input:$(this).val()},function(data){alert(data);location.reload(true);});
+                                        }
+
+                                    }
+                                }
+                            });
+                        </script>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->

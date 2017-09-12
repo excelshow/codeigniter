@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'WeixinPay.php';
 class Post extends CI_Controller {
@@ -18,19 +18,28 @@ class Post extends CI_Controller {
      * @var string 微信支付商户密钥
      */
     private $mch_key='xy34id0jq0mxw8640sdjiyr654sdu9mv';
-    /**
-     * Generate_orderid
-     * @param $user_id 用户唯一openid
-     * @return string 订单号
-     * 根据用户唯一openid及当前时间生成订单号
-     */
+     /**
+      * Post constructor.
+      */
+     public function __construct()
+     {
+         parent::__construct();
+         $this->load->model('Op_order');
+         $this->load->model('Op_user');
+         $this->load->model('Op_goods');
+     }
+     /**
+      * Generate_orderid
+      * @param $user_id 用户唯一openid
+      * @return string 订单号
+      * 根据用户唯一openid及当前时间生成订单号
+      */
     private function Generate_orderid($user_id){
         $time=strftime("%Y%m%d",time());
         $user_no=$this->Op_user->get_user_no($user_id);
         $user_num=$this->Op_user->get_user_num($user_id);
         return $time.$user_no.$user_num;
     }
-
     /**
      * get_openid
      * @param $codes 用户代码
@@ -42,17 +51,6 @@ class Post extends CI_Controller {
         $data = json_decode(file_get_contents($url),true);
         return $data['openid'];
     }
-
-    /**
-     * Post constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('Op_order');
-        $this->load->model('Op_user');
-    }
-
     /**
      * index 反馈用户状态信息
      */
@@ -61,29 +59,34 @@ class Post extends CI_Controller {
         $openid = $this->get_openid($this->input->get('code'));
         $request = array(
             'openid' => $openid,
-            'status' => $this->Op_user->get_status($openid),
+            'info' => $this->Op_user->get_info($openid),
         );
         echo json_encode($request);
     }
 
     /**
-     * get_status
+     * get_info
      * @param $openid 用户openid
      * 输出用户认证状态
      */
-    public function get_status($openid)
+    public function get_info($openid)
     {
         $data = array(
-            'status' => $this->Op_user->get_status($openid),
+            'info' => $this->Op_user->get_info($openid),
         );
         echo json_encode($data);
     }
-	public function sure_order($order_id)
+    /**
+     * 确认订单到货的接口
+     * @param  int $order_id 订单号
+     * @return null           暂时没有返回值
+     */
+	   public function sure_order($order_id)
     {
         $this->Op_order->sure($order_id);
     }
     /**
-     * order 下单接口，对接微信小程序的下单请求
+     * order 下单接口，对接微信小程序的下单请求接口
      */
     public function order(){
         $openid=$this->input->get('userId');
@@ -95,8 +98,9 @@ class Post extends CI_Controller {
             'user_id' => $openid,
             'orderInfo' => $this->input->get('orderInfo'),
             'money' => $money,
+            'type' => $order_info['type'],
             'datetime' => $order_info['expected_arrive_time'],
-            'orderTime' => $this->input->get('orderTime'),
+            'orderTime' => $order_info['orderTime'],
             'pay_way' => $order_info['pay_way'],
         );
         //如果订单插入成功，则进行商品解析并插入
@@ -124,19 +128,6 @@ class Post extends CI_Controller {
         }
 
     }
-	/**
-     * order 下单接口，对接微信小程序的取消订单请求
-
-	public function cancleOrder(){
-		$order_id = $this->input->get('order_id') ;
-		$return = WeixinPay::closeOrder($this->app_id, $this->mch_id, $order_id) ;
-		echo json_encode($return) ;
-		return true ;
-	}
-	*/
-	 
-	 
-	 
     /**
      * register 接受注册请求
      */
@@ -153,25 +144,6 @@ class Post extends CI_Controller {
             echo "sorry,注册消息提交失败，勿重复提交";
         }
     }
-
-    /**
-     * pay 支付时需请求的函数
-     * 完成支付拉取功能
-     */
-//public function pay(){
-//		$appid='wx50e06fc628202675';
-//		$openid= $_GET['id'];
-//		$mch_id='1484436742';
-//		$key='xy34id0jq0mxw8640sdjiyr654sdu9mv';
-//		$out_trade_no = $mch_id. time();
-//		$total_fee = $_GET['total_fee'];
-//        $body = "购买商品";
-//        $total_fee = floatval($total_fee*100);
-//        $weixinpay = new WeixinPay($appid,$openid,$mch_id,$key,$out_trade_no,$body,$total_fee);
-//        $return=$weixinpay->pay();
-//        echo json_encode($return);
-//	}
-
     /**
      * notice 验证是否支付
      * @return bool
@@ -196,7 +168,42 @@ class Post extends CI_Controller {
         $out_trade_no = $attr[out_trade_no];
 //        $time = $attr[time_end];
         $this->Op_order->settlement($out_trade_no);
-		echo "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
+
+        echo "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
+    }
+
+    /**
+     * post_order_comment
+     * @param $order_id
+     * post订单评论，健全性不高
+     */
+    public function post_order_comment($order_id)
+    {
+        $comment = $this->input->get('comment');
+        if($this->Op_order->save_order_comment($order_id,$comment))
+        {
+            echo '1';
+        }else{
+            echo '0';
+        }
+    }
+    /**
+    * 发送商品评价的接口
+     * @param  int $user_id  用户ID
+     * @param  int $goods_id 商品ID
+     * @return Bool           利用字符伪造bool型变量
+     */
+    public function post_goods_comment($user_id,$goods_id)
+    {
+        $comment = $this->input->get('comment');
+        if($this->Op_goods->save_goods_comment($user_id,$goods_id,$comment))
+        {
+            echo '1';
+        }else{
+            echo '0';
+        }
+    }
+    public function bug_report(){
+      file_get_contents('https://sc.ftqq.com/SCU10223T309896e3f8dc384edc342918050a783059703e8545e05.send?text='.urlencode($this->input->get('title')).'&desp='.urlencode($this->input->get('content')));
     }
 }
-

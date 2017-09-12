@@ -6,7 +6,7 @@
 <!-- */-->
 <div id="contentwrapper" class="contentwrapper">
     <div class="admin-biaogelist">
-    <?=form_open('goods/edit/'.$goods_id)?>
+    <?php echo form_open('goods/edit/'.$goods_id)?>
 
         <div class="fbneirong">
 
@@ -16,43 +16,44 @@
                 <div class="am-form-group am-cf">
                     <div class="zuo">名称<span style="color:red;" >*</span>：</div>
                     <div class="you">
-                        <input type="text" name='name' value="<?=$item['name'];?>" class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入商品名">
+                        <input type="text" name='name' value="<?php echo $item['name'];?>" class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入商品名">
                     </div>
                 </div>
                 <div class="am-form-group am-cf">
                     <div class="zuo">价格<span style="color:red;" >*</span>：</div>
                     <div class="you">
-                        <input type="number" step='0.01' name='prices' value="<?=$item['prices'];?>"  class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入价格">
+                        <input type="number" step='0.01' name='prices' value="<?php echo $item['prices'];?>"  class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入价格">
+                        规格：元/<input name='spec' value="<?php echo $item['spec'];?>" placeholder="请输入规格">
                     </div>
                 </div>
                 <div class="am-form-group am-cf">
                     <div class="zuo">产地<span style="color:red;" >*</span>：</div>
                     <div class="you">
-                        <input type="text"  name='origin' value="<?=$item['origin'];?>"  rows="5" id="doc-ta-1"  placeholder="请输入产地">
+                        <input type="text"  name='origin' value="<?php echo $item['origin'];?>"  rows="5" id="doc-ta-1"  placeholder="请输入产地">
                     </div>
                 </div>
                 <div class="am-form-group am-cf">
                     <div class="zuo">类别<span style="color:red;" >*</span>：</div>
                     <div class="you">
-                        <select style="width:150px" name="class"><?php foreach ($class as $row): ?><option value="<?=$row['class']?>"><?=$row['class']?></option><?php endforeach; ?></select>
+                        <select style="width:150px" name="class"><?php foreach ($class as $row): ?><option value="<?php echo $row['class']?>"><?php echo $row['class']?></option><?php endforeach; ?></select>
                     </div>
                 </div>
                 <div class="am-form-group am-cf">
                     <div class="zuo">功效：</div>
                     <div class="you">
-                        <textarea class="" rows="5" id="doc-ta-1" name="function"><?=$item['function'];?></textarea>
+                        <textarea class="" rows="5" id="doc-ta-1" name="function"><?php echo $item['function'];?></textarea>
                     </div>
                 </div>
                 <div class="am-form-group am-cf">
                     <div class="zuo">食用方法：</div>
                     <div class="you">
-                        <textarea class="" rows="5" id="doc-ta-1" name="eat"> <?=$item['eat'];?></textarea>
+                        <textarea class="" rows="5" id="doc-ta-1" name="eat"> <?php echo $item['eat'];?></textarea>
                     </div>
                 </div>
                 <div class="am-form-group am-cf">
                     <div class="zuo">储存方法：</div>
                     <div class="you">
-                        <textarea class="" rows="5" id="doc-ta-1" name="save"><?=$item['save'];?></textarea>
+                        <textarea class="" rows="5" id="doc-ta-1" name="save"><?php echo $item['save'];?></textarea>
                     </div>
                 </div>
                 <div class="am-form-group am-cf">

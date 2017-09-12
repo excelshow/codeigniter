@@ -1,4 +1,4 @@
-﻿<?php
+<?php
  date_default_timezone_set('PRC');
 /**
  * Description of Op_user_model
@@ -32,7 +32,7 @@ class Op_order  extends CI_Model{
     }
     public function get_info($order_id)
     {
-        $query = $this->db->query("SELECT money,pay_way,orderInfo FROM orders WHERE order_id='$order_id'");
+        $query = $this->db->query("SELECT money,pay_way,orderInfo,type FROM orders WHERE order_id='$order_id'");
         return $query->row_array();
     }
 
@@ -48,13 +48,13 @@ class Op_order  extends CI_Model{
     /**
      * @return mixed
      */
-    public function get_order($dist){
+    public function get_order($dist,$type){
 
         if($dist == 'a'){
-            $query = $this->db->get($this->order_table_name);
+            $query = $this->db->get_where($this->order_table_name,array('type' => $type));
         }else{
-            $query = $this->db->order_by('datetime','ASC')
-                ->get_where($this->order_table_name,array('status' => $dist));
+            $query = $this->db->order_by('datetime','DEC')
+                ->get_where($this->order_table_name,array('status' => $dist,'type' => $type));
         }
         return $query->result_array();
     }
@@ -85,27 +85,29 @@ class Op_order  extends CI_Model{
         return false;
     }
 
-    public function get_orders($user_id,$dist='')
+    public function get_orders($user_id,$dist)
     {
-		if( $dist != ''){
+		if( $dist != 'all'){
         $query = $this->db->query("SELECT order_id,orderInfo,status FROM orders WHERE user_id='$user_id' AND status='$dist'");
         }else{
 			$query = $this->db->query("SELECT order_id,orderInfo,status FROM orders WHERE user_id='$user_id'");
 		}
 		return array_reverse($query->result_array());
     }
-	
+
 	public function delete_order($order_id)
 	{
-		if( $this->db->query("delete from orders where order_id='$order_id'") )
+        $this->db->query("delete from orders where order_id='$order_id'");
+//        echo $this->db->affected_rows();
+		if( $this->db->affected_rows() == 1 )
 			return true ;
 		else return false ;
 	}
-	
+
     public function settlement($order_id)
     {
 		$this->db->query("update orders set status=1 where order_id='$order_id' AND status=0") ;
-		$num = $this->db->affacted_rows() ;
+		$num = $this->db->affected_rows() ;
         if( $num ){
 			$query = $this->db->query("select goods_id , select_num from order_content where order_id = '$order_id'");
 			foreach ( $query->result as $row ){
@@ -115,11 +117,11 @@ class Op_order  extends CI_Model{
 			}
             return TRUE;
         }else return FALSE;
-	
+
     }
 
     public function sure($order_id)
-    {	
+    {
 		//生成sql语句
 		$data = array('status' => '-1' );
 		$where = "order_id = '$order_id' AND status = '1'";
@@ -178,7 +180,7 @@ public function together($orders)
     {
         $this->db->set(array('stocked' => 1,'act_num'=> $act_num))->where(array('goods_id' => $goods_id,'order_id' => $order_id))->update('order_content');
         if($this->db->affected_rows() >= 1){
-            echo "已完成";
+            $this->output->set_output('已完成');
         }
     }
 
@@ -209,5 +211,113 @@ public function together($orders)
     {
         $query = $this->db->select('name')->from('deliver')->get();
         return $query->result_array();
+    }
+
+    public function judge_order_comment($order_id)
+    {
+        $valid_time = strtotime("-7 day")*1000;
+        $query =$this->db->query("SELECT * FROM orders WHERE order_id='$order_id' AND datetime>='$valid_time' AND status='-1'");
+        if(count($query->result_array()) == 0){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+//待完善
+    public function save_order_comment($order_id,$comment)
+    {
+        $query=$this->db->query("update orders set comment='$comment',reply='谢谢您的评论，您的关注是我们最大的支持' WHERE order_id='$order_id'");
+        return TRUE;
+    }
+
+    /**
+     * get_comment
+     * @param $order_id
+     * @return mixed
+     * 获取单个订单评论
+     */
+    public function get_comment($order_id)
+    {
+        $query=$this->db->query("SELECT comment,reply from orders WHERE order_id='$order_id'");
+        return $query->result_array();
+    }
+
+    /**
+     * get_new_comment
+     * 获取待回复的订单评论
+     */
+    public function get_new_comment($show=FALSE){
+        $comment_list = $this->db->select('order_id,comment')->from('orders')->where(array('reply' => '谢谢您的评论，您的关注是我们最大的支持'))->get();
+        $num = count($comment_list->result_array());
+        if($show){
+            if($num != 0) echo $num;
+        }
+        return $comment_list->result_array();
+    }
+
+    /**
+     * reply_comment 回复记录
+     * @param $order_id
+     * @param $reply
+     * @return bool
+     */
+    public function reply_comment($order_id,$reply)
+    {
+        $query=$this->db->query("update orders set reply='$reply' WHERE order_id='$order_id'");
+        return true;
+    }
+
+    /**
+     * get_comment_list
+     * @return mixed
+     * 获取评论列表
+     */
+    public function get_comment_list()
+    {
+        $comment_list = $this->db->select('order_id,comment,reply')->from('orders')->where(array('reply !=' => NULL,'comment !=' => NULL))->get();
+        return $comment_list->result_array();
+    }
+
+    public function get_today_earning()
+    {
+        $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'))*1000;
+        $endToday=(mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1)*1000;
+        $query = $this->db->select_sum('money')->where(array('status !=' => '0','orderTime >=' => $beginToday,'orderTime <=' => $endToday))->get($this->order_table_name);
+        if($query->row()->money == NULL){
+            echo 0;
+        }else{
+            echo $query->row()->money;
+        }
+//        echo $beginToday;
+//        exec('top -b -n 1 -d 3',$out);
+//        $Cpu = explode('  ', $out[2]);
+//        $Mem = explode('  ', $out[3]);
+//        $Swap = explode('  ', $out[4]);
+//        //var_dump($Cpu,$Mem,$Swap);
+//
+//        $cpu = str_replace(array('%us,',' '),'',$Cpu[1]);
+//        $mem = str_replace(array('k used,',' '),'',$Mem[2]);
+//        $swap = str_replace(array('k cached',' '),'',$Swap[5]);
+//        echo date('md H').' '.$cpu.'    '.intval($mem/1024).'   '.intval($swap/1024).chr(10);
+    }
+
+    public function get_expired_order($dist=FALSE)
+    {
+        $query = $this->db->select('order_id,user_name,orderTime,type,user_phone')->from('orders')->join('user','user.user_id = orders.user_id')->where(array('datetime <=' => time()*1000,'orders.status' => '1'))->get();
+        $num = count($query->result_array());
+        if($dist){
+            if($num != 0) echo $num;
+        }
+        return $query->result_array();
+    }
+
+	public function end_order($order_id)
+	{
+		$this->db->query("update orders set status='-1' WHERE order_id='$order_id'");
+		if($this->db->affected_rows() >= 1){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
     }
 }

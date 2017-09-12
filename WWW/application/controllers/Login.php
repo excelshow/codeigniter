@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-      	$this->load->helper(array('form', 'url'));
+      	$this->load->helper(array('form', 'url','others'));
         $this->load->library(array('form_validation','session'));
     }
 	public function index()
@@ -50,14 +50,18 @@ class Login extends CI_Controller {
     						'logged_in' => TRUE,
 						);
         				$this->session->set_userdata($newdata);
-        				file_get_contents('https://sc.ftqq.com/SCU10223T309896e3f8dc384edc342918050a783059703e8545e05.send?text='.urlencode('后台系统有人登录').'&desp='.urlencode('登录IP：'.$_SERVER["REMOTE_ADDR"]));
+        				weixin_notify('后台系统有人登录','登录IP：'.$_SERVER["REMOTE_ADDR"]);
         				redirect('admin/');
         			}
         		}
-        		$data = Array(
-        			'content' => $username,
-        			);
-        		$this->load->view('tip',$data);
+                alert($username.'登录失败');
+        		js_redirect("",2000);
         	}
+	}
+
+    public function out()
+    {
+        session_destroy();
+        redirect('admin/');
 	}
 }
