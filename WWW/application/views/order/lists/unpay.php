@@ -42,11 +42,10 @@
 							</h1>
 						</div><!-- /.page-header -->
 						<?php echo form_open('Order/together'); ?>
-						<link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.css')?>">
+                        <link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.css')?>">
 
-						<!-- Latest compiled and minified JavaScript -->
-						<script src="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.js')?>"></script>
-
+                        <!-- Latest compiled and minified JavaScript -->
+                        <script src="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.js')?>"></script>
 						<ul class="nav nav-tabs hornav">
 							<li class="active"><a href="#tomeng" data-toggle="tab">送货上门</a></li>
 							<li><a href="#selfna" data-toggle="tab">定点自取</a></li>
@@ -56,8 +55,7 @@
 							<table class="table"
 							       data-toggle="table"
 							       data-height="460"
-							       data-sort-name="name"
-							       data-sort-order="desc">
+							       data-sort-name="name">
 								<thead>
 								<tr>
 									<th class="table-check"><input type="checkbox" name="all" onclick="check_all(this,'checkbox[]')" /></th>
@@ -65,9 +63,11 @@
 									<th >下单人</th>
 									<th >下单电话</th>
 									<th >详细地址</th>
-									<th data-field="id" data-sortable="true">期望送达日期</th>
-									<th data-field="name" data-sortable="true">下单时间</th>
-									<th data-field="price" data-sortable="true">订单总金额</th>
+									<th data-field="id" data-sortable="true" >期望送达日期
+                                    </th>
+                                    <th data-field="name" data-sortable="true">下单时间</th>
+									<th data-field="price" data-sortable="true">订单总金额
+                                    </th>
 									<th class="table-title">订单状态</th>
 									<th width="163px" class="table-set">操作</th>
 								</tr>
@@ -106,7 +106,7 @@
 						</div><!--/.tomeng -->
 						<div class="tab-pane fade" id="selfna">
 
-							<table class="stdtable stdtablecb"
+							<table class="table"
 							       data-toggle="table"
 							       data-height="460"
 							       data-sort-name="name"

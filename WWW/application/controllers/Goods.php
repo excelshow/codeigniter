@@ -305,6 +305,45 @@ class Goods extends Admin{
 		}
 	}
 
+	/**
+	 * @param $goods_id 商品id
+	 * 上移一个分类
+	 */
+	public function up_class($id)
+	{
+		$id_list=$this->Op_goods->goods_class('id');
+		$class_list=$this->Op_goods->goods_class();
+		$aim=array('id'=>$id);
+		$site = array_search($aim,$id_list);
+		$pre_site = $site;
+		if($site==0){go_history();return FALSE;}
+		else{
+			$pre_site--;
+		}
+		if($this->Op_goods->exchange_class($class_list[$pre_site]['id'],$class_list[$pre_site]['class'],$class_list[$site]['id'],$class_list[$site]['class'])){
+			go_history();
+			return TRUE;
+		}
+		$this->output->set_output('操作失败');
+	}
+
+	public function down_class($id)
+	{
+		$id_list=$this->Op_goods->goods_class('id');
+		$class_list=$this->Op_goods->goods_class();
+		$aim=array('id'=>$id);
+		$site = array_search($aim,$id_list);
+		$post_site = $site;
+		if($site==(count($class_list)-1)){go_history();return FALSE;}
+		else{
+			$post_site++;
+		}
+		if($this->Op_goods->exchange_class($class_list[$post_site]['id'],$class_list[$post_site]['class'],$class_list[$site]['id'],$class_list[$site]['class'])){
+			go_history();
+			return TRUE;
+		}
+		$this->output->set_output('操作失败');
+	}
 
 
 

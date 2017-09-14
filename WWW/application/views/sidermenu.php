@@ -282,6 +282,16 @@
                         <b class="arrow"></b>
                     </li>
                 </ul>
+                <ul class="submenu">
+                    <li class="">
+                        <a href="<?php url('setting/must_address')?>">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            快递员管理
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
             </li>
             <!--            /nav.setting-->
         </ul>

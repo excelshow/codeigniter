@@ -32,15 +32,16 @@ class Op_goods extends CI_Model {
     public function get_last_ten_goods()
     {
         $query = $this->db->query("SELECT * FROM goods_view");
+	    file_put_contents('./download/test.json', json_encode($query->result_array()));
         return $query->result_array();
     }
 
     /**
      * @return array 商品类数组
      */
-    public function goods_class()
+    public function goods_class($aim='*')
     {
-        $query = $this->db->get('goods_class');
+        $query = $this->db->select($aim)->from('class')->order_by('id', 'ASC')->get();
         return $query->result_array();
     }
     /**
@@ -296,6 +297,19 @@ class Op_goods extends CI_Model {
     public function col_sub_one($goods_id)
     {
         $this->db->query("update goods set filenum=filenum - 1 WHERE id='$goods_id'");
+    }
+
+	/**
+	 * @param $pre_site 前一个位置
+	 * @param $post_site 后一个位置
+	 */
+	public function exchange_class($pre_id,$pre_value,$post_id,$post_value)
+	{
+        if($this->db->where('id',$pre_id)->update('class',array('class' => $post_value))&&$this->db->where('id',$post_id)->update('class',array('class' => $pre_value))){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
 }
 ?>

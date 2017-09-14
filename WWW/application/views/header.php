@@ -7,7 +7,9 @@
     <title>小程序后台管理</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
+    <!--    plugin bootstrap table-->
+    <link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.css')?>">
+    <script src="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.js')?>"></script>
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/bootstrap.css" />
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/font-awesome.css" />

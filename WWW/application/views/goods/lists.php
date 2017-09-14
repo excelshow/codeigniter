@@ -43,14 +43,14 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th class="head0"><input type="checkbox" class="checkall" /></th>
-                                    <th class="head1">商品</th>
-                                    <th class="head0">商品名称</th>
-                                    <th class="head1">商品缩略图</th>
-                                    <th class="head0">商品价格</th>
-                                    <th class="head1">剩余数量</th>
-                                    <th class="head1">商品分类 </th>
-                                    <th class="head0">&nbsp;</th>
+                                    <th><input type="checkbox" class="checkall" /></th>
+                                    <th>商品</th>
+                                    <th>商品名称</th>
+                                    <th>商品缩略图</th>
+                                    <th>商品价格</th>
+                                    <th>剩余数量</th>
+                                    <th>商品分类 </th>
+                                    <th>&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>

@@ -42,10 +42,6 @@
 							</h1>
 						</div><!-- /.page-header -->
 						<?php echo form_open('Order/together'); ?>
-						<link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.css')?>">
-
-						<!-- Latest compiled and minified JavaScript -->
-						<script src="<?php echo base_url('/assets/bootstrap_table/bootstrap-table.min.js')?>"></script>
 
 						<ul class="nav nav-tabs hornav">
 							<li class="active"><a href="#tomeng" data-toggle="tab">送货上门</a></li>
