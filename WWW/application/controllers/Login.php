@@ -46,6 +46,7 @@ class Login extends CI_Controller {
         			if($username == $row->username && password_verify($password , $row->password ))
         			{
         				$newdata = array(
+        					'id' => $row->id,
    							'username'  => $username,
     						'logged_in' => TRUE,
 						);

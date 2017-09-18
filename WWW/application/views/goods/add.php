@@ -55,7 +55,7 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 类别 </label>
 
                                 <div class="col-sm-9">
-                                    <select style="width:150px" name="class"><?php foreach ($class as $item): ?><option value="<?php echo $item['class']?>"><?php echo $item['class']?></option><?php endforeach; ?></select>
+                                    <select style="width:150px" name="class"><?php foreach ($class as $item): ?><option value="<?php echo $item['id']?>"><?php echo $item['class']?></option><?php endforeach; ?></select>
                                 </div>
                             </div>
                             <div class="form-group">

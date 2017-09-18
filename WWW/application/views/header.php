@@ -248,7 +248,7 @@
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
                         <li>
-                            <a href="#">
+                            <a href="<?php url('setting/admin')?>">
                                 <i class="ace-icon fa fa-cog"></i>
                                 设置
                             </a>

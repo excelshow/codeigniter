@@ -63,12 +63,11 @@
 
     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 
-    <button type="button" class="btn btn-primary" onclick="$.post(next_request_url,{order_id:<?php echo $order_id?>},function(data) {$("#mymodal_content").html(data);$("#btn<?php echo $order_id?>").html("备货完成");});">提交</button>
 
 </div>
 <script>
     request_url=base_url+"order/stocking_goods/<?php echo $order_id?>";
-    next_request_url=base_url+"setting/next_order/1";
+    next_request_url=base_url+"order/next_order/1";
     var inputs = $("form[name='stocking']").find("input"); // 获取表单中的所有输入框
     inputs[0].focus();
     inputs[0].select();

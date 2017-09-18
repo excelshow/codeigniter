@@ -31,7 +31,7 @@ header("Cache-Control: no-cache, must-revalidate");
 <div class="modal-body">
     <form id="upload_form">
 		<?php $i=$filenum; for($i--;$i>=0;$i--){?>
-            <div><img src="<?php echo base_url('uploads/'.$goods_id.'-'.$i.'.jpg')?>"><a href="#" onclick="$.post(base_url + 'setting/delete_pic',{goods_id:<?php echo $goods_id?>,pic_id:<?php echo $i?>},function(data){alert(data);btn_click('setting/edit_pic/<?php echo $goods_id?>')});"><span style="
+            <div><img src="<?php echo base_url('uploads/'.$goods_id.'-'.$i.'.jpg')?>"><a href="#" onclick="$.post(base_url + 'goods/delete_pic',{goods_id:<?php echo $goods_id?>,pic_id:<?php echo $i?>},function(data){alert(data);btn_click('goods/edit_pic/<?php echo $goods_id?>')});"><span style="
     position: relative;
     top: -70px;
     right: -80px;
@@ -44,7 +44,7 @@ header("Cache-Control: no-cache, must-revalidate");
         <input id="upload" onchange="
                 if($(this).val()){
                 $.ajax({
-                url: base_url + 'setting/upload_pic/<?php echo $goods_id?>/<?php echo $filenum?>' ,
+                url: base_url + 'goods/upload_pic/<?php echo $goods_id?>/<?php echo $filenum?>' ,
                 type: 'POST',
                 data: new FormData($('#upload_form')[0]),
                 async: false,
@@ -53,7 +53,7 @@ header("Cache-Control: no-cache, must-revalidate");
                 processData: false,
                 success: function (returndata) {
                 if(returndata == 1){
-                btn_click('setting/edit_pic/<?php echo $goods_id?>');
+                btn_click('goods/edit_pic/<?php echo $goods_id?>');
                 }
                 },
                 error: function (returndata) {

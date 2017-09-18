@@ -28,7 +28,7 @@
                         <!-- PAGE CONTENT BEGINS -->
                         <div class="page-header">
                             <h1>
-                                待回复的订单
+                                待激活用户数
                                 <small>
                                     <i class="ace-icon fa fa-angle-double-right"></i>
 
@@ -41,6 +41,8 @@
                                 <th class="table-id">会员编号</th>
                                 <th class="table-id">会员姓名</th>
                                 <th class="table-id">会员电话</th>
+                                <th class="table-id">会员所在小区</th>
+                                <th class="table-id">会员详细地址</th>
                                 <th class="table-id">会员状态</th>
                                 <th class="table-title">会员积分</th>
                                 <th class="table-title">操作</th>
@@ -53,6 +55,8 @@
                                     <td width="90px"><a href="#"><?php echo $item['user_no'];?></a></td>
                                     <td width="100px"><a href="#"><?php echo $item['user_name'];?></a></td>
                                     <td  width="100px"><?php echo $item['user_phone'];?></td>
+                                    <td  width="100px"><?php echo $item['user_estate'];?></td>
+                                    <td  width="100px"><?php echo $item['user_address'];?></td>
                                     <td  width="100px"><center><?php echo $item['status'];?></center></td>
                                     <td><?php echo $item['user_num'];?></td>
                                     <td><a href="<?php url('member/sure_member/'.$item['user_no'])?>">激活</a>&nbsp;<a href="<?php url('member/delete_member/'.$item['user_no'])?>">删除</a>

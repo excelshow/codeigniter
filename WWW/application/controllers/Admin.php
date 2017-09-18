@@ -5,9 +5,8 @@
  * Date: 2017/9/10 0010
  * Time: 17:29
  */
-require('My_Controller.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require('MY_Controller.php');
 class Admin extends MY_Controller {
 	/**
 	 * 这就是一个普通的构造函数

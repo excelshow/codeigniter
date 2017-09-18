@@ -61,7 +61,7 @@
                                         <td><?php echo $item['name'];?></td>
                                         <td>
                                             <img width='90px' height='50px' src="<?php echo base_url('uploads/'.$item['id'].'-0.jpg')?>">
-                                            <a href="javascript:void(0);" onclick="btn_click('setting/edit_pic/<?php echo $item['id'];?>');">编辑图片</a>
+                                            <a href="javascript:void(0);" onclick="btn_click('goods/edit_pic/<?php echo $item['id']?>');">编辑图片</a>
                                         </td>
                                         <td class="center"><?php echo $item['prices']?></td>
                                         <td class="center"><?php echo $item['num']?></td>

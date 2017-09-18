@@ -130,8 +130,6 @@ class Goods extends Admin{
 				$good_id = $this->Op_goods->get_max('id', 'goods');
 				$this->Op_goods->update_class($good_id, $this->input->post('class'));
 				$this->Op_goods->update_content($good_id,$this->input->post('function'),$this->input->post('eat'),$this->input->post('save'));
-				$this->load->view('header');
-				$this->load->view('sidermenu');
 
 				for($i=0;$i<$this->filenum;$i++){
 					$this->upload_file($good_id,$i);
@@ -344,9 +342,52 @@ class Goods extends Admin{
 		}
 		$this->output->set_output('操作失败');
 	}
-
-
-
+	public function upload_pic($goods_id,$time)
+	{
+		$this->output->set_output('');
+		$config['upload_path']      = './uploads/';
+		$config['allowed_types']    = 'jpg';
+		$config['max_size']    			= 1000;
+		$config['max_width']        = 1900;
+		$config['max_height']       = 1900;
+		$config['file_name']       = $goods_id.'-'.$time;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config,TRUE);
+		if ( ! $this->upload->do_upload('file'))
+		{
+			$data = array('tips' => $this->upload->display_errors());
+			var_dump($data);
+		}
+		else
+		{
+			echo 1;
+			$this->Op_goods->col_add_one($goods_id);
+		}
+	}
+	public function delete_pic()
+	{
+		$this->output->set_output('');
+		$goods_id = $this->input->post('goods_id');
+		$pic_id = $this->input->post('pic_id');
+		$this->load->helper('path');
+		if(unlink(set_realpath('uploads/').$goods_id.'-'.($pic_id).'.jpg')){
+			$this->Op_goods->col_sub_one($goods_id);
+			while(file_exists(set_realpath('uploads/').$goods_id.'-'.($pic_id+1).'.jpg')){
+				rename(set_realpath('uploads/').$goods_id.'-'.($pic_id+1).'.jpg', set_realpath('uploads/').$goods_id.'-'.($pic_id).'.jpg');
+				$pic_id++;
+			}
+			echo "删除成功";
+		}
+	}
+	public function edit_pic($goods_id)
+	{
+		$this->output->set_output('');
+		$data=array(
+			'goods_id' => $goods_id,
+			'filenum' => $this->Op_goods->get_filenum($goods_id)
+		);
+		$this->load->view('goods/edit_pic',$data);
+	}
 
 
 }

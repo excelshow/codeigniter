@@ -136,7 +136,10 @@ class Post extends CI_Controller {
         $data = array(
             'user_id'=>$this->input->get('userID'),
             'user_name'=>$this->input->get('name'),
-            'user_phone'=>$this->input->get('call'));
+            'user_phone'=>$this->input->get('call'),
+            'user_estate'=>$this->input->get('estate'),
+	        'user_address'=>$this->input->get('address'),
+	        );
         if($this->db->insert('user', $data))
         {
             echo "注册消息提交成功，请等待管理员审核";

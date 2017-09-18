@@ -97,7 +97,7 @@
 													<div class="am-btn-group am-btn-group-xs">
                                                         <a href="<?php url('order/detail/'.$item['order_id'])?>">查看</a>
 														<a href="javascript:void(0);" onclick="request_url = base_url + 'order/delete';if(confirm('确认删除？')){$.post(request_url,{order_id:<?php echo $item['order_id'];?>},function(data) {alert(data);})}">删除</a>
-                                                        <button id="btn<?php echo $item['order_id']?>" class='btn btn-primary' type='button' onclick='btn_click("setting/stocking/<?php echo $item['order_id']?>")'>开始备货</button>
+                                                        <button id="btn<?php echo $item['order_id']?>" class='btn btn-primary' type='button' onclick='btn_click("order/stocking/<?php echo $item['order_id']?>")'>开始备货</button>
                                                     </div>
 												</div></td>
 										</tr>
@@ -154,7 +154,7 @@
 														<a href="javascript:void(0);" onclick="request_url = base_url + 'order/delete';if(confirm('确认删除？')){$.post(request_url,{order_id:<?php echo $item['order_id'];?>},function(data) {
 															alert(data);
 															})}">删除</a>
-                                                        <button id="btn<?php echo $item['order_id']?>" class='btn btn-primary' type='button' onclick='btn_click("setting/stocking/<?php echo $item['order_id']?>")'>开始备货</button>
+                                                        <button id="btn<?php echo $item['order_id']?>" class='btn btn-primary' type='button' onclick='btn_click("order/stocking/<?php echo $item['order_id']?>")'>开始备货</button>
 													</div>
 												</div></td>
 										</tr>

@@ -4,6 +4,7 @@ class Op_goods extends CI_Model {
      * @var string 商品表名
      */
     private $goods_table_name='goods';
+    private $goods_class_name='goods_class';
 
     /**
      * Op_good_model constructor.
@@ -32,7 +33,6 @@ class Op_goods extends CI_Model {
     public function get_last_ten_goods()
     {
         $query = $this->db->query("SELECT * FROM goods_view");
-	    file_put_contents('./download/test.json', json_encode($query->result_array()));
         return $query->result_array();
     }
 
@@ -41,17 +41,21 @@ class Op_goods extends CI_Model {
      */
     public function goods_class($aim='*')
     {
-        $query = $this->db->select($aim)->from('class')->order_by('id', 'ASC')->get();
+        $query = $this->db->select($aim)->from($this->goods_class_name)->order_by('id', 'ASC')->get();
         return $query->result_array();
     }
     /**
      * @param $class 商品类名
      * @return array 商品列表数组
      */
-    public function get_goods_byclass($class)
+    public function get_goods_byclass($ID)
     {
-        $class = urldecode($class);
-        $query = $this->db->query("SELECT * FROM goods_view where class='$class'");
+        if($ID=='all'){
+	        $query = $this->db->query("SELECT * FROM goods_view");
+        }else{
+	        $query = $this->db->query("SELECT * FROM goods_view where class_id='$ID'");
+        }
+
         return $query->result_array();
     }
     /**
@@ -144,7 +148,7 @@ class Op_goods extends CI_Model {
      */
     public function add_class($class_name)
     {
-        if($this->db->insert('goods_class',array('class'=>$class_name))){
+        if($this->db->insert($this->goods_class_name,array('class'=>$class_name))){
             return TRUE;
         }else{
             return FALSE;
@@ -156,9 +160,9 @@ class Op_goods extends CI_Model {
      * @param $class_name
      * 删除商品类的模块
      */
-    public function delete_class($class_name)
+    public function delete_class($old_id)
     {
-        $this->db->delete('goods_class',array('class'=>$class_name));
+        $this->db->delete($this->goods_class_name,array('id'=>$old_id));
         return TRUE;
     }
     /**
@@ -166,9 +170,9 @@ class Op_goods extends CI_Model {
      * @param $class_name 商品类名
      * 编辑商品类别的模块
      */
-    public function edit_class($old_class_name,$new_class_name)
+    public function edit_class($old_id,$new_class_name)
     {
-        $str = "UPDATE goods_class set class='$new_class_name' WHERE class='$old_class_name'";
+        $str = "UPDATE goods_class set class='$new_class_name' WHERE id='$old_id'";
         //执行sql语句
         $this->db->query($str) ;
         //获取影响行数
@@ -305,7 +309,7 @@ class Op_goods extends CI_Model {
 	 */
 	public function exchange_class($pre_id,$pre_value,$post_id,$post_value)
 	{
-        if($this->db->where('id',$pre_id)->update('class',array('class' => $post_value))&&$this->db->where('id',$post_id)->update('class',array('class' => $pre_value))){
+        if($this->db->where('id',$pre_id)->update($this->goods_class_name,array('class' => $post_value))&&$this->db->where('id',$post_id)->update($this->goods_class_name,array('class' => $pre_value))){
             return TRUE;
         }else{
             return FALSE;

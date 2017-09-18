@@ -252,4 +252,41 @@ class Order extends Admin{
 			$this->output->set_output('操作失败');
 		}
 	}
+	/**
+	 * reply_new_comment
+	 * 评论回复视图显示接口
+	 */
+	public function reply_new_comment()
+	{
+		$this->output->set_output('');
+		$order_id = $this->input->post('order_id');
+		$data = array(
+			'order_id' => $order_id,
+			'comment' => $this->Op_order->get_comment($order_id),
+		);
+		$this->load->view('order/reply_new_comment',$data);
+	}
+	/**
+	 * stocking 备货接口
+	 * @param $order_id 待备货单号
+	 */
+	public function stocking($order_id)
+	{
+		$this->output->set_output('');
+		$data = array(
+			'order_id' => $order_id,
+			'data' => $this->Op_order->order_detail($order_id),
+		);
+		$this->load->view('order/stocking',$data);
+	}
+	public function next_order($dist)
+	{
+		$this->output->set_output('');
+		$next_order_id = $this->Op_order->next_order($this->input->post('order_id'),$dist);
+		if("end" == $next_order_id){
+			$this->output->set_output("<div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class=‘modal-title’>所有订单都已备货完成</h4>");
+		}else{
+			$this->stocking($next_order_id);
+		}
+	}
 }

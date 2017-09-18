@@ -50,9 +50,9 @@
                                     <td><?php echo $item['id']?></td>
                                     <td><?php echo $item['class']?></td>
                                     <td><button onclick="new_class_name=prompt('请输入你要修改的类名','<?php echo $item['class']?>');if(new_class_name != null){
-                                                $.post(base_url + 'goods/edit_class',{old:'<?php echo $item['class']?>',new:new_class_name},function(data){alert(data);location.reload(true);});
+                                                $.post(base_url + 'goods/edit_class',{old:'<?php echo $item['id']?>',new:new_class_name},function(data){alert(data);location.reload(true);});
                                                 }else{alert('你已取消');}">编辑</button><button onclick="
-                                                $.post(base_url + 'goods/delete_class',{class:'<?php echo $item['class']?>'},function(data){alert(data);location.reload(true);});
+                                                $.post(base_url + 'goods/delete_class',{class:'<?php echo $item['id']?>'},function(data){alert(data);location.reload(true);});
                                                 ">删除</button></td>
                                     <td><a href="<?php url('goods/up_class/'.$item['id'])?>"><i class="fa fa-arrow-up" aria-hidden="true"></i>上移</a>&nbsp; <a href="<?php url('goods/down_class/'.$item['id'])?>"><i class="fa fa-arrow-down" aria-hidden="true"></i>下移</a></td>
                                 </tr>

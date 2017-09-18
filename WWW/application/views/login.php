@@ -45,7 +45,7 @@
                         <h1>
                             <i class="ace-icon fa fa-fort-awesome green"></i>
                             <span class="red">小程序后台</span>
-                            <span class="white" id="id-text2">(V.2.0.1)</span>
+                            <span class="white" id="id-text2">(V.2.0.2)</span>
                         </h1>
                         <h4 class="blue" id="id-company-text">&copy; <a href="https://thinkmoonmagic.wordpress.com">思月魔法室</a></h4>
                     </div>
