@@ -283,7 +283,7 @@
                     </li>
 
                     <li class="">
-                        <a href="<?php url('setting/must_address')?>">
+                        <a href="<?php url('setting/deliver')?>">
                             <i class="menu-icon fa fa-caret-right"></i>
                             快递员管理
                         </a>

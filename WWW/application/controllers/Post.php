@@ -207,6 +207,7 @@ class Post extends CI_Controller {
         }
     }
     public function bug_report(){
+	    
       file_get_contents('https://sc.ftqq.com/SCU10223T309896e3f8dc384edc342918050a783059703e8545e05.send?text='.urlencode($this->input->get('title')).'&desp='.urlencode($this->input->get('content')));
     }
 }

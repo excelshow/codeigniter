@@ -113,5 +113,33 @@ class Setting extends My_Controller
 		go_history();
 	}
 
+	public function deliver()
+	{
+		$this->load->view('header');
+		$this->load->view('sidermenu');
+		$this->data['function'] = __FUNCTION__;
+		$this->data['deliver'] = $this->Op_deliver->get_deliver();
+		$this->load->view('setting/deliver',$this->data);
+	}
+
+	public function sure_member($deliver_id)
+	{
+		if($this->Op_deliver->sure($deliver_id)){
+			alert('激活成功');
+			go_history();
+		}else{
+			$this->output->set_output('激活失败');
+		}
+	}
+
+	public function delete_member($deliver_id)
+	{
+		if($this->Op_deliver->delete($deliver_id)){
+			alert('删除成功');
+			go_history();
+		}else{
+			$this->output->set_output('激活失败');
+		}
+	}
 
 }

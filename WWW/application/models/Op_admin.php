@@ -26,4 +26,5 @@ private $administrator_table_name='administrator';
 			return FALSE;
 		}
     }
+
 }

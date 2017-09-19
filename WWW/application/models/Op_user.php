@@ -20,6 +20,12 @@ class Op_user  extends CI_Model {
     $this->load->database();
     // Your own constructor code
   }
+
+	/**
+	 * @param $user_id 用户openid
+	 * @return mixed 用户编号
+	 *
+	 */
     public function get_user_no($user_id){
         $this->db->select('user_no');
         $query = $this->db->get_where($this->user_table_name,array('user_id' => $user_id));
@@ -38,12 +44,22 @@ class Op_user  extends CI_Model {
         return $query->result_array();
     }
 
+	/**
+	 * @param $user_id 用户Id
+	 * @return mixed
+	 * 获取用户ID
+	 */
     public function get_info($user_id)
     {
         $query = $this->db->select('*')->get_where('user', array('user_id' => $user_id));
         return $query->result_array();
     }
 
+	/**
+	 * @param $user_no 会员编号
+	 * @return bool
+	 * 激活会员
+	 */
     public function sure($user_no)
     {
         if($this->db->query("update user set status=1 where user_no='$user_no'")){
@@ -53,6 +69,11 @@ class Op_user  extends CI_Model {
         }
 
     }
+	/**
+	 * @param $user_no 会员编号
+	 * @return bool
+	 * 删除会员
+	 */
 	public function delete($user_no)
 	{
 		$this->db->delete('user', array('user_no' => $user_no));

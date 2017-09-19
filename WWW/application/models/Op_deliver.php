@@ -8,6 +8,7 @@
  */
 class Op_deliver extends CI_Model
 {
+	private $db_deliver_name = 'deliver';
     public function __construct()
     {
         parent::__construct();
@@ -36,4 +37,28 @@ class Op_deliver extends CI_Model
     {
         $this->db->query("update orders set status=3 where order_id='$order_id' AND status=2") ;
     }
+
+	public function get_deliver($var='all')
+	{
+		$query = $this->db->get($this->db_deliver_name);
+		return $query->result_array();
+	}
+	public function sure($deliver_id)
+	{
+		if($this->db->where('deliver_id',$deliver_id)->update($this->db_deliver_name,array('status' => '1'))){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+
+	}
+	public function delete($deliver_id)
+	{
+		$this->db->delete('deliver', array('deliver_id' => $deliver_id));
+		if($this->db->affected_rows() == 1){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
 }

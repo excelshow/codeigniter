@@ -109,4 +109,6 @@ class Op_address extends CI_Model
 		$query = $this->db->select('*')->from($this->user_address_name)->get();
 		return $query->result_array();
 	}
+
+
 }
