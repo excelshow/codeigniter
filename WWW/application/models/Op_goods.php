@@ -48,14 +48,15 @@ class Op_goods extends CI_Model {
      * @param $class 商品类名
      * @return array 商品列表数组
      */
-    public function get_goods_byclass($ID)
+    public function get_goods($class_id,$odd)
     {
-        if($ID=='all'){
-	        $query = $this->db->query("SELECT * FROM goods_view");
-        }else{
-	        $query = $this->db->query("SELECT * FROM goods_view where class_id='$ID'");
+        if($class_id != 'all'){
+            $this->db->where('class_id',$class_id);
         }
-
+        if($odd != NULL){
+            $this->db->where('odd',$odd);
+        }
+        $query = $this->db->get('goods_view');
         return $query->result_array();
     }
     /**

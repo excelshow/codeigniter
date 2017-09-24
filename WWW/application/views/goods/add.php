@@ -59,6 +59,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 特供 </label>
+
+                                <div class="col-sm-9">
+                                    <select style="width:150px" name="odd">
+                                        <option value="0">全周供应</option>
+                                        <option value="1">周一供应</option>
+                                        <option value="2">周二供应</option>
+                                        <option value="3">周三供应</option>
+                                        <option value="4">周四供应</option>
+                                        <option value="5">周五供应</option>
+                                        <option value="6">周六供应</option>
+                                        <option value="7">周日供应</option></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 价格 </label>
 
                                 <div class="col-sm-9">

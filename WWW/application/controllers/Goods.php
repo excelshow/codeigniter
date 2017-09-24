@@ -124,7 +124,8 @@ class Goods extends Admin{
 				'prices' => $this->input->post('prices'),
 				'origin' => $this->input->post('origin'),
 				'filenum' => $this->filenum,
-				'spec' => $this->input->post('spec')
+				'spec' => $this->input->post('spec'),
+                'odd' => $this->input->post('odd')
 			);
 			if($this->Op_goods->insert_good($row)){
 				$good_id = $this->Op_goods->get_max('id', 'goods');
@@ -192,7 +193,8 @@ class Goods extends Admin{
 				'name' => $this->input->post('name'),
 				'prices' => $this->input->post('prices'),
 				'origin' => $this->input->post('origin'),
-				'spec' => $this->input->post('spec')
+				'spec' => $this->input->post('spec'),
+                'odd' => $this->input->post('odd'),
 			);
 			if($this->Op_goods->update_goods($row)) {
 				$this->Op_goods->update_class($id, $this->input->post('class'));

@@ -1,72 +1,126 @@
-<!--/**-->
-<!-- * Created by PhpStorm.-->
-<!-- * User: 醉月思-->
-<!-- * Date: 2017/6/27-->
-<!-- * Time: 15:27-->
-<!-- */-->
-<div id="contentwrapper" class="contentwrapper">
-    <div class="admin-biaogelist">
-    <?php echo form_open('goods/edit/'.$goods_id)?>
-
-        <div class="fbneirong">
-
-           <?php foreach ($detail as $item): ?>
-
-            <form class="am-form">
-                <div class="am-form-group am-cf">
-                    <div class="zuo">名称<span style="color:red;" >*</span>：</div>
-                    <div class="you">
-                        <input type="text" name='name' value="<?php echo $item['name'];?>" class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入商品名">
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="zuo">价格<span style="color:red;" >*</span>：</div>
-                    <div class="you">
-                        <input type="number" step='0.01' name='prices' value="<?php echo $item['prices'];?>"  class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入价格">
-                        规格：元/<input name='spec' value="<?php echo $item['spec'];?>" placeholder="请输入规格">
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="zuo">产地<span style="color:red;" >*</span>：</div>
-                    <div class="you">
-                        <input type="text"  name='origin' value="<?php echo $item['origin'];?>"  rows="5" id="doc-ta-1"  placeholder="请输入产地">
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="zuo">类别<span style="color:red;" >*</span>：</div>
-                    <div class="you">
-                        <select style="width:150px" name="class"><?php foreach ($class as $row): ?><option value="<?php echo $row['class']?>"><?php echo $row['class']?></option><?php endforeach; ?></select>
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="zuo">功效：</div>
-                    <div class="you">
-                        <textarea class="" rows="5" id="doc-ta-1" name="function"><?php echo $item['function'];?></textarea>
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="zuo">食用方法：</div>
-                    <div class="you">
-                        <textarea class="" rows="5" id="doc-ta-1" name="eat"> <?php echo $item['eat'];?></textarea>
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="zuo">储存方法：</div>
-                    <div class="you">
-                        <textarea class="" rows="5" id="doc-ta-1" name="save"><?php echo $item['save'];?></textarea>
-                    </div>
-                </div>
-                <div class="am-form-group am-cf">
-                    <div class="you" style="margin-left: 11%;">
-                        <button type="submit" class="am-btn am-btn-success am-radius">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp; <button type="submit" class="am-btn am-btn-secondary am-radius">发布并继续发布</button>
-
-                    </div>
-                </div>
-            </form>
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="<?php url('admin')?>">Home</a>
+                <li>
+                    <a href="<?php url('detail')?>"><?php echo 'detail'?></a>
+                </li>
+                <li class="active">
+                    <?php echo $goods_id?>
+                </li>
+            </ul><!-- /.breadcrumb -->
         </div>
-        <?php endforeach ?>
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h4 class="widget-title">编辑商品</h4>
+
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+
+                            <a href="#" data-action="close">
+                                <i class="ace-icon fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <?php echo form_open('goods/edit/'.$goods_id)?>
+                            <!-- #section:elements.form -->
+                            <?php foreach ($detail as $item):?>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 名称 </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" value="<?php echo $item['name'] ?>" name='name' placeholder="请输入名字" class="col-xs-10 col-sm-5" /><?php echo form_error('name'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 类别 </label>
+
+                                <div class="col-sm-9">
+                                    <select style="width:150px" name="class"><?php foreach ($class as $item): ?><option value="<?php echo $item['id']?>"><?php echo $item['class']?></option><?php endforeach; ?></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 特供 </label>
+
+                                <div class="col-sm-9">
+                                    <select style="width:150px" name="odd" id="odd">
+                                        <option value="0" >全周供应</option>
+                                        <option value="1">周一供应</option>
+                                        <option value="2">周二供应</option>
+                                        <option value="3" class="selected">周三供应</option>
+                                        <option value="4">周四供应</option>
+                                        <option value="5">周五供应</option>
+                                        <option value="6">周六供应</option>
+                                        <option value="7">周日供应</option></select>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 价格 </label>
+
+                                <div class="col-sm-9">
+                                    <input type="number" step='0.01' name='prices' value="<?php echo set_value('prices'); ?>"  class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入价格"><?php echo form_error('prices'); ?>
+                                    规格：元/<input name='spec' placeholder="请输入规格">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 产地 </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text"  name='origin' value="<?php echo set_value('origin'); ?>"  rows="5" id="doc-ta-1"  placeholder="请输入产地"><?php echo form_error('origin'); ?>
+                                </div>
+                            </div>
+                            <label for="form-field-6">功效：</label>
+
+                            <textarea class="form-control" name="function" id="form-field-6" placeholder="Default Text"></textarea>
 
 
-    </div>
+                            <label for="form-field-6">食用方法：</label>
 
-</div>
+                            <textarea class="form-control" name="eat" id="form-field-6" placeholder="Default Text"></textarea>
+
+
+                            <label for="form-field-6">储存方法：</label>
+
+                            <textarea class="form-control" name="save" id="form-field-6" placeholder="Default Text"></textarea>
+                            <div class="zuo">缩略图(只支持JPG格式）<span style="color:red;" >*</span>：</div><?php echo form_error('file'); ?>
+                            <div class="you"></div><input type="file" name="file0" id="doc-ipt-file-1">
+                            <div class="zuo">附加图(非必需)请按顺序添加
+                                <input type="file" name="file1">
+                                <input type="file" name="file2">
+                                <input type="file" name="file3">
+                                <input type="file" name="file4">
+                                <input type="file" name="file5">
+                            </div>
+                        </div>
+                        <div style="margin-left: 11%;">
+                            <button type="submit" class="btn btn-info" id="bootbox-confirm">提交</button>
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                    </form>
+                    <script>
+                        $('#odd')[0].selectedIndex = <?php echo $detail[0]['odd']?>;
+                    </script>
+                </div>
+            </div>
+
+
+
+
+
+
+

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 598c59a74a723.gz.cdb.myqcloud.com_5504
-Source Server Version : 50628
-Source Host           : 598c59a74a723.gz.cdb.myqcloud.com:5504
+Source Server         : 本地
+Source Server Version : 50553
+Source Host           : localhost:3306
 Source Database       : xcx
 
 Target Server Type    : MYSQL
-Target Server Version : 50628
+Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-09-18 15:47:41
+Date: 2017-09-24 17:08:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,6 +36,7 @@ CREATE TABLE `deliver` (
   `account` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `phone_number` int(11) DEFAULT NULL,
+  `status` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`deliver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -54,9 +55,10 @@ CREATE TABLE `goods` (
   `pre_input` int(5) NOT NULL COMMENT '预入库库存',
   `num` int(5) NOT NULL COMMENT '前台显示库存',
   `spec` varchar(3) NOT NULL DEFAULT '',
+  `odd` int(1) NOT NULL DEFAULT '0' COMMENT '特供',
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for goods_class
@@ -85,7 +87,7 @@ CREATE TABLE `goods_comment` (
   KEY `user_id` (`user_id`) USING BTREE,
   CONSTRAINT `goods_comment_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `goods_comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for goods_content
@@ -109,7 +111,7 @@ CREATE TABLE `map_class_id` (
   `id` int(4) unsigned DEFAULT NULL,
   KEY `id` (`id`) USING BTREE,
   KEY `class_id_map_ibfk_1` (`class`) USING BTREE,
-  CONSTRAINT `map_class` FOREIGN KEY (`class`) REFERENCES `goods_class` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `map_class_id_ibfk_1` FOREIGN KEY (`class`) REFERENCES `goods_class` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `map_class_id_ibfk_2` FOREIGN KEY (`id`) REFERENCES `goods` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -148,22 +150,6 @@ CREATE TABLE `must_address` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for order_content
--- ----------------------------
-DROP TABLE IF EXISTS `order_content`;
-CREATE TABLE `order_content` (
-  `order_id` varchar(16) NOT NULL,
-  `goods_id` int(4) unsigned zerofill NOT NULL,
-  `select_num` int(11) NOT NULL,
-  `stocked` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否备货？',
-  `act_num` double(5,2) unsigned DEFAULT NULL,
-  KEY `order_id` (`order_id`) USING BTREE,
-  KEY `goods_id` (`goods_id`) USING BTREE,
-  CONSTRAINT `order_content_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `order_content_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for orders
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
@@ -180,8 +166,23 @@ CREATE TABLE `orders` (
   `reply` varchar(100) DEFAULT NULL,
   `type` bit(1) NOT NULL DEFAULT b'1' COMMENT '1:定点自取；0：送货上门；',
   PRIMARY KEY (`order_id`),
-  KEY `user_id` (`user_id`) USING BTREE,
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for order_content
+-- ----------------------------
+DROP TABLE IF EXISTS `order_content`;
+CREATE TABLE `order_content` (
+  `order_id` varchar(16) NOT NULL,
+  `goods_id` int(4) unsigned zerofill NOT NULL,
+  `select_num` int(11) NOT NULL,
+  `stocked` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否备货？',
+  `act_num` double(5,2) unsigned DEFAULT NULL,
+  KEY `order_id` (`order_id`) USING BTREE,
+  KEY `goods_id` (`goods_id`) USING BTREE,
+  CONSTRAINT `order_content_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `order_content_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -200,7 +201,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_no`),
   UNIQUE KEY `user_id_2` (`user_id`) USING BTREE,
   KEY `user_id` (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user_address
@@ -228,7 +229,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `goods_d
 -- View structure for goods_view
 -- ----------------------------
 DROP VIEW IF EXISTS `goods_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `goods_view` AS select `goods`.`id` AS `id`,`goods`.`name` AS `name`,`goods`.`prices` AS `prices`,`goods`.`origin` AS `origin`,`goods`.`show` AS `show`,`goods`.`filenum` AS `filenum`,`goods`.`have` AS `have`,`goods`.`pre_input` AS `pre_input`,`goods`.`num` AS `num`,`goods`.`spec` AS `spec`,`goods_class`.`class` AS `class`,`goods_class`.`id` AS `class_id` from ((`map_class_id` join `goods` on((`map_class_id`.`id` = `goods`.`id`))) join `goods_class` on((`map_class_id`.`class` = `goods_class`.`id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `goods_view` AS select `goods`.`id` AS `id`,`goods`.`name` AS `name`,`goods`.`prices` AS `prices`,`goods`.`origin` AS `origin`,`goods`.`show` AS `show`,`goods`.`filenum` AS `filenum`,`goods`.`have` AS `have`,`goods`.`pre_input` AS `pre_input`,`goods`.`num` AS `num`,`goods`.`spec` AS `spec`,`goods_class`.`class` AS `class`,`goods_class`.`id` AS `class_id`,`goods`.`odd` AS `odd` from ((`map_class_id` join `goods` on((`map_class_id`.`id` = `goods`.`id`))) join `goods_class` on((`map_class_id`.`class` = `goods_class`.`id`))) ;
 
 -- ----------------------------
 -- View structure for order_view
@@ -242,17 +243,17 @@ CREATE TRIGGER `change_num` BEFORE UPDATE ON `goods` FOR EACH ROW BEGIN
 end
 ;;
 DELIMITER ;
-DROP TRIGGER IF EXISTS `sub_goods`;
-DELIMITER ;;
-CREATE TRIGGER `sub_goods` AFTER INSERT ON `order_content` FOR EACH ROW begin
-  update goods set have = have - new.select_num where id = new.goods_id;
-end
-;;
-DELIMITER ;
 DROP TRIGGER IF EXISTS `add`;
 DELIMITER ;;
 CREATE TRIGGER `add` AFTER INSERT ON `orders` FOR EACH ROW BEGIN 
 	update user set user_num=user_num+1 where user_id=NEW.user_id;
 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `sub_goods`;
+DELIMITER ;;
+CREATE TRIGGER `sub_goods` AFTER INSERT ON `order_content` FOR EACH ROW begin
+  update goods set have = have - new.select_num where id = new.goods_id;
+end
 ;;
 DELIMITER ;

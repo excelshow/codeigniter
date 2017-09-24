@@ -26,8 +26,8 @@ class Client extends CI_Controller {
 	 * @param string $class 类名
 	 * 根据类名获取商品名
 	 */
-	public function goods_lists($ID='all'){
-		$result = $this->Op_goods->get_goods_byclass($ID);
+	public function goods_lists($class_id='all'){
+		$result = $this->Op_goods->get_goods($class_id,$this->input->get('odd'));
 		echo json_encode($result);
 	}
 
@@ -82,6 +82,10 @@ class Client extends CI_Controller {
 		$result = $this->Op_order->get_orders($user_id,$dist);
 		echo json_encode($result);
 	}
+
+    /**
+     * get_user_address 获取用户能够使用的地址库
+     */
 	public function get_user_address()
 	{
 		$result = $this->Op_address->user_address();

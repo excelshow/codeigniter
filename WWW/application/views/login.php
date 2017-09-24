@@ -35,7 +35,7 @@
     <![endif]-->
 </head>
 
-<body class="login-layout">
+<body class="login-layout" background="https://auth.gfx.ms/16.000.27537.00/images/Backgrounds/0.jpg?x=f5a9a9531b8f4bcc86eabb19472d15d5">
 <div class="main-container">
     <div class="main-content">
         <div class="row">
@@ -45,7 +45,7 @@
                         <h1>
                             <i class="ace-icon fa fa-fort-awesome green"></i>
                             <span class="red">小程序后台</span>
-                            <span class="white" id="id-text2">(V.2.0.2)</span>
+                            <span class="white" id="id-text2">(V.2.0.5)</span>
                         </h1>
                         <h4 class="blue" id="id-company-text">&copy; <a href="https://thinkmoonmagic.wordpress.com">思月魔法室</a></h4>
                     </div>
