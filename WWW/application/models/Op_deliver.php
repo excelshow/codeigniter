@@ -40,6 +40,7 @@ class Op_deliver extends CI_Model
 
 	public function get_deliver($var='all')
 	{
+	    $this->db->where('status','1');
 		$query = $this->db->get($this->db_deliver_name);
 		return $query->result_array();
 	}

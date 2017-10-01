@@ -207,12 +207,6 @@ class Op_order  extends CI_Model{
 		}
 	}
 
-	public function get_deliver()
-	{
-		$query = $this->db->select('name')->from('deliver')->get();
-		return $query->result_array();
-	}
-
 	public function judge_order_comment($order_id)
 	{
 		$valid_time = strtotime("-7 day")*1000;

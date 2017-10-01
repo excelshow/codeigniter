@@ -220,7 +220,7 @@ class Order extends Admin{
 		$this->data['function'] = __FUNCTION__;
 		$this->data['order_list_tomeng'] = $this->Op_order->get_order(2,0);
 		$this->data['order_list_selfna'] = $this->Op_order->get_order(2,1);
-		$this->data['deliver'] = $this->Op_order->get_deliver();
+		$this->data['deliver'] = $this->Op_deliver->get_deliver();
 		$this->load->view('order/lists/stocked',$this->data);
 	}
 	/**

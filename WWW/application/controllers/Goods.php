@@ -109,7 +109,7 @@ class Goods extends Admin{
 			array(
 				'field' => 'origin',
 				'label' => '产地',
-				'rules' => 'required|min_length[3]|max_length[100]'
+				'rules' => 'required|max_length[6]'
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -177,7 +177,7 @@ class Goods extends Admin{
 			array(
 				'field' => 'origin',
 				'label' => '产地',
-				'rules' => 'required|min_length[3]|max_length[100]'
+				'rules' => 'required|max_length[6]'
 			),
 		);
 		$this->form_validation->set_rules($config);
